@@ -1,3 +1,6 @@
+/**
+ * Main entry point for blowgun.
+ */
 export { argvParser } from "./argv-parser"
 export { runCommand } from "./run-command"
 export { findCommand } from "./find-command"

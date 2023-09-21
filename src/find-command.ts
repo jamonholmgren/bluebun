@@ -1,8 +1,8 @@
 import type { CommandRun, Command } from "blowgun"
 
 /**
- * Given an ParsedArgv, return the command to run based on
- * commands in the ./commands directory.
+ * Given a CommandRun, updates it with the right command to run based on
+ * commands it finds in the ./commands directory.
  */
 export async function findCommand(parsed: CommandRun, dir: string): Promise<CommandRun> {
   // start with the last path element and work backwards
@@ -10,7 +10,6 @@ export async function findCommand(parsed: CommandRun, dir: string): Promise<Comm
     const commandPath = parsed.fullpath.slice(0, i + 1)
     const parameters = parsed.fullpath.slice(i + 1)
     const filepath = commandPath.join("/")
-    console.log(`/commands/${filepath}.ts`)
 
     try {
       const module = await import(`${dir}/commands/${filepath}.ts`)
@@ -22,5 +21,6 @@ export async function findCommand(parsed: CommandRun, dir: string): Promise<Comm
     }
   }
 
+  // didn't find a command, so just return the original parsed command
   return parsed
 }
