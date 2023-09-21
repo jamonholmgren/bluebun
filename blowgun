@@ -1,0 +1,31 @@
+#!/usr/bin/env bun
+
+// speed up `blowgun --version` etc
+async function checkForVersion() {
+  if (["v", "version", "-v", "--v", "-version", "--version"].includes(process.argv[2])) {
+    const contents = await Bun.file(__dirname + "/package.json").text()
+
+    var package = JSON.parse(contents)
+    console.log(package.version)
+    process.exit(0)
+  }
+}
+
+async function main() {
+  await checkForVersion()
+
+  const args = process.argv.slice(2)
+  const command = args[0]
+  const commandArgs = args.slice(1)
+
+  if (!command) {
+    console.log("Usage: blowgun <command> [options]")
+    console.log("Commands:")
+    console.log("  version")
+    process.exit(1)
+  }
+
+  require("./src/blowgun.ts").run(command, commandArgs)
+}
+
+main()

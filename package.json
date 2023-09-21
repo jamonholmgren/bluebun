@@ -1,0 +1,26 @@
+{
+  "name": "blowgun",
+  "description": "A CLI framework for Bun",
+  "version": "0.0.1",
+  "author": {
+    "name": "Jamon Holmgren",
+    "email": "hello@jamon.dev"
+  },
+  "homepage": "https://github.com/jamonholmgren/blowgun",
+  "type": "module",
+  "module": "./src/blowgun.ts",
+  "bin": {
+    "blowgun": "./blowgun"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "bun-types": "^1.0.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false
+  }
+}
