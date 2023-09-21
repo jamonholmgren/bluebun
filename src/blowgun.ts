@@ -4,26 +4,35 @@
 export { argvParser } from "./argv-parser"
 export { runCommand } from "./run-command"
 export { findCommand } from "./find-command"
+export { defaultRunOptions } from "./default-run-options"
 
-export type CommandRun = {
+export type RunOptions = {
+  testOutput?: string
+  print: (...msg: any[]) => void
+  noCommand: (toolbox: Toolbox) => Promise<void>
+}
+
+export type Parameters = {
   // these are parsed from the argv
+  argv: string[]
   fullpath: string[]
   options: { [key: string]: string | boolean }
   errors: string[]
 
   // these are added once the command is found
   commandPath?: string[]
-  parameters?: string[]
-  command?: Command
+  arguments?: string[]
 }
 
-export type RunOptions = {
-  print: (...msg: any[]) => void
-  noCommand?: (commandRun: CommandRun) => Promise<void>
+export type Toolbox = {
+  // these are provided by the caller
+  runOptions: RunOptions
+  // these are added by blowgun
+  parameters: Parameters
 }
 
 export type Command = {
   name: string
   description: string
-  run: (options: RunOptions) => Promise<void>
+  run: (toolbox: Toolbox) => Promise<void>
 }

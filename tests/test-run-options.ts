@@ -1,12 +1,15 @@
+import { RunOptions } from "blowgun"
+
 /**
  * Basically a mock of console.log
  */
-export function testRunOptions() {
+export function testRunOptions(): RunOptions {
   const out = {
-    output: "",
+    testOutput: "",
     print(...msgs: any[]) {
-      msgs.forEach((msg) => (out.output += msg + "\n"))
+      msgs.forEach((msg) => (out.testOutput += msg + "\n"))
     },
+    async noCommand() {},
   }
   return out
 }

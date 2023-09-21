@@ -1,4 +1,4 @@
-import type { CommandRun } from "blowgun"
+import type { Parameters } from "blowgun"
 
 /**
  * This parses process.argv and returns an object with the command path and
@@ -35,16 +35,16 @@ import type { CommandRun } from "blowgun"
  *
  * const { path, options, errors } = argvParser(process.argv)
  */
-export function argvParser(argvFull: string[]): CommandRun {
-  const argv = argvFull.slice(2)
+export function argvParser(argv: string[]): Parameters {
+  const args = argv.slice(2)
 
   const fullpath: string[] = []
   const options: { [key: string]: string | boolean } = {}
   const errors: string[] = []
   let firstOption = false
 
-  for (let i = 0; i < argv.length; i += 1) {
-    let arg = argv[i]
+  for (let i = 0; i < args.length; i += 1) {
+    let arg = args[i]
     if (arg.startsWith("-")) {
       firstOption = true
 
@@ -78,8 +78,8 @@ export function argvParser(argvFull: string[]): CommandRun {
       }
 
       // check if next arg is a value, and assign that to the option
-      if (i + 1 < argv.length && !argv[i + 1].startsWith("-")) {
-        options[key] = argv[i + 1]
+      if (i + 1 < args.length && !args[i + 1].startsWith("-")) {
+        options[key] = args[i + 1]
         i += 1 // skip that one, since we've parsed it
       } else {
         options[key] = true
@@ -97,5 +97,5 @@ export function argvParser(argvFull: string[]): CommandRun {
     fullpath.push(arg)
   }
 
-  return { fullpath, options, errors }
+  return { argv, fullpath, options, errors }
 }

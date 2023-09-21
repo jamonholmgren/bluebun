@@ -7,12 +7,12 @@ test("blowgun version", async () => {
   // we give the CLI a fake console.log so we can test its output
   const options = testRunOptions()
   await run(argv, options)
-  expect(options.output).toContain("0.0.1")
+  expect(options.testOutput).toContain("0.0.1")
 })
 
 test("blowgun help", async () => {
   const argv = ["/bin/node", "/bin/blowgun", "help"]
   const options = testRunOptions()
   await run(argv, options)
-  expect(options.output).toContain(`Commands:`)
+  expect(options.testOutput).toContain(`Commands:`)
 })
