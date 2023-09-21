@@ -14,18 +14,7 @@ async function checkForVersion() {
 async function main() {
   await checkForVersion()
 
-  const args = process.argv.slice(2)
-  const command = args[0]
-  const commandArgs = args.slice(1)
-
-  if (!command) {
-    console.log("Usage: blowgun <command> [options]")
-    console.log("Commands:")
-    console.log("  version")
-    process.exit(1)
-  }
-
-  require("./src/blowgun.ts").run(command, commandArgs)
+  require("./cli/run.js").run(process.argv)
 }
 
 main()
