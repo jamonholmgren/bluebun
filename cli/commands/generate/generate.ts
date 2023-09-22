@@ -1,10 +1,10 @@
-import { RunOptions } from "blowgun"
+import { Toolbox } from "blowgun"
 
 export default {
   name: "generate",
   description: "Generates something",
-  run: async (options: RunOptions) => {
-    options.print(`blowgun generate`)
-    options.print(options)
+  run: async (options: Toolbox) => {
+    options.runOptions.print(`blowgun generate`)
+    options.runOptions.print(options)
   },
 }

@@ -4,13 +4,18 @@
 export { argvParser } from "./argv-parser"
 export { runCommand } from "./run-command"
 export { findCommand } from "./find-command"
-export { defaultRunOptions } from "./default-run-options"
+export { run } from "./run"
 
-export type RunOptions = {
+export type InitialRunOptions = {
+  argv?: string[]
+  path?: string
+  package?: any
   testOutput?: string
-  print: (...msg: any[]) => void
-  noCommand: (toolbox: Toolbox) => Promise<void>
+  print?: (...msg: any[]) => void
+  noCommand?: (toolbox: Toolbox) => Promise<void>
 }
+
+export type RunOptions = Required<InitialRunOptions>
 
 export type Parameters = {
   // these are parsed from the argv

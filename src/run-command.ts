@@ -1,16 +1,13 @@
 import type { RunOptions, Toolbox } from "blowgun"
-import { argvParser, defaultRunOptions, findCommand } from "blowgun"
+import { argvParser, findCommand } from "blowgun"
 
-export async function runCommand(argv: string[], dir: string, runOptions: RunOptions) {
+export async function runCommand(runOptions: RunOptions) {
   const toolbox: Toolbox = {
-    runOptions: {
-      ...defaultRunOptions,
-      ...runOptions,
-    },
-    parameters: argvParser(argv),
+    runOptions,
+    parameters: argvParser(runOptions.argv),
   }
 
-  const foundCommand = await findCommand(toolbox, dir)
+  const foundCommand = await findCommand(toolbox)
   const { commandPath, parameters, command } = foundCommand || {}
 
   toolbox.parameters.commandPath = commandPath

@@ -9,6 +9,7 @@
   "homepage": "https://github.com/jamonholmgren/blowgun",
   "type": "module",
   "module": "./src/blowgun.ts",
+  "scripts": {},
   "bin": {
     "blowgun": "./blowgun"
   },
