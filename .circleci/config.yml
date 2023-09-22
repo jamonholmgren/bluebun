@@ -1,0 +1,50 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+
+defaults: &defaults
+  docker:
+    # Choose the version of Node you want here
+    - image: cimg/node:18.17.1
+  working_directory: ~/repo
+
+version: 2.1
+orbs:
+  # https://circleci.com/developer/orbs/orb/cmgriffing/bun-orb
+  bun-orb: cmgriffing/bun-orb@0.0.24
+jobs:
+  tests:
+    <<: *defaults
+    steps:
+      - checkout
+      - bun-orb/setup
+      - run:
+          name: Run tests
+          command: bun test
+
+  publish:
+    <<: *defaults
+    steps:
+      - checkout
+      - bun-orb/setup
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      # Run semantic-release after all the above is set.
+      - run:
+          name: Publish to NPM
+          command: bun run ci:publish # this will be added to your package.json scripts
+
+workflows:
+  version: 2.1
+  test_and_release:
+    jobs:
+      - setup
+      - tests:
+          requires:
+            - setup
+      - publish:
+          requires:
+            - tests
+          filters:
+            branches:
+              only: main

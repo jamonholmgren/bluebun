@@ -9,19 +9,41 @@
   "homepage": "https://github.com/jamonholmgren/blowgun",
   "type": "module",
   "module": "./src/blowgun.ts",
-  "scripts": {},
+  "scripts": {
+    "ci:publish": "semantic-release"
+  },
   "bin": {
     "blowgun": "./blowgun"
   },
+  "files": [
+    "blowgun",
+    "src",
+    "cli",
+    "README.md"
+  ],
   "devDependencies": {
+    "@semantic-release/git": "^10.0.1",
     "@types/node": "latest",
-    "bun-types": "^1.0.2"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+    "bun-types": "latest",
+    "semantic-release": "^22.0.1"
   },
   "prettier": {
     "printWidth": 120,
     "semi": false
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": "package.json",
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
   }
 }
