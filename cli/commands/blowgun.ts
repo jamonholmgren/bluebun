@@ -1,9 +1,9 @@
-import { Toolbox } from "blowgun"
+import { Toolbox, print } from "blowgun"
 
 export default {
   name: "blowgun",
   description: "Default command",
   run: async (toolbox: Toolbox) => {
-    toolbox.runOptions.print(toolbox.runOptions.package.version)
+    print(`Welcome to Blowgun CLI!`)
   },
 }

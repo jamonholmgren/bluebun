@@ -1,4 +1,4 @@
-import { InitialRunOptions, RunOptions, runCommand } from "blowgun"
+import { InitialRunOptions, RunOptions, runCommand, print } from "blowgun"
 
 /**
  * This is the main entry point to your CLI and takes the initial run options
@@ -10,10 +10,8 @@ export async function run(runOptions: InitialRunOptions) {
   runOptions.argv ||= process.argv
   runOptions.path ||= process.cwd()
   runOptions.package ||= {}
-  runOptions.testOutput ||= ""
-  runOptions.print ||= console.log
-  runOptions.noCommand ||= async (toolbox) => {
-    toolbox.runOptions.print(`command not found: ${toolbox.parameters?.fullpath.join(" ")}`)
+  runOptions.defaultCommand ||= async (toolbox) => {
+    print(`command not found: ${toolbox.parameters?.fullpath.join(" ")}`)
   }
 
   const options = runOptions as RunOptions

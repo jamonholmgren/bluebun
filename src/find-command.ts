@@ -1,18 +1,16 @@
-import type { Toolbox, Command, RunOptions } from "blowgun"
+import type { Toolbox, Command } from "blowgun"
 
-export type FindCommandResult =
-  | {
-      commandPath: string[]
-      parameters: string[]
-      command: Command
-    }
-  | undefined
+export type FindCommandResult = {
+  commandPath: string[]
+  parameters: string[]
+  command: Command
+}
 
 /**
  * Given a CommandRun, updates it with the right command to run based on
  * commands it finds in the ./commands directory.
  */
-export async function findCommand(toolbox: Toolbox): Promise<FindCommandResult> {
+export async function findCommand(toolbox: Toolbox): Promise<FindCommandResult | undefined> {
   const commandsPath = toolbox.runOptions.path
 
   // start with the last path element and work backwards

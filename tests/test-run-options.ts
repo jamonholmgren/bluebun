@@ -11,11 +11,7 @@ export function testRunOptions(extras: InitialRunOptions): RunOptions {
       name: "nopackage",
       version: "0.0.1",
     },
-    testOutput: "",
-    print(...msgs: any[]) {
-      msgs.forEach((msg) => (out.testOutput += msg + "\n"))
-    },
-    async noCommand() {},
+    async defaultCommand() {},
     ...extras,
   }
   return out
