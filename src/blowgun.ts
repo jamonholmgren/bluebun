@@ -6,6 +6,7 @@ export { runCommand } from "./run-command"
 export { findCommand } from "./find-command"
 export { print } from "./print-tools"
 export { run } from "./run"
+export * from "./colors"
 
 export type InitialRunOptions = {
   /**
