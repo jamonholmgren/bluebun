@@ -4,9 +4,11 @@
 export { argvParser } from "./argv-parser"
 export { runCommand } from "./run-command"
 export { findCommand } from "./find-command"
-export { print } from "./print-tools"
+export { print } from "./print"
 export { run } from "./run"
-export * from "./colors"
+export * from "./styles"
+export * from "./input"
+export * from "./cursor"
 
 export type InitialRunOptions = {
   /**

@@ -5,11 +5,11 @@ export type PrintFunction = {
   testOutput?: string
 }
 
-export const print: PrintFunction = (...opts: any[]) => {
+export const print: PrintFunction = (output: string) => {
   if (print.testing) {
-    print.testOutput += opts.join(" ") + "\n"
+    print.testOutput += output + "\n"
   } else {
-    console.log(...opts)
+    write(output + "\n")
   }
 }
 
@@ -17,3 +17,5 @@ print.setTesting = (testing: boolean) => {
   print.testing = testing
   if (testing) print.testOutput = ""
 }
+
+export const write = (text: string): void => process.stdout.write(text)
