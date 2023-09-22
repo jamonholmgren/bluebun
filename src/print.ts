@@ -18,4 +18,4 @@ print.setTesting = (testing: boolean) => {
   if (testing) print.testOutput = ""
 }
 
-export const write = (text: string): void => process.stdout.write(text)
+export const write = (text: string) => process.stdout.write(text)

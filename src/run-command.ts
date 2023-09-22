@@ -1,10 +1,10 @@
-import type { RunOptions, Toolbox } from "blowgun"
+import type { CLIOptions, Toolbox } from "blowgun"
 import { argvParser, findCommand, print } from "blowgun"
 
-export async function runCommand(runOptions: RunOptions) {
+export async function runCommand(cliOptions: CLIOptions) {
   const toolbox: Toolbox = {
-    runOptions,
-    parameters: argvParser(runOptions.argv),
+    cliOptions,
+    parameters: argvParser(cliOptions.argv),
   }
 
   const foundCommand = await findCommand(toolbox)
@@ -17,8 +17,8 @@ export async function runCommand(runOptions: RunOptions) {
     await command.run(toolbox)
   } else {
     // no command found, so run the defaultCommand handler if it exists
-    if (toolbox.runOptions.defaultCommand) {
-      await toolbox.runOptions.defaultCommand(toolbox)
+    if (toolbox.cliOptions.defaultCommand) {
+      await toolbox.cliOptions.defaultCommand(toolbox)
     } else {
       // otherwise, print the help message
       print(`blowgun command not found: ${toolbox.parameters.fullpath.join(" ")}`)

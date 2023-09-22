@@ -1,4 +1,4 @@
-import { RunOptions, Toolbox, print } from "blowgun"
+import { CLIOptions, Toolbox, print } from "blowgun"
 
 export default {
   name: "help",

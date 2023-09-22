@@ -11,7 +11,7 @@ export type FindCommandResult = {
  * commands it finds in the ./commands directory.
  */
 export async function findCommand(toolbox: Toolbox): Promise<FindCommandResult | undefined> {
-  const commandsPath = toolbox.runOptions.path
+  const commandsPath = toolbox.cliOptions.path
 
   // start with the last path element and work backwards
   const fullpath = toolbox.parameters.fullpath
@@ -41,7 +41,7 @@ export async function findCommand(toolbox: Toolbox): Promise<FindCommandResult |
 
   // no command, see if they provided a <cliname>.ts command as a last resort
   try {
-    const module = await import(`${commandsPath}/commands/${toolbox.runOptions.package.name}.ts`)
+    const module = await import(`${commandsPath}/commands/${toolbox.cliOptions.name}.ts`)
     const command: Command = module.default
     return { commandPath: [], parameters: [], command }
   } catch (err) {

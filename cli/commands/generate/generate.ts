@@ -4,7 +4,7 @@ export default {
   name: "generate",
   description: "Generates something",
   run: async (options: Toolbox) => {
-    options.runOptions.print(`blowgun generate`)
-    options.runOptions.print(options)
+    options.cliOptions.print(`blowgun generate`)
+    options.cliOptions.print(options)
   },
 }

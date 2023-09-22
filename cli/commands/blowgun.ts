@@ -1,5 +1,5 @@
-import { Toolbox, print, color, style, cursor } from "blowgun"
-import { inputKey } from "../../src/input"
+import { Toolbox, print, write, color, style, cursor } from "blowgun"
+import { inputKey, inputLoop } from "../../src/input"
 
 export default {
   name: "blowgun",
@@ -13,9 +13,7 @@ export default {
     print(`  ${red("blowgun")} ${bold("help")}`)
     print(`hello`)
 
-    while (true) {
-      const key = await inputKey()
-
+    inputLoop((key) => {
       if (key === "up") {
         cursor.up()
       } else if (key === "down") {
@@ -25,11 +23,16 @@ export default {
       } else if (key === "left") {
         cursor.back()
       } else if (key === "backspace") {
-        cursor.back()
-        cursor.erase()
+        cursor.back().erase(1)
+      } else if (key === "delete") {
+        cursor.erase(1)
+      } else if (key === "enter") {
+        write("\n")
       } else if (["escape", "ctrl-c", "q"].includes(key)) {
-        break
+        return
+      } else {
+        write(key)
       }
-    }
+    })
   },
 }

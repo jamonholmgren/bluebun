@@ -1,7 +1,6 @@
 #!/usr/bin/env bun
 
 require("blowgun").run({
-  argv: process.argv,
+  name: require("./package.json").name,
   path: __dirname + "/cli",
-  package: require("./package.json"),
 })

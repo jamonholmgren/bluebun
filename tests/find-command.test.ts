@@ -1,10 +1,10 @@
 import { expect, test } from "bun:test"
 import { findCommand } from "blowgun"
-import { testRunOptions } from "./test-run-options"
+import { testCLIOptions } from "./test-run-options"
 
 test("findCommand", async () => {
   const result = await findCommand({
-    runOptions: testRunOptions({
+    cliOptions: testCLIOptions({
       argv: ["/bin/node", "/bin/blowgun", "version"],
       path: __dirname + "/../cli",
     }),

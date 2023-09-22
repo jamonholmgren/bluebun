@@ -4,28 +4,30 @@
 export { argvParser } from "./argv-parser"
 export { runCommand } from "./run-command"
 export { findCommand } from "./find-command"
-export { print } from "./print"
+export { print, write } from "./print"
 export { run } from "./run"
+export { specialKeys } from "./special-keys"
 export * from "./styles"
 export * from "./input"
 export * from "./cursor"
 
-export type InitialRunOptions = {
+export type InitialCLIOptions = {
+  /**
+   * This is the name of the CLI. It's used to find the default command.
+   * It's is required.
+   */
+  name?: string
+
+  /**
+   * This is the path to the directory where the ./commands folder is.
+   * It is required, because we have no other way to infer it.
+   */
+  path: string
+
   /**
    * Usually process.argv, but can be changed for testing.
    */
   argv?: string[]
-
-  /**
-   * This is the path to the directory where the ./commands folder is.
-   */
-  path?: string
-
-  /**
-   * This is the package.json of your CLI. Useful for getting the version, name, etc.
-   * Not possible to type this because it's a dynamic import. Ce la vie.
-   */
-  package?: any
 
   /**
    * If no command is found, this is the default handler.
@@ -33,7 +35,7 @@ export type InitialRunOptions = {
   defaultCommand?: (toolbox: Toolbox) => Promise<void>
 }
 
-export type RunOptions = Required<InitialRunOptions>
+export type CLIOptions = Required<InitialCLIOptions>
 
 export type Parameters = {
   // these are parsed from the argv
@@ -48,7 +50,7 @@ export type Parameters = {
 
 export type Toolbox = {
   // these are provided by the caller
-  runOptions: RunOptions
+  cliOptions: CLIOptions
   // these are added by blowgun
   parameters: Parameters
 }

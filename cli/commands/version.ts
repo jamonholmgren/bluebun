@@ -4,6 +4,8 @@ export default {
   name: "version",
   description: "Prints the CLI version",
   run: async (toolbox: Toolbox) => {
-    print(toolbox.runOptions.package.version)
+    const version = (await import(toolbox.cliOptions.path + "/../package.json")).version
+
+    print(version)
   },
 }

@@ -1,16 +1,12 @@
-import { InitialRunOptions, RunOptions } from "blowgun"
+import { InitialCLIOptions, CLIOptions } from "blowgun"
 
 /**
  * Basically a mock of console.log
  */
-export function testRunOptions(extras: InitialRunOptions): RunOptions {
+export function testCLIOptions(extras: InitialCLIOptions): CLIOptions {
   const out = {
+    name: "blowgun",
     argv: [],
-    path: "",
-    package: {
-      name: "nopackage",
-      version: "0.0.1",
-    },
     async defaultCommand() {},
     ...extras,
   }
