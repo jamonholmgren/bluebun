@@ -1,7 +1,7 @@
 import { write } from "./print"
 
 /**
- * The ANSI escape sequences.
+ * ANSI escape sequences.
  */
 export const cursorCodes = {
   up: "A",

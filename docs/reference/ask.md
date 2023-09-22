@@ -7,7 +7,7 @@ It's a single line and will return when the user hits enter.
 ## Usage
 
 ```typescript
-import { ask } from "blowgun"
+import { ask } from "butterbun"
 
 const answer = await ask("What is your name?")
 ```
@@ -18,7 +18,7 @@ You can set a mock property on the `ask` function to return a value for a given 
 
 ```typescript
 import { expect, test, beforeAll, afterAll } from "bun:test"
-import { ask } from "blowgun"
+import { ask } from "butterbun"
 
 beforeAll(() => {
   ask.mock = (input) => {

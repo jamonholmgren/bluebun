@@ -1,4 +1,4 @@
-import { Toolbox, print } from "blowgun"
+import { Toolbox, print } from "butterbun"
 
 export default {
   name: "version",

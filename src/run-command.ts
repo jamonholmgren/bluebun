@@ -1,5 +1,5 @@
-import type { CLIOptions, Toolbox } from "blowgun"
-import { argvParser, findCommand, print } from "blowgun"
+import type { CLIOptions, Toolbox } from "butterbun"
+import { argvParser, findCommand, print } from "butterbun"
 
 export async function runCommand(cliOptions: CLIOptions) {
   const toolbox: Toolbox = {
@@ -21,7 +21,7 @@ export async function runCommand(cliOptions: CLIOptions) {
       await toolbox.cliOptions.defaultCommand(toolbox)
     } else {
       // otherwise, print the help message
-      print(`blowgun command not found: ${toolbox.parameters.fullpath.join(" ")}`)
+      print(`butterbun command not found: ${toolbox.parameters.fullpath.join(" ")}`)
     }
   }
 }

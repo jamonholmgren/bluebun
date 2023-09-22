@@ -1,11 +1,11 @@
-# blowgun
+# butterbun
 
-Blowgun is a CLI framework for [Bun](https://bun.sh). It's inspired the Node CLI framework [Gluegun](https://github.com/infinitered/gluegun), but isn't a drop-in replacement.
+Butterbun is a CLI framework written specifically for [Bun](https://bun.sh). It's inspired the Node CLI framework [Gluegun](https://github.com/infinitered/gluegun), but isn't a drop-in replacement.
 
 To run locally:
 
 ```bash
-./blowgun
+./butterbun
 ```
 
 This project is currently under development and highly experimental.

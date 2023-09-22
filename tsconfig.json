@@ -15,7 +15,7 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "paths": {
-      "blowgun": ["./src/blowgun.ts"]
+      "butterbun": ["./src/butterbun.ts"]
     },
     "types": [
       "bun-types" // add Bun global

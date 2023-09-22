@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test"
-import { argvParser } from "blowgun"
+import { argvParser } from "butterbun"
 
 test("argvParse with no args", () => {
   const command = "/something /else"

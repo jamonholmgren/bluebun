@@ -1,4 +1,4 @@
-import { InitialCLIOptions, CLIOptions, runCommand, print, color } from "blowgun"
+import { InitialCLIOptions, CLIOptions, runCommand, print, color } from "butterbun"
 
 /**
  * This is the main entry point to your CLI and takes the initial run options

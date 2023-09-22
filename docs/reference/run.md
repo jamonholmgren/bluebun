@@ -1,12 +1,12 @@
 # run
 
-Blowgun's main function is just called `run`. It's usually run from the CLI binary and from tests.
+Butterbun's main function is just called `run`. It's usually run from the CLI binary and from tests.
 
 ```ts
 #!/usr/bin/env bun
 
-// Start blowgun to run the correct CLI command
-require("blowgun").run({ path: __dirname + "/cli" })
+// Start butterbun to run the correct CLI command
+require("butterbun").run({ path: __dirname + "/cli" })
 ```
 
 ## Options
