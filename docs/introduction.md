@@ -1,7 +1,5 @@
 # Introduction to Butterbun
 
-_(Name still TBD -- we're open to suggestions! Just file an issue.)_
-
 Butterbun is a CLI framework inspired by [Gluegun](https://github.com/infinitered/gluegun), but specifically designed to be used with [Bun](https://bun.sh), the new JS runtime.
 
 ## Why Bun?

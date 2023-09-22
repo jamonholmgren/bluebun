@@ -1,14 +1,28 @@
-# butterbun
+# Butterbun
 
-Butterbun is a CLI framework written specifically for [Bun](https://bun.sh). It's inspired the Node CLI framework [Gluegun](https://github.com/infinitered/gluegun), but isn't a drop-in replacement.
+Butterbun is a CLI framework inspired by [Gluegun](https://github.com/infinitered/gluegun), but specifically designed to be used with [Bun](https://bun.sh), the new JS runtime.
 
-To run locally:
+Head on over to the [Introduction](docs/introduction.md) to learn more.
 
-```bash
-./butterbun
+## Quick Start
+
+Butterbun has a CLI (of course) to help you get started building your own CLI.
+
+```
+# install/update bun
+curl -fsSL https://bun.sh/install | bash
+
+# use butterbun's CLI to create your new CLI
+bunx butterbun new pizza # doesn't work yet!
+
+# cd in and link it so you can run it
+cd pizza
+bun link
 ```
 
-This project is currently under development and highly experimental.
+Butterbun will then **(EVENTUALLY -- when done!)** spin up a new CLI project for you, and you can start building your CLI right away.
+
+Next: [Usage Guide](docs/usage-guide.md)
 
 ## License
 
