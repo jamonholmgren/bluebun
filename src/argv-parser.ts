@@ -97,5 +97,5 @@ export function argvParser(argv: string[]): Parameters {
     fullpath.push(arg)
   }
 
-  return { argv, fullpath, options, errors }
+  return { fullpath, options, errors }
 }

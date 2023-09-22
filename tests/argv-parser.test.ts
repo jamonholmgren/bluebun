@@ -6,7 +6,6 @@ test("argvParse with no args", () => {
   const argv = command.split(" ")
   const result = argvParser(argv)
   expect(result).toEqual({
-    argv,
     fullpath: [],
     options: {},
     errors: [],
@@ -18,7 +17,6 @@ test("argvParse", () => {
   const argv = command.split(" ")
   const result = argvParser(argv)
   expect(result).toEqual({
-    argv,
     fullpath: ["parse", "one"],
     options: {
       foo: "bar",
@@ -36,7 +34,6 @@ test("argvParse with errors", () => {
   const argv = command.split(" ")
   const result = argvParser(argv)
   expect(result).toEqual({
-    argv,
     fullpath: ["parse", "one"],
     options: {
       foo: "bar",

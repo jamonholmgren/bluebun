@@ -34,7 +34,6 @@ export type RunOptions = Required<InitialRunOptions>
 
 export type Parameters = {
   // these are parsed from the argv
-  argv: string[]
   fullpath: string[]
   options: { [key: string]: string | boolean }
   errors: string[]
