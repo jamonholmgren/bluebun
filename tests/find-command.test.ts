@@ -18,6 +18,6 @@ test("findCommand", async () => {
   })
 
   expect(result).toBeTruthy()
-  expect(result.command).toBeTruthy()
-  expect(result.command.name).toBe("version")
+  expect(result!.command).toBeTruthy()
+  expect(result!.command.name).toBe("version")
 })
