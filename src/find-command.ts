@@ -1,4 +1,4 @@
-import type { Toolbox, Command } from "blowgun"
+import type { Toolbox, Command } from "./blowgun"
 
 export type FindCommandResult = {
   commandPath: string[]

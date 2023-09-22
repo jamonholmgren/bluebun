@@ -1,6 +1,6 @@
 # run
 
-Gluegun's main function is just called `run`. It's usually run from the CLI binary and from tests.
+Blowgun's main function is just called `run`. It's usually run from the CLI binary and from tests.
 
 ```ts
 #!/usr/bin/env bun

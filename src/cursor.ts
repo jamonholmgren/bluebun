@@ -54,4 +54,6 @@ export const cursor = {
   queryPosition: () => c(`\u001b[${cursorCodes.queryPosition}`),
   hide: () => c(`\u001b[${cursorCodes.hide}`),
   show: () => c(`\u001b[${cursorCodes.show}`),
+
+  backspace: () => cursor.back().erase(1),
 }

@@ -17,6 +17,7 @@ Blowgun, on the other hand, is designed to be extremely fast and no-dependencies
 - It's under heavy construction, so tons of stuff doesn't work right now and the API is unstable
 - We will not support Node (ever)
 - We will not support Windows (until Bun does, and then we'll consider it)
+- We won't support Gluegun-style plugins
 
 ## Getting Started
 

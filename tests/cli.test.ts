@@ -3,7 +3,7 @@ import { expect, test, beforeEach, afterEach } from "bun:test"
 import { testCLIOptions } from "./test-run-options"
 
 beforeEach(() => {
-  print.setTesting(true)
+  print.setMocked(true)
 })
 
 test("blowgun version", async () => {
@@ -22,5 +22,5 @@ test("blowgun help", async () => {
 })
 
 afterEach(() => {
-  print.setTesting(false)
+  print.setMocked(false)
 })

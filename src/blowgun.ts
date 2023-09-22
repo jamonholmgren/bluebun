@@ -7,8 +7,9 @@ export { findCommand } from "./find-command"
 export { print, write } from "./print"
 export { run } from "./run"
 export { specialKeys } from "./special-keys"
+export { ask } from "./ask"
+export { inputKey, inputLoop } from "./input"
 export * from "./styles"
-export * from "./input"
 export * from "./cursor"
 
 export type InitialCLIOptions = {

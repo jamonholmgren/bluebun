@@ -20,10 +20,11 @@ export async function inputKey(): Promise<string> {
   return key
 }
 
-export async function inputLoop(onKey: (key: string) => void) {
+export async function inputLoop(onKey: (key: string) => Promise<void | "break"> | void | "break") {
   while (true) {
     const key = await inputKey()
     if (key === "ctrl-c") break
-    onKey(key)
+    const result = await onKey(key)
+    if (result === "break") break
   }
 }

@@ -1,4 +1,4 @@
-import type { Parameters } from "blowgun"
+import type { Parameters } from "./blowgun"
 
 /**
  * This parses process.argv and returns an object with the command path and
