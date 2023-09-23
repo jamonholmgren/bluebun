@@ -1,6 +1,10 @@
 # Bluebun
 
-Bluebun is a CLI framework inspired by [Gluegun](https://github.com/infinitered/gluegun), but specifically designed to be used with [Bun](https://bun.sh), the new JS runtime.
+Bluebun is a CLI framework inspired by [Gluegun](https://github.com/infinitered/gluegun), but specifically designed to be used with [Bun](https://bun.sh), the new JS runtime, and with a new, simpler, more straightforward API.
+
+Bluebun has _zero_ prod dependencies and is designed to be used with Bun's built-in modules.
+
+_Note: the name is a play on Gluegun and Bun. But we're open to other names! Please file an issue if you have ideas._
 
 Head on over to the [Introduction](docs/introduction.md) to learn more.
 
