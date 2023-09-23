@@ -32,6 +32,9 @@ jobs:
       - checkout
       - bun-orb/setup
       - run:
+          name: Bundle with bun
+          command: bun install
+      - run:
           name: Connecting to NPM
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run:
