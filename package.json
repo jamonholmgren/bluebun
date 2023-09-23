@@ -1,7 +1,7 @@
 {
   "name": "bluebun",
   "description": "A CLI framework for Bun, inspired by Gluegun",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Jamon Holmgren",
     "email": "hello@jamon.dev"
