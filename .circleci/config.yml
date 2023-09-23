@@ -6,7 +6,7 @@
 defaults: &defaults
   docker:
     # Choose the version of Node you want here
-    - image: cimg/node:20.7.0
+    - image: cimg/base
   working_directory: ~/repo
 
 version: 2.1
@@ -28,11 +28,12 @@ jobs:
     steps:
       - checkout
       - bun-orb/setup
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-      # Run semantic-release after all the above is set.
+      - run:
+          name: Connecting to NPM
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run:
           name: Publish to NPM
-          command: bun run ci:publish # this will be added to your package.json scripts
+          command: bun run ci:publish
 
 workflows:
   version: 2.1
