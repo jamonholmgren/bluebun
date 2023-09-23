@@ -1,24 +1,20 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
+# CircleCI 2.1 configuration file with Bun.sh
 
 defaults: &defaults
   docker:
     # Choose the version of Node you want here
-    - image: cimg/node:18.17.1
+    - image: cimg/base:latest
   working_directory: ~/repo
 
 version: 2.1
-orbs:
-  # https://circleci.com/developer/orbs/orb/cmgriffing/bun-orb
-  bun-orb: cmgriffing/bun-orb@0.0.25
 jobs:
   tests:
     <<: *defaults
     steps:
       - checkout
-      - bun-orb/setup
+      - run:
+          name: Install bun
+          command: curl -fsSL https://bun.sh/install | bash
       - run:
           name: Bundle with bun
           command: bun install
@@ -30,7 +26,9 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - bun-orb/setup
+      - run:
+          name: Install bun
+          command: curl -fsSL https://bun.sh/install | bash
       - run:
           name: Bundle with bun
           command: bun install
