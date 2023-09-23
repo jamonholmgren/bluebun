@@ -17,7 +17,7 @@ jobs:
           command: curl -fsSL https://bun.sh/install | bash
       - run:
           name: Link bun
-          command: alias bun="~/.bun/bin/bun"
+          command: ln -s ~/.bun/bin/bun /usr/local/bin/
       - run:
           name: Bundle with bun
           command: bun install
