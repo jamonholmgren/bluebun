@@ -21,7 +21,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - bun-orb/setup
       - run:
           name: Run tests
           command: bun test
@@ -30,7 +29,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - bun-orb/setup
       - run:
           name: Connecting to NPM
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
