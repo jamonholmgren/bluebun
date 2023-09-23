@@ -6,21 +6,19 @@
 defaults: &defaults
   docker:
     # Choose the version of Node you want here
-    - image: cimg/base:current
+    - image: cimg/node:20.7.0
   working_directory: ~/repo
 
 version: 2.1
+orbs:
+  # https://circleci.com/developer/orbs/orb/cmgriffing/bun-orb
+  bun-orb: cmgriffing/bun-orb@0.0.24
 jobs:
-  setup:
-    <<: *defaults
-    steps:
-      - run:
-          name: Install bun
-          command: curl -fsSL https://bun.sh/install | bash
   tests:
     <<: *defaults
     steps:
       - checkout
+      - bun-orb/setup
       - run:
           name: Run tests
           command: bun test
@@ -29,6 +27,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - bun-orb/setup
       - run:
           name: Connecting to NPM
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
@@ -40,10 +39,7 @@ workflows:
   version: 2.1
   test_and_release:
     jobs:
-      - setup
-      - tests:
-          requires:
-            - setup
+      - tests
       - publish:
           requires:
             - tests
