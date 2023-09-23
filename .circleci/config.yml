@@ -6,13 +6,13 @@
 defaults: &defaults
   docker:
     # Choose the version of Node you want here
-    - image: cimg/node:20.7.0
+    - image: cimg/node:18.17.1
   working_directory: ~/repo
 
 version: 2.1
 orbs:
   # https://circleci.com/developer/orbs/orb/cmgriffing/bun-orb
-  bun-orb: cmgriffing/bun-orb@0.0.24
+  bun-orb: cmgriffing/bun-orb@0.0.25
 jobs:
   tests:
     <<: *defaults
