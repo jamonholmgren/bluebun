@@ -20,6 +20,9 @@ jobs:
       - checkout
       - bun-orb/setup
       - run:
+          name: Bundle with bun
+          command: bun install
+      - run:
           name: Run tests
           command: bun test
 
