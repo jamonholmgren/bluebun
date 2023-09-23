@@ -1,6 +1,13 @@
 import { specialKeys } from "./special-keys"
 
-export async function inputKey(): Promise<string> {
+type InputKeyFunction = {
+  (): Promise<string>
+  mock?: () => Promise<string> | string
+}
+
+export const inputKey: InputKeyFunction = async () => {
+  if (inputKey.mock) return inputKey.mock()
+
   // wait for user input (1 key, including arrow keys)
   const key = (await new Promise((resolve) => {
     process.stdin.setRawMode(true)
@@ -20,7 +27,14 @@ export async function inputKey(): Promise<string> {
   return key
 }
 
-export async function inputLoop(onKey: (key: string) => Promise<void | "break"> | void | "break") {
+type InputLoopFunction = {
+  (onKey: (key: string) => Promise<void | "break"> | void | "break"): Promise<void>
+  mock?: (onKey: (key: string) => Promise<void | "break"> | void | "break") => Promise<void>
+}
+
+export const inputLoop: InputLoopFunction = async (onKey) => {
+  if (inputLoop.mock) return inputLoop.mock(onKey)
+
   while (true) {
     const key = await inputKey()
     if (key === "ctrl-c") break
