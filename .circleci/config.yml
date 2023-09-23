@@ -3,7 +3,7 @@
 defaults: &defaults
   docker:
     # Choose the version of Node you want here
-    - image: cimg/base:latest
+    - image: cimg/base:current
   working_directory: ~/repo
 
 version: 2.1
