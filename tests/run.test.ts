@@ -7,7 +7,10 @@ test("bluebun version", async () => {
   const argv = ["/bin/node", "/bin/bluebun", "version"]
   const options = testCLIOptions({ argv, path: __dirname + "/../cli" })
   await run(options)
-  expect(print.testOutput).toContain("0.0.1")
+  // read the version from package.json
+  const pkg = await Bun.file(__dirname + "/../package.json").json()
+  expect(pkg.version).toInclude(".") // should be a version number
+  expect(print.testOutput).toContain(pkg.version)
   print.setMocked(false)
 })
 
