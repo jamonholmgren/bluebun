@@ -38,7 +38,7 @@ workflows:
   version: 2.1
   test_and_release:
     jobs:
-      - tests:
+      - tests
       - publish:
           requires:
             - tests
