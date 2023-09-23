@@ -1,12 +1,12 @@
 # run
 
-Butterbun's main function is just called `run`. It's usually run from the CLI binary and from tests.
+Bluebun's main function is just called `run`. It's usually run from the CLI binary and from tests.
 
 ```ts
 #!/usr/bin/env bun
 
-// Start butterbun to run the correct CLI command
-require("butterbun").run({ path: __dirname + "/cli" })
+// Start bluebun to run the correct CLI command
+require("bluebun").run({ path: __dirname + "/cli" })
 ```
 
 ## Options

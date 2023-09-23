@@ -1,5 +1,5 @@
 import { expect, test, beforeAll, afterAll } from "bun:test"
-import { ask } from "butterbun"
+import { ask } from "bluebun"
 
 beforeAll(() => {
   ask.mock = (input) => {

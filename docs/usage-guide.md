@@ -8,13 +8,13 @@ For the rest of this document, we'll assume your CLI is called `pizza`. Just rep
 
 So, when you run `bunx pizza`, the file that is run is `pizza` in the root of your project. (This is specified in the package.json file, under the `bin` key.)
 
-This is very simple -- it just calls the `run()` function that is exported from `butterbun`, and passes in a few standard arguments:
+This is very simple -- it just calls the `run()` function that is exported from `bluebun`, and passes in a few standard arguments:
 
 ```js
 #!/usr/bin/env bun
 
-// Start butterbun to run the correct CLI command
-require("butterbun").run({
+// Start bluebun to run the correct CLI command
+require("bluebun").run({
   name: require("./package.json").name,
   path: __dirname + "/cli",
 })
@@ -26,7 +26,7 @@ _(Note: if you replace the `require("./package.json").name` with a simple string
 
 ## The CLI directory
 
-By convention, Butterbun expects your CLI source to be in a directory called `cli` in the root of your project (but you can configure it above).
+By convention, Bluebun expects your CLI source to be in a directory called `cli` in the root of your project (but you can configure it above).
 
 ### Commands
 

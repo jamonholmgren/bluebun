@@ -1,11 +1,11 @@
-import { CLIOptions, Toolbox, print } from "butterbun"
+import { CLIOptions, Toolbox, print } from "bluebun"
 
 export default {
   name: "help",
   description: "Prints this help message",
   run: async (options: Toolbox) => {
-    print(`butterbun help`)
-    print(`  butterbun [command]`)
+    print(`bluebun help`)
+    print(`  bluebun [command]`)
     print(``)
     print(`Commands:`)
     print(`  help`)

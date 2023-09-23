@@ -1,16 +1,16 @@
-import { Toolbox, print, write, color, style, cursor } from "butterbun"
+import { Toolbox, print, write, color, style, cursor } from "bluebun"
 import { inputKey, inputLoop } from "../../src/input"
 
 export default {
-  name: "butterbun",
+  name: "bluebun",
   description: "Default command",
   run: async (toolbox: Toolbox) => {
     const red = color("red")
     const bold = style("bold")
 
-    print(red(`Welcome to ${bold("Butterbun CLI")}!`))
+    print(red(`Welcome to ${bold("Bluebun CLI")}!`))
     print(``)
-    print(`  ${red("butterbun")} ${bold("help")}`)
+    print(`  ${red("bluebun")} ${bold("help")}`)
     print(`hello`)
 
     inputLoop((key) => {

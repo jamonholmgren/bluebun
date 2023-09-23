@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 
-require("butterbun").run({
+require("bluebun").run({
   name: require("./package.json").name,
   path: __dirname + "/cli",
 })

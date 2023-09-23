@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test"
-import { argvParser } from "butterbun"
+import { argvParser } from "bluebun"
 
 test("argvParse with no args", () => {
   const command = "/something /else"

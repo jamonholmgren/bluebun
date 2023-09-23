@@ -1,22 +1,22 @@
 {
-  "name": "butterbun",
+  "name": "bluebun",
   "description": "A CLI framework for Bun, inspired by Gluegun",
   "version": "0.0.1",
   "author": {
     "name": "Jamon Holmgren",
     "email": "hello@jamon.dev"
   },
-  "homepage": "https://github.com/jamonholmgren/butterbun",
+  "homepage": "https://github.com/jamonholmgren/bluebun",
   "type": "module",
-  "module": "./src/butterbun.ts",
+  "module": "./src/bluebun.ts",
   "scripts": {
     "ci:publish": "semantic-release"
   },
   "bin": {
-    "butterbun": "./butterbun"
+    "bluebun": "./bluebun"
   },
   "files": [
-    "butterbun",
+    "bluebun",
     "src",
     "cli",
     "README.md"

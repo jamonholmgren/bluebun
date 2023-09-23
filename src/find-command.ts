@@ -1,4 +1,4 @@
-import type { Toolbox, Command } from "./butterbun"
+import type { Toolbox, Command } from "./bluebun"
 
 export type FindCommandResult = {
   commandPath: string[]

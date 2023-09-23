@@ -1,5 +1,5 @@
 /**
- * Main entry point for butterbun.
+ * Main entry point for bluebun.
  */
 export { argvParser } from "./argv-parser"
 export { runCommand } from "./run-command"
@@ -52,7 +52,7 @@ export type Parameters = {
 export type Toolbox = {
   // these are provided by the caller
   cliOptions: CLIOptions
-  // these are added by butterbun
+  // these are added by bluebun
   parameters: Parameters
 }
 

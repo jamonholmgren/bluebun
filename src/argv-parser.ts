@@ -1,4 +1,4 @@
-import type { Parameters } from "./butterbun"
+import type { Parameters } from "./bluebun"
 
 /**
  * This parses process.argv and returns an object with the command path and
