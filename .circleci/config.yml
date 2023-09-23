@@ -33,6 +33,9 @@ jobs:
           name: Install bun
           command: curl -fsSL https://bun.sh/install | bash
       - run:
+          name: Link bun
+          command: sudo ln -s ~/.bun/bin/bun /usr/local/bin/
+      - run:
           name: Bundle with bun
           command: bun install
       - run:
