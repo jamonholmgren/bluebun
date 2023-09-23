@@ -16,6 +16,9 @@ jobs:
           name: Install bun
           command: curl -fsSL https://bun.sh/install | bash
       - run:
+          name: Link bun
+          command: export BUN_INSTALL="$HOME/.bun" && export PATH="$BUN_INSTALL/bin:$PATH"
+      - run:
           name: Bundle with bun
           command: bun install
       - run:
