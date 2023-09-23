@@ -42,6 +42,9 @@ jobs:
           name: Connecting to NPM
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run:
+          name: Hack semantic-release to ignore node version requirement
+          command: awk '{gsub("\^18\.17", "^18.15"); print}' ~/repo/node_modules/semantic-release/package.json > temp.json && mv temp.json ~/repo/node_modules/semantic-release/package.json
+      - run:
           name: Publish to NPM
           command: bun run ci:publish
 
