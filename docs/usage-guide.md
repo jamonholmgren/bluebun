@@ -1,6 +1,6 @@
 # Usage Guide
 
-This lays out how to use Glowgun in your CLI at a high level. It assumes you've already [spun up a Glowgun CLI project](./introduction.md) using our CLI.
+This lays out how to use Bluebun in your CLI at a high level. It assumes you've already [spun up a Bluebun CLI project](./introduction.md) using our CLI.
 
 ## Your CLI's binary
 
