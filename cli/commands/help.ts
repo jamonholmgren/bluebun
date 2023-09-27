@@ -1,9 +1,9 @@
-import { CLIOptions, Toolbox, print } from "bluebun"
+import { Props, print } from "bluebun"
 
 export default {
   name: "help",
   description: "Prints this help message",
-  run: async (options: Toolbox) => {
+  run: async (props: Props) => {
     print(`bluebun help`)
     print(`  bluebun [command]`)
     print(``)

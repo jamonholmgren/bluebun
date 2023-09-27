@@ -1,5 +1,3 @@
-import type { Parameters } from "./bluebun"
-
 /**
  * This parses process.argv and returns an object with the command path and
  * options.
@@ -33,14 +31,13 @@ import type { Parameters } from "./bluebun"
  *
  * Usage:
  *
- * const { path, options, errors } = argvParser(process.argv)
+ * const { path, options } = argvParser(process.argv)
  */
-export function argvParser(argv: string[]): Parameters {
+export function argvParser(argv: string[]) {
   const args = argv.slice(2)
 
   const fullpath: string[] = []
   const options: { [key: string]: string | boolean } = {}
-  const errors: string[] = []
   let firstOption = false
 
   for (let i = 0; i < args.length; i += 1) {
@@ -90,12 +87,13 @@ export function argvParser(argv: string[]): Parameters {
     }
 
     if (firstOption) {
-      errors.push(`Unknown option: ${arg}`)
+      // unknownOptions.push(`Unknown option: ${arg}`)
+      // unknown option, we'll just ignore it
       continue
     }
 
     fullpath.push(arg)
   }
 
-  return { fullpath, options, errors }
+  return { fullpath, options }
 }

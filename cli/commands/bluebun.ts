@@ -1,10 +1,10 @@
-import { Toolbox, print, write, color, style, cursor } from "bluebun"
+import { Props, print, write, color, style, cursor } from "bluebun"
 import { inputKey, inputLoop } from "../../src/input"
 
 export default {
   name: "bluebun",
   description: "Default command",
-  run: async (toolbox: Toolbox) => {
+  run: async (props: Props) => {
     const red = color("red")
     const bold = style("bold")
 

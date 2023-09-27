@@ -8,7 +8,6 @@ test("argvParse with no args", () => {
   expect(result).toEqual({
     fullpath: [],
     options: {},
-    errors: [],
   })
 })
 
@@ -25,7 +24,6 @@ test("argvParse", () => {
       jamon: false,
       boom: true,
     },
-    errors: [],
   })
 })
 
@@ -44,6 +42,6 @@ test("argvParse with errors", () => {
       y: true,
       z: true,
     },
-    errors: ["Unknown option: extra"],
+    // extra is ignored
   })
 })

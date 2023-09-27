@@ -1,10 +1,10 @@
-import { Toolbox, print, ask } from "bluebun"
+import { Props, print, ask } from "bluebun"
 
 // run this with `bun run --inspect ./bluebun perf` to see the inspector
 export default {
   name: "perf",
   description: "Runs stress test for inspector",
-  run: async (toolbox: Toolbox) => {
+  run: async (props: Props) => {
     // long running perf test
     print("Running perf tests...")
     for (let i = 0; i < 100000000; i++) {

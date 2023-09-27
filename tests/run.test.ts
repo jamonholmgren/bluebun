@@ -1,11 +1,10 @@
-import { run, print } from "bluebun"
+import { run, print, type InitialProps } from "bluebun"
 import { expect, test } from "bun:test"
-import { testCLIOptions } from "./test-run-options"
 
 test("bluebun version", async () => {
   print.setMocked(true)
   const argv = ["/bin/node", "/bin/bluebun", "version"]
-  const options = testCLIOptions({ argv, path: __dirname + "/../cli" })
+  const options: InitialProps = { name: "pizza", argv, cliPath: __dirname + "/../cli" }
   await run(options)
   // read the version from package.json
   const pkg = await Bun.file(__dirname + "/../package.json").json()
@@ -17,7 +16,7 @@ test("bluebun version", async () => {
 test("bluebun help", async () => {
   print.setMocked(true)
   const argv = ["/bin/node", "/bin/bluebun", "help"]
-  const options = testCLIOptions({ argv, path: __dirname + "/../cli" })
+  const options: InitialProps = { name: "bluebun", argv, cliPath: __dirname + "/../cli" }
   await run(options)
   expect(print.testOutput).toContain(`Commands:`)
   print.setMocked(false)

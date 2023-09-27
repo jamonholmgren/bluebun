@@ -29,14 +29,13 @@ run({ path: __dirname + "/../cli" })
 We recommend mocking the print output and any input functions (see the [print docs](./print.md) and [inputKey docs](./inputKey.md) and [inputLoop docs](./inputLoop.md)).
 
 ```ts
-import { run, print, inputKey } from "bluebun"
+import { run, print, inputKey, type InitialProps } from "bluebun"
 import { expect, test } from "bun:test"
-import { testCLIOptions } from "./test-run-options"
 
 test("pizza version", async () => {
   print.setMocked(true)
   const argv = ["/bin/node", "/bin/pizza", "version"]
-  const options = testCLIOptions({ argv, path: __dirname + "/../cli" })
+  const options: InitialProps = { name: "pizza", argv, cliPath: __dirname + "/../cli" }
   await run(options)
   expect(print.testOutput).toContain("0.0.1")
   print.setMocked(false)
@@ -47,7 +46,7 @@ test("pizza interactive", async () => {
   inputKey.mock = async () => "a" // will type an "a" for any interactive keypress
 
   const argv = ["/bin/node", "/bin/pizza", "interactive"]
-  const options = testCLIOptions({ argv, path: __dirname + "/../cli" })
+  const options: InitialProps = { name: "pizza", argv, cliPath: __dirname + "/../cli" }
   await run(options)
   expect(print.testOutput).toContain(`You chose: a`)
 

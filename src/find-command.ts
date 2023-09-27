@@ -1,4 +1,4 @@
-import type { Toolbox, Command } from "./bluebun"
+import type { Props, Command } from "./bluebun"
 
 export type FindCommandResult = {
   commandPath: string[]
@@ -10,11 +10,10 @@ export type FindCommandResult = {
  * Given a CommandRun, updates it with the right command to run based on
  * commands it finds in the ./commands directory.
  */
-export async function findCommand(toolbox: Toolbox): Promise<FindCommandResult | undefined> {
-  const commandsPath = toolbox.cliOptions.path
+export async function findCommand(props: Props): Promise<FindCommandResult | undefined> {
+  const { commandPath, fullpath } = props
 
   // start with the last path element and work backwards
-  const fullpath = toolbox.parameters.fullpath
   for (let i = fullpath.length - 1; i >= 0; i -= 1) {
     const commandPath = fullpath.slice(0, i + 1)
     const parameters = fullpath.slice(i + 1)
@@ -22,16 +21,16 @@ export async function findCommand(toolbox: Toolbox): Promise<FindCommandResult |
 
     // try ./path/to/command.ts
     try {
-      const module = await import(`${commandsPath}/commands/${filepath}.ts`)
+      const module = await import(`${commandPath}/commands/${filepath}.ts`)
       const command: Command = module.default
-      return { ...toolbox, commandPath, parameters, command }
+      return { ...props, commandPath, parameters, command }
     } catch (err) {
       // no command found, move on
     }
 
     // also try ./path/to/command/command.ts
     try {
-      const module = await import(`${commandsPath}/commands/${filepath}/${commandPath.at(-1)}.ts`)
+      const module = await import(`${commandPath}/commands/${filepath}/${commandPath.at(-1)}.ts`)
       const command: Command = module.default
       return { commandPath, parameters, command }
     } catch (err) {
@@ -41,13 +40,13 @@ export async function findCommand(toolbox: Toolbox): Promise<FindCommandResult |
 
   // no command, see if they provided a <cliname>.ts command as a last resort
   try {
-    const module = await import(`${commandsPath}/commands/${toolbox.cliOptions.name}.ts`)
+    const module = await import(`${commandPath}/commands/${props.name}.ts`)
     const command: Command = module.default
     return { commandPath: [], parameters: [], command }
   } catch (err) {
     // no command found, move on
   }
 
-  // didn't find a command, so just return an empty object
+  // didn't find a command, so just return
   return
 }
