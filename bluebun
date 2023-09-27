@@ -2,5 +2,5 @@
 
 require("bluebun").run({
   name: require("./package.json").name,
-  path: __dirname + "/cli",
+  cliPath: __dirname + "/cli",
 })

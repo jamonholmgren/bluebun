@@ -16,7 +16,7 @@ This is very simple -- it just calls the `run()` function that is exported from 
 // Start bluebun to run the correct CLI command
 require("bluebun").run({
   name: require("./package.json").name,
-  path: __dirname + "/cli",
+  cliPath: __dirname + "/cli",
 })
 ```
 

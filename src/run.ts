@@ -37,6 +37,7 @@ export async function run(initialProps: InitialProps) {
   if (!props.commandPath) {
     const red = color("red")
     print(red(`command not found: ${props.fullpath.join(" ")}`))
+    console.log({ props })
     process.exit(1)
   }
 }

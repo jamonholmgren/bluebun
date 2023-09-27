@@ -6,15 +6,15 @@ Bluebun's main function is just called `run`. It's usually run from the CLI bina
 #!/usr/bin/env bun
 
 // Start bluebun to run the correct CLI command
-require("bluebun").run({ path: __dirname + "/cli" })
+require("bluebun").run({ name: "pizza", cliPath: __dirname + "/cli" })
 ```
 
 ## Options
 
 The `run` function takes an options object with the following keys:
 
-- `path`: The path to the CLI directory. This is a required option, because we can't infer it. Highly recommended to use `__dirname + "/cli"` for this value -- relative paths are not supported!
-- `name`: The name of the CLI. This is optional, and defaults to the name of the package (from `package.json`). Providing it can speed up startup time since we won't have to read from package.json.
+- `name`: The name of the CLI. This is required. Usually just a string literal, but you can also use `require("./package.json").name` if you want to infer it from the package.json.
+- `cliPath`: The path to the CLI directory. This is a required option, because we can't infer it. Highly recommended to use `__dirname + "/cli"` for this value.
 
 ## Testing
 
@@ -23,7 +23,7 @@ To test your CLI end-to-end, you can just import the `run` function and call it 
 ```ts
 import { run } from "bluebun"
 
-run({ path: __dirname + "/../cli" })
+run({ cliPath: __dirname + "/../cli", argv: ["/bin/bun", "/bin/pizza", "version"] })
 ```
 
 We recommend mocking the print output and any input functions (see the [print docs](./print.md) and [inputKey docs](./inputKey.md) and [inputLoop docs](./inputLoop.md)).
