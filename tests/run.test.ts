@@ -3,7 +3,7 @@ import { expect, test } from "bun:test"
 
 test("bluebun version", async () => {
   print.setMocked(true)
-  const argv = ["/bin/node", "/bin/bluebun", "version"]
+  const argv = ["/bin/bun", "/bin/bluebun", "version"]
   const options: InitialProps = { name: "pizza", argv, cliPath: __dirname + "/../cli" }
   await run(options)
   // read the version from package.json
@@ -15,7 +15,7 @@ test("bluebun version", async () => {
 
 test("bluebun help", async () => {
   print.setMocked(true)
-  const argv = ["/bin/node", "/bin/bluebun", "help"]
+  const argv = ["/bin/bun", "/bin/bluebun", "help"]
   const options: InitialProps = { name: "bluebun", argv, cliPath: __dirname + "/../cli" }
   await run(options)
   expect(print.testOutput).toContain(`Commands:`)

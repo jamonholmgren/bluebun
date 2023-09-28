@@ -1,10 +1,9 @@
 /**
  * Main entry point for bluebun.
  */
-export { argvParser } from "./argv-parser"
-export { findCommand } from "./find-command"
-export { print, write } from "./print"
+export { cli } from "./cli"
 export { run } from "./run"
+export { print, write } from "./print"
 export { specialKeys } from "./special-keys"
 export { ask } from "./ask"
 export { inputKey, inputLoop } from "./input"
@@ -40,13 +39,10 @@ export type Props = {
   // usually process.argv
   argv: string[]
 
-  // these are parsed from the argv
-  fullpath: string[]
-  options: { [key: string]: string | boolean }
-
   // these are added once the command is found
   commandPath?: string[]
   arguments?: string[]
+  options: { [key: string]: string | boolean }
   first?: string // convenience for arguments[0]
   second?: string
   third?: string
