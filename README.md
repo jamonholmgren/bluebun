@@ -26,7 +26,9 @@ bun link
 
 Bluebun will then **(EVENTUALLY -- when done!)** spin up a new CLI project for you, and you can start building your CLI right away.
 
-Next: [Usage Guide](docs/usage-guide.md)
+Next: [Introduction](docs/introduction.md)
+
+Or, if you want to skip to the good part: [Getting Started](docs/getting-started.md)
 
 ## License
 

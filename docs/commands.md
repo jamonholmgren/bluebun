@@ -95,3 +95,7 @@ export default {
   },
 }
 ```
+
+For a full list of all the features available to you from Bluebun, see the [Reference](./reference.md) page.
+
+For a much more in-depth guide on how to use Bluebun, see the [Usage Guide](./usage-guide.md) page.

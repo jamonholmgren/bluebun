@@ -1,18 +1,18 @@
-const styles = {
+const asciiStyles = {
   bold: 1,
   italic: 3,
   underline: 4,
   inverse: 7,
 }
 
-const reset = {
+const asciiReset = {
   bold: 22,
   italic: 23,
   underline: 24,
   inverse: 27,
 }
 
-const colors = {
+const asciiColors = {
   white: 37,
   black: 30,
   blue: 34,
@@ -21,6 +21,7 @@ const colors = {
   magenta: 35,
   red: 31,
   yellow: 33,
+  orange: 38,
   grey: 90,
   brightBlack: 90,
   brightRed: 91,
@@ -34,12 +35,19 @@ const colors = {
 
 const resetColor = "\u001b[0m"
 
-export const color = (color: keyof typeof colors) => (text: string) => {
+export const color = (color: keyof typeof asciiColors) => (text: string) => {
   // reset color will always actually reset to this color
-  const newText = text.replace(resetColor, `\u001b[${colors[color]}m`)
-  return `\u001b[${colors[color]}m${text}${resetColor}`
+  const newText = text.replace(resetColor, `\u001b[${asciiColors[color]}m`)
+  return `\u001b[${asciiColors[color]}m${text}${resetColor}`
 }
 
-export const style = (style: keyof typeof styles) => (text: string) => {
-  return `\u001b[${styles[style]}m${text}\u001b[${reset[style]}m`
+/**
+ * // Returns multiple colors at once
+ * // Usage:
+ * const [red, blue, green] = colors("red", "blue", "green")
+ */
+export const colors = (...colors: (keyof typeof asciiColors)[]) => colors.map((c) => color(c))
+
+export const style = (style: keyof typeof asciiStyles) => (text: string) => {
+  return `\u001b[${asciiStyles[style]}m${text}\u001b[${asciiReset[style]}m`
 }

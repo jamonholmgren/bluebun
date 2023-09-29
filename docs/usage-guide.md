@@ -1,14 +1,17 @@
 # Usage Guide
 
-This lays out how to use Bluebun in your CLI at a high level. It assumes you've already [spun up a Bluebun CLI project](./introduction.md) using our CLI.
+This is a fairly comprehensive guide on how I use Bluebun to build CLIs. It doesn't cover
+_everything_ that Bluebun does, but after reading through this you should have a pretty
+solid understanding of how to use Bluebun.
 
-## Your CLI's binary
+Make sure you've done the [Getting Started](./getting-started.md) guide first, as that covers
+installation and spinning up the CLI we are about to build.
 
-For the rest of this document, we'll assume your CLI is called `pizza`. Just replace "pizza" with whatever name you chose when you made your CLI.
+For the purposes of this guide, we'll be building a CLI called `pizza`.
 
-So, when you run `bunx pizza`, the file that is run is `pizza` in the root of your project. (This is specified in the package.json file, under the `bin` key.)
+## Binary
 
-This is very simple -- it just calls the `run()` function that is exported from `bluebun`, and passes in a few standard arguments:
+There's a file in the root of your new project, called `pizza`. It should look like this:
 
 ```js
 #!/usr/bin/env bun
@@ -20,24 +23,66 @@ require("bluebun").run({
 })
 ```
 
-While you _could_ put more logic in this file, we don't recommend it. Instead, you should put your logic in the `cli` directory under the correct command.
+First, I always replace the `require("./package.json").name` with a string, so that it isn't reading
+from disk every time. This speeds up startup time a bit.
 
-_(Note: if you replace the `require("./package.json").name` with a simple string with the name, you can speed up startup time a bit, since we won't have to read from package.json.)_
+So, the file should look like this:
 
-## The CLI directory
+```js
+#!/usr/bin/env bun
 
-By convention, Bluebun expects your CLI source to be in a directory called `cli` in the root of your project (but you can configure it above).
+require("bluebun").run({ name: "pizza", cliPath: __dirname + "/cli" })
+```
 
-### Commands
+Ready to roll!
 
-Inside the `cli` directory, you'll have a directory called `commands`. Inside this directory, you'll have a file for each command you want to run, and folders for nested commands.
+## Default Command
 
-The root (bare) command is just called the same as your CLI (we infer this from the package.json "name" field).
+The first thing I work on is the default command. This runs when you just run `pizza` OR if you run `pizza some nonexistant commands` (it falls back to this).
 
-So, if your CLI is called `pizza`, then the root command is in `cli/commands/pizza.ts`.
+This is always named the same as your CLI. So, in this case, it's `cli/commands/pizza.ts`.
 
-This command is run anytime you run `pizza` (or `bunx pizza`), and it is also run if you run `pizza something else` when there is no command called `something` or `something/else`. It's the default command, essentially.
+Now I have to decide -- what do I want this command to do? I usually make it display a cool ASCII art logo, and then show some help.
 
-Next, see the [Commands](./commands.md) page for more details on how to write commands.
+If I want, I'll sometimes look at the `first` parameter to see if they passed in a subcommand, and if so, I'll let them know that's not a recognized command.
 
-Or, see the [Reference](./reference.md) page for all the available features.
+So, let's do that.
+
+```ts
+import { type Props, print, color } from "bluebun"
+
+export default {
+  name: "pizza",
+  description: "The best CLI ever",
+  run: async (props: Props) => {
+    const { first } = props
+    const [orange, cyan] = colors("orange", "cyan")
+
+    print("")
+    print("🍕🍕🍕🍕 Pizza! 🍕🍕🍕🍕")
+    print("")
+    print(orange("Welcome to the pizza CLI!"))
+    print("")
+    print("To get started, run:")
+    print("")
+    print("  pizza help")
+    print("")
+
+    if (first) {
+      print(`I don't know what "pizza ${cyan(first)}" is. Try "pizza help"`)
+    }
+  },
+}
+```
+
+The default exported object has a `name` (which should always match the filename), a `description`, and an async `run` function.
+
+It can also have an `alias` property that can either be a string or an array of strings. It's used to alias commands; for example, if you have a command called `bake` with an alias `b`, then `pizza b` will run the `bake` command.
+
+If you're familiar with React, the `props` object works kind of the same way. It's an object with a bunch of properties that are passed in to the command when it runs. We're only using the `first` positional argument here, so we destructure it.
+
+To explain further how the props work, check the [`Commands`](./commands.md) docs.
+
+So, now we have a default command that displays a cool logo and some help.
+
+## TODO: Continue this usage guide.

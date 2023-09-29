@@ -1,6 +1,6 @@
 - BLUEBUN
 introduction.md
-usage-guide.md
+getting-started.md
 reference.md
 
 - REFERENCE
