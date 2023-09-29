@@ -1,9 +1,9 @@
 import { Props, print } from "bluebun"
 
 export default {
-  name: "test",
+  name: "testing",
   description: "Just a test",
-  alias: ["t", "testing"],
+  alias: ["t", "woohoo"],
   run: async (props: Props) => {
     print(`Just testing.`)
   },

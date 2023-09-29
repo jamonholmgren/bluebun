@@ -173,7 +173,7 @@ test("nested new command", async () => {
 })
 
 test("checking aliases within nested commands, etc", async () => {
-  const argv = ["/bin/bun", "/bin/bluebun", "n", "t", "cli", "pizza", "cheese"]
+  const argv = ["/bin/bun", "/bin/bluebun", "t", "cli", "pizza", "cheese"]
 
   const { command, props } = await cli({ argv, name, cliPath })
 
@@ -182,7 +182,7 @@ test("checking aliases within nested commands, etc", async () => {
     name,
     cliPath,
     argv,
-    commandPath: ["new", "test", "cli"],
+    commandPath: ["testing", "cli"],
     arguments: ["pizza", "cheese"],
     options: {},
     first: "pizza",
