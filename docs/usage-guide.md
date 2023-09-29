@@ -38,4 +38,6 @@ So, if your CLI is called `pizza`, then the root command is in `cli/commands/piz
 
 This command is run anytime you run `pizza` (or `bunx pizza`), and it is also run if you run `pizza something else` when there is no command called `something` or `something/else`. It's the default command, essentially.
 
-See the [Commands](./commands.md) page for more details on how to write commands.
+Next, see the [Commands](./commands.md) page for more details on how to write commands.
+
+Or, see the [Reference](./reference.md) page for all the available features.

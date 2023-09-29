@@ -10,7 +10,8 @@ Each of the following docs has usage examples and a Testing section that gives e
 
 ## CLI
 
-- [run](./reference/run.md) - run the CLI
+- [run](./reference/run.md) - run the CLI and command
+- [cli](./reference/cli.md) - start the CLI without running the command
 
 ## User Interaction
 
@@ -21,4 +22,5 @@ Each of the following docs has usage examples and a Testing section that gives e
 ## Output
 
 - [print](./reference/print.md)
+- [spinner](./reference/spinner.md)
 - [styles and colors](./reference/styles.md)

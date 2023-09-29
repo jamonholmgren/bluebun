@@ -15,6 +15,7 @@ The `run` function takes an options object with the following keys:
 
 - `name`: The name of the CLI. This is required. Usually just a string literal, but you can also use `require("./package.json").name` if you want to infer it from the package.json.
 - `cliPath`: The path to the CLI directory. This is a required option, because we can't infer it. Highly recommended to use `__dirname + "/cli"` for this value.
+- `argv`: The raw arguments passed to the CLI. Usually just `process.argv`, but you can pass in a custom array if you want to test. Defaults to `process.argv` and most of the time you won't need to provide this. It's usually used for testing.
 
 ## Testing
 

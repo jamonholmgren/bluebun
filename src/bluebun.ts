@@ -9,6 +9,7 @@ export { ask } from "./ask"
 export { inputKey, inputLoop } from "./input"
 export * from "./styles"
 export * from "./cursor"
+export * from "./spinner"
 
 export type InitialProps = {
   /**
