@@ -1,4 +1,4 @@
-import { Command, InitialProps, Props } from "bluebun"
+import { Command, InitialProps, Props } from "./bluebun"
 import { findAlias } from "./find-alias"
 
 type CLIResponse = { props: Props; command: Command }

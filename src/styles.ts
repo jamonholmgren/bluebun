@@ -21,8 +21,8 @@ const asciiColors = {
   magenta: 35,
   red: 31,
   yellow: 33,
-  orange: 38,
   grey: 90,
+  gray: 90,
   brightBlack: 90,
   brightRed: 91,
   brightGreen: 92,
@@ -38,7 +38,7 @@ const resetColor = "\u001b[0m"
 export const color = (color: keyof typeof asciiColors) => (text: string) => {
   // reset color will always actually reset to this color
   const newText = text.replace(resetColor, `\u001b[${asciiColors[color]}m`)
-  return `\u001b[${asciiColors[color]}m${text}${resetColor}`
+  return `\u001b[${asciiColors[color]}m${newText}${resetColor}`
 }
 
 /**

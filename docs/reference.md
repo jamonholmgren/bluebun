@@ -24,4 +24,5 @@ Each of the following docs has usage examples and a Testing section that gives e
 
 - [print](./reference/print.md) - print a string to the terminal
 - [spinner](./reference/spinner.md) - start and stop a spinner
+- [progress](./reference/progress.md) - start, update, and stop a progress bar
 - [styles and colors](./reference/styles.md) - style and colorize text

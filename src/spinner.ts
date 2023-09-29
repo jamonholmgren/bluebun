@@ -5,16 +5,22 @@ import { print } from "./print"
 const dots = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
 
 let spinner: Timer | undefined = undefined
+let spinnerText: string = ""
+let i = 0
 
 /**
  * Start a spinner. Returns a Timer object that can be used to stop the spinner.
  */
 export function spinStart(text: string) {
+  if (spinner) clearInterval(spinner)
+
+  // add spaces to new text if the new text is shorter
+  spinnerText = text + " ".repeat(Math.max(0, spinnerText.length - text.length))
+
   cursor.hide()
 
-  let i = 0
   spinner = setInterval(() => {
-    cursor.back(text.length + 2).write(dots[i++ % dots.length] + " " + text)
+    cursor.back(spinnerText.length + 2).write(dots[i++ % dots.length] + " " + spinnerText)
   }, 80)
 
   return spinner
@@ -30,13 +36,12 @@ export function spinStop(mark: string = "", text?: string) {
     mark = "✓"
   }
 
-  // No spinner, so just print the text
-  if (!spinner) return print(mark + " " + text)
+  if (spinner) {
+    clearInterval(spinner)
+    spinner = undefined
 
-  clearInterval(spinner)
-  spinner = undefined
-
-  cursor.eraseLine().backToStart()
+    cursor.eraseLine().backToStart()
+  }
 
   if (text) print(mark + " " + text)
 

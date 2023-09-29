@@ -10,6 +10,7 @@ export { inputKey, inputKeys } from "./input"
 export * from "./styles"
 export * from "./cursor"
 export * from "./spinner"
+export * from "./progress"
 
 export type InitialProps = {
   /**

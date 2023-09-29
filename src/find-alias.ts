@@ -1,4 +1,4 @@
-import { type Command } from "bluebun"
+import { type Command } from "./bluebun"
 import { type Dirent, promises } from "fs"
 
 export async function findAlias(cliPath: string, commandPath: string[], arg: string): Promise<Command | undefined> {

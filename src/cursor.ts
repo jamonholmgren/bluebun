@@ -1,27 +1,31 @@
 import { write } from "./print"
 
+// ty https://github.com/sindresorhus/ansi-escapes/blob/main/index.js
+const ESC = "\u001B["
+const isTerminalApp = process.env.TERM_PROGRAM === "Apple_Terminal"
+
 /**
  * ANSI escape sequences.
  */
 export const cursorCodes = {
-  up: "A",
-  down: "B",
-  forward: "C",
-  back: "D",
-  nextLine: "E",
-  previousLine: "F",
-  horizontalAbsolute: "G",
-  eraseData: "J",
-  eraseLine: "K",
-  eraseCharacter: "X",
-  clearScreen: "2J",
-  scrollUp: "S",
-  scrollDown: "T",
-  savePosition: "s",
-  restorePosition: "u",
-  queryPosition: "6n",
-  hide: "?25l",
-  show: "?25h",
+  up: ESC + "A",
+  down: ESC + "B",
+  forward: ESC + "C",
+  back: ESC + "D",
+  nextLine: ESC + "E",
+  previousLine: ESC + "F",
+  horizontalAbsolute: ESC + "G",
+  eraseData: ESC + "J",
+  eraseLine: ESC + "K",
+  eraseCharacter: ESC + "X",
+  clearScreen: ESC + "2J",
+  scrollUp: ESC + "S",
+  scrollDown: ESC + "T",
+  savePosition: isTerminalApp ? "\u001B7" : ESC + "s",
+  restorePosition: isTerminalApp ? "\u001B8" : ESC + "u",
+  queryPosition: ESC + "6n",
+  hide: ESC + "?25l",
+  show: ESC + "?25h",
 }
 
 /**
@@ -37,25 +41,25 @@ const c = (s: string) => {
  */
 export const cursor = {
   write: (s: string) => c(s),
-  up: (count = 1) => c(`\u001b[${count}${cursorCodes.up}`),
-  down: (count = 1) => c(`\u001b[${count}${cursorCodes.down}`),
-  forward: (count = 1) => c(`\u001b[${count}${cursorCodes.forward}`),
-  back: (count = 1) => c(`\u001b[${count}${cursorCodes.back}`),
-  moveDown: (count = 1) => c(`\u001b[${count}${cursorCodes.nextLine}`),
-  moveUp: (count = 1) => c(`\u001b[${count}${cursorCodes.previousLine}`),
-  backToStart: () => c(`\u001b[${cursorCodes.horizontalAbsolute}`),
-  horizontalAbsolute: (count = 1) => c(`\u001b[${count}${cursorCodes.horizontalAbsolute}`),
-  eraseBefore: (count = 1) => c(`\u001b[${count}${cursorCodes.eraseData}`),
-  eraseLine: (count = 1) => c(`\u001b[${count}${cursorCodes.eraseLine}`),
-  erase: (count = 1) => c(`\u001b[${count}${cursorCodes.eraseCharacter}`),
-  clearScreen: () => c(`\u001b[${cursorCodes.clearScreen}`),
-  scrollUp: (count = 1) => c(`\u001b[${count}${cursorCodes.scrollUp}`),
-  scrollDown: (count = 1) => c(`\u001b[${count}${cursorCodes.scrollDown}`),
-  savePosition: () => c(`\u001b[${cursorCodes.savePosition}`),
-  restorePosition: () => c(`\u001b[${cursorCodes.restorePosition}`),
-  queryPosition: () => c(`\u001b[${cursorCodes.queryPosition}`),
-  hide: () => c(`\u001b[${cursorCodes.hide}`),
-  show: () => c(`\u001b[${cursorCodes.show}`),
+  up: (count = 1) => c(`${count}${cursorCodes.up}`),
+  down: (count = 1) => c(`${count}${cursorCodes.down}`),
+  forward: (count = 1) => c(`${count}${cursorCodes.forward}`),
+  back: (count = 1) => c(`${count}${cursorCodes.back}`),
+  moveDown: (count = 1) => c(`${count}${cursorCodes.nextLine}`),
+  moveUp: (count = 1) => c(`${count}${cursorCodes.previousLine}`),
+  backToStart: () => c(`${cursorCodes.horizontalAbsolute}`),
+  horizontalAbsolute: (count = 1) => c(`${count}${cursorCodes.horizontalAbsolute}`),
+  eraseBefore: (count = 1) => c(`${count}${cursorCodes.eraseData}`),
+  eraseLine: (count = 1) => c(`${count}${cursorCodes.eraseLine}`),
+  erase: (count = 1) => c(`${count}${cursorCodes.eraseCharacter}`),
+  clearScreen: () => c(`${cursorCodes.clearScreen}`),
+  scrollUp: (count = 1) => c(`${count}${cursorCodes.scrollUp}`),
+  scrollDown: (count = 1) => c(`${count}${cursorCodes.scrollDown}`),
+  savePosition: () => c(`${cursorCodes.savePosition}`),
+  restorePosition: () => c(`${cursorCodes.restorePosition}`),
+  queryPosition: () => c(`${cursorCodes.queryPosition}`),
+  hide: () => c(`${cursorCodes.hide}`),
+  show: () => c(`${cursorCodes.show}`),
 
   backspace: () => cursor.back(1).erase(1),
 }
