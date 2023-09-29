@@ -27,18 +27,18 @@ export const inputKey: InputKeyFunction = async () => {
   return key
 }
 
-type InputLoopFunction = {
-  (onKey: (key: string) => Promise<void | "break"> | void | "break"): Promise<void>
-  mock?: (onKey: (key: string) => Promise<void | "break"> | void | "break") => Promise<void>
+type InputKeysFunction = {
+  (onKey: (key: string) => Promise<void | false> | void | false): Promise<void>
+  mock?: (onKey: (key: string) => Promise<void | false> | void | false) => Promise<void>
 }
 
-export const inputLoop: InputLoopFunction = async (onKey) => {
-  if (inputLoop.mock) return inputLoop.mock(onKey)
+export const inputKeys: InputKeysFunction = async (onKey) => {
+  if (inputKeys.mock) return inputKeys.mock(onKey)
 
   while (true) {
     const key = await inputKey()
     if (key === "ctrl-c") break
     const result = await onKey(key)
-    if (result === "break") break
+    if (result === false) break
   }
 }

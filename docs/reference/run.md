@@ -27,7 +27,7 @@ import { run } from "bluebun"
 run({ cliPath: __dirname + "/../cli", argv: ["/bin/bun", "/bin/pizza", "version"] })
 ```
 
-We recommend mocking the print output and any input functions (see the [print docs](./print.md) and [inputKey docs](./inputKey.md) and [inputLoop docs](./inputLoop.md)).
+We recommend mocking the print output and any input functions (see the [print docs](./print.md) and [inputKey docs](./inputKey.md) and [inputKeys docs](./inputKeys.md)).
 
 ```ts
 import { run, print, inputKey, type InitialProps } from "bluebun"

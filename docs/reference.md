@@ -15,12 +15,13 @@ Each of the following docs has usage examples and a Testing section that gives e
 
 ## User Interaction
 
-- [ask](./reference/ask.md)
-- [cursor](./reference/cursor.md)
-- [inputKey](./reference/inputKey.md)
+- [ask](./reference/ask.md) - ask the user a question via a prompt
+- [cursor](./reference/cursor.md) - manipulate the cursor
+- [inputKey](./reference/inputKey.md) - wait for a single keypress
+- [inputKeys](./reference/inputKeys.md) - wait for and handle multiple keypresses
 
 ## Output
 
-- [print](./reference/print.md)
-- [spinner](./reference/spinner.md)
-- [styles and colors](./reference/styles.md)
+- [print](./reference/print.md) - print a string to the terminal
+- [spinner](./reference/spinner.md) - start and stop a spinner
+- [styles and colors](./reference/styles.md) - style and colorize text

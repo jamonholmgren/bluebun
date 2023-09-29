@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test"
-import { inputKey, inputLoop } from "bluebun"
+import { inputKey, inputKeys } from "bluebun"
 
 test("inputKey", async () => {
   inputKey.mock = async () => "a"
@@ -10,8 +10,8 @@ test("inputKey", async () => {
   inputKey.mock = undefined
 })
 
-test("inputLoop", async () => {
-  inputLoop.mock = async (onKey) => {
+test("inputKeys", async () => {
+  inputKeys.mock = async (onKey) => {
     await onKey("a")
     await onKey("b")
     await onKey(" ")
@@ -20,11 +20,11 @@ test("inputLoop", async () => {
   }
 
   let result = ""
-  await inputLoop(async (key) => {
+  await inputKeys(async (key) => {
     result += key
   })
 
   expect(result).toBe("ab c")
 
-  inputLoop.mock = undefined
+  inputKeys.mock = undefined
 })
