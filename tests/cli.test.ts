@@ -4,6 +4,72 @@ import { expect, test } from "bun:test"
 const name = "bluebun"
 const cliPath = __dirname + "/../cli"
 
+test("bluebun default", async () => {
+  const argv = ["/bin/bun", "/bin/bluebun"]
+
+  const { command, props } = await cli({ argv, name, cliPath })
+
+  // make sure the command is the right one
+  expect(command.name).toEqual("bluebun")
+
+  // check the props
+  expect(props).toMatchObject({
+    name,
+    cliPath,
+    argv,
+    commandPath: [],
+    arguments: [],
+    options: {},
+    first: undefined,
+    second: undefined,
+    third: undefined,
+  })
+})
+
+test("bluebun nonexistant command", async () => {
+  const argv = ["/bin/bun", "/bin/bluebun", "pizza"]
+
+  const { command, props } = await cli({ argv, name, cliPath })
+
+  // make sure the command is the right one
+  expect(command.name).toEqual("bluebun")
+
+  // check the props
+  expect(props).toMatchObject({
+    name,
+    cliPath,
+    argv,
+    commandPath: [],
+    arguments: ["pizza"],
+    options: {},
+    first: "pizza",
+    second: undefined,
+    third: undefined,
+  })
+})
+
+test("bluebun nonexistant command after flag", async () => {
+  const argv = ["/bin/bun", "/bin/bluebun", "--verbose=true", "pizza"]
+
+  const { command, props } = await cli({ argv, name, cliPath })
+
+  // make sure the command is the right one
+  expect(command.name).toEqual("bluebun")
+
+  // check the props
+  expect(props).toMatchObject({
+    name,
+    cliPath,
+    argv,
+    commandPath: [],
+    arguments: ["pizza"],
+    options: { verbose: "true" },
+    first: "pizza",
+    second: undefined,
+    third: undefined,
+  })
+})
+
 test("bluebun version", async () => {
   const argv = ["/bin/bun", "/bin/bluebun", "version"]
 
@@ -100,6 +166,70 @@ test("nested new command", async () => {
     first: "pizza",
     second: "cheese",
     third: undefined,
+  })
+
+  // make sure the command is the right one
+  expect(command.name).toEqual("new")
+})
+
+test("checking aliases within nested commands, etc", async () => {
+  const argv = ["/bin/bun", "/bin/bluebun", "n", "t", "cli", "pizza", "cheese"]
+
+  const { command, props } = await cli({ argv, name, cliPath })
+
+  // check the props
+  expect(props).toMatchObject({
+    name,
+    cliPath,
+    argv,
+    commandPath: ["new", "test", "cli"],
+    arguments: ["pizza", "cheese"],
+    options: {},
+    first: "pizza",
+    second: "cheese",
+    third: undefined,
+  })
+
+  // make sure the command is the right one
+  expect(command.name).toEqual("cli")
+})
+
+test("extremely complicated command, arguments, options", async () => {
+  const argv = [
+    "/bin/bun",
+    "/bin/bluebun",
+    "new",
+    "pizza",
+    "cheese",
+    "pepperoni",
+    "--verbose",
+    "true",
+    "--print=debug",
+    "-b",
+    "boilerplate",
+    "-f",
+    "-g",
+  ]
+
+  const { command, props } = await cli({ argv, name, cliPath })
+
+  // check the props
+  expect(props).toMatchObject({
+    name,
+    cliPath,
+    argv,
+    commandPath: ["new"],
+    arguments: ["pizza", "cheese", "pepperoni"],
+    options: {
+      verbose: "true",
+      print: "debug",
+      b: "boilerplate",
+      f: true,
+      g: true,
+    },
+    first: "pizza",
+    second: "cheese",
+    third: "pepperoni",
   })
 
   // make sure the command is the right one

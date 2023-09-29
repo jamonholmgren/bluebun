@@ -52,4 +52,5 @@ export type Command = {
   name: string
   description: string
   run: (props: Props) => Promise<void>
+  alias?: string | string[]
 }

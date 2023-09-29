@@ -1,4 +1,5 @@
 import { Command, InitialProps, Props } from "bluebun"
+import { findAlias } from "./find-alias"
 
 type CLIResponse = { props: Props; command: Command }
 
@@ -26,7 +27,11 @@ export async function cli(initialProps: InitialProps): Promise<CLIResponse> {
   // the currently pending option, if there is one, otherwise it's a parameter
   let pendingOption: string | undefined = undefined
 
+  // currently found command
+  let currentCommand: Command | undefined = undefined
+
   for (let i = 2; i < (argv || []).length; i += 1) {
+    currentCommand = undefined
     const arg = argv[i].replace(/^-+/, "")
 
     if (argv[i].startsWith("-")) {
@@ -49,36 +54,31 @@ export async function cli(initialProps: InitialProps): Promise<CLIResponse> {
       continue
     }
 
-    // check if the folder exists or if there's a command with that name
-    const folderExists = await Bun.file(`${cliPath}/commands/${[...commandPath, arg].join("/")}`).exists()
-
-    // if the folder exists, then it's a command path, so set the command path and continue parsing
-    if (folderExists) {
-      commandPath.push(arg)
-      pendingOption = undefined
-      continue
-    }
-
     try {
       // otherwise, try to import it as an actual command
-      let module = await import(`${cliPath}/commands/${[...commandPath, arg].join("/")}.ts`)
+      let module = await import([cliPath, "commands", ...commandPath, arg].join("/") + `.ts`)
 
-      // it is an actual command, so set the command and continue parsing the rest of the args
-      command = module.default
-      commandPath.push(arg)
-      pendingOption = undefined
-      continue
+      currentCommand = module.default
     } catch (err) {
-      // not a direct command, try importing it in a subfolder
+      // not a direct command, try importing it in a subfolder, like `commands/new/new.ts`
       try {
-        let module = await import(`${cliPath}/commands/${[...commandPath, arg, arg].join("/")}.ts`)
+        let module = await import([cliPath, "commands", ...commandPath, arg, arg].join("/") + `.ts`)
 
         // it is an actual command, so set the command and continue parsing the rest of the args
-        command = module.default
-        commandPath.push(arg)
-        pendingOption = undefined
-        continue
+        currentCommand = module.default
       } catch (err) {}
+    }
+
+    // if we haven't found a command yet, check if any of the commands in the current folder
+    // have an alias that matches
+    if (!currentCommand) currentCommand = await findAlias(cliPath, commandPath, arg)
+
+    if (currentCommand) {
+      // found one! continue parsing the rest of the args
+      command = currentCommand
+      commandPath.push(command.name)
+      pendingOption = undefined
+      continue
     }
 
     // okay, it's not a command, so if we have a pending option, then this is the value for that option
