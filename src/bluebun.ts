@@ -3,6 +3,8 @@
  */
 export { cli } from "./cli"
 export { run } from "./run"
+export { type CommandTree, commandTree } from "./command-tree"
+export { commandHelp } from "./command-help"
 export { print, write } from "./print"
 export { specialKeys } from "./special-keys"
 export { ask } from "./ask"

@@ -1,3 +1,5 @@
+const ESC = "\u001B["
+
 const asciiStyles = {
   bold: 1,
   italic: 3,
@@ -33,12 +35,12 @@ const asciiColors = {
   brightWhite: 97,
 }
 
-const resetColor = "\u001b[0m"
+const resetColor = `${ESC}0m`
 
 export const color = (color: keyof typeof asciiColors) => (text: string) => {
   // reset color will always actually reset to this color
-  const newText = text.replace(resetColor, `\u001b[${asciiColors[color]}m`)
-  return `\u001b[${asciiColors[color]}m${newText}${resetColor}`
+  const newText = text.replace(resetColor, `${ESC}${asciiColors[color]}m`)
+  return `${ESC}${asciiColors[color]}m${newText}${resetColor}`
 }
 
 /**
@@ -49,5 +51,20 @@ export const color = (color: keyof typeof asciiColors) => (text: string) => {
 export const colors = (...colors: (keyof typeof asciiColors)[]) => colors.map((c) => color(c))
 
 export const style = (style: keyof typeof asciiStyles) => (text: string) => {
-  return `\u001b[${asciiStyles[style]}m${text}\u001b[${asciiReset[style]}m`
+  return `${ESC}${asciiStyles[style]}m${text}${ESC}${asciiReset[style]}m`
+}
+
+/**
+ * // Returns multiple styles at once
+ * // Usage:
+ * const [bold, italic, underline] = styles("bold", "italic", "underline")
+ */
+export const styles = (...styles: (keyof typeof asciiStyles)[]) => styles.map((s) => style(s))
+
+/**
+ * Lets you strip the above ansi codes from a string.
+ * Useful for testing.
+ */
+export function stripANSI(str: string): string {
+  return str.replace(/\u001B\[\d+m/g, "")
 }

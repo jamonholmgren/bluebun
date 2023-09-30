@@ -12,6 +12,7 @@ Each of the following docs has usage examples and a Testing section that gives e
 
 - [run](./reference/run.md) - run the CLI and command
 - [cli](./reference/cli.md) - start the CLI without running the command
+- [commandHelp](./reference/commandHelp.md) - get a list of all commands and their descriptions
 
 ## User Interaction
 
