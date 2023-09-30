@@ -26,9 +26,9 @@ Generally speaking, other options are either too slow, too complex, have too man
 
 ## Limitations and Caveats
 
-- It's under heavy construction, so tons of stuff doesn't work right now and the API is unstable
-- We will not support Node (ever)
+- It's under heavy construction, so tons of stuff doesn't work right now and the API is very unstable, changing every release
+- We will not support Node (until Bun releases `node-bun`, and then we'll consider it)
 - We will not support Windows (until Bun does, and then we'll consider it)
-- We won't support Gluegun-style plugins
+- We don't currently plan to support Gluegun-style plugins (although this may change)
 
 Next: [Getting Started](getting-started.md)
