@@ -8,7 +8,7 @@ _Note: the name is a play on Gluegun and Bun. But we're open to other names! Ple
 
 Head on over to the [Introduction](docs/introduction.md) to learn more.
 
-![Bluebun help](https://user-images.githubusercontent.com/1479215/271745279-b7b47544-01b9-40c5-b9ff-77caa51bd970.png)
+<img alt="Bluebun help screenshot" src="https://user-images.githubusercontent.com/1479215/271745349-c41dc1fe-1c84-4184-a617-f8c26507a6fb.png" width="500" />
 
 ## Quick Start
 
