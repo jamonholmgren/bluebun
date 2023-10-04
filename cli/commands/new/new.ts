@@ -1,4 +1,4 @@
-import { type Props, spinStart, spinStop, progressStart, progressUpdate, progressEnd, write, colors } from "bluebun"
+import { type Props, progressStart, progressUpdate, progressEnd, print, colors } from "bluebun"
 import { getName } from "./_getName"
 
 export default {
@@ -11,19 +11,23 @@ export default {
     // Ask for the project name if it wasn't given
     const projectName = await getName(props.first)
 
-    write(`Creating new project: ${projectName}\n`)
-
+    print(`\nCreating new project: ${projectName}`)
     progressStart({ length: 40, bar: green("▣"), empty: gray("⬚") })
-    await new Promise((r) => setTimeout(r, 5000))
+
+    await new Promise((r) => setTimeout(r, 1000))
     progressUpdate(0.3)
-    await new Promise((r) => setTimeout(r, 5000))
-    progressUpdate(1)
-    await new Promise((r) => setTimeout(r, 5000))
-    progressUpdate(0.6)
-    await new Promise((r) => setTimeout(r, 5000))
+
+    await new Promise((r) => setTimeout(r, 3000))
+    progressUpdate(0.5)
+
+    await new Promise((r) => setTimeout(r, 3000))
+    progressUpdate(0.7)
+
+    await new Promise((r) => setTimeout(r, 2000))
     progressUpdate(1.0)
+    await new Promise((r) => setTimeout(r, 1000))
     progressEnd()
 
-    // spinStop(`Created new project: ${projectName}`)
+    print("")
   },
 }
