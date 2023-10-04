@@ -8,11 +8,13 @@ export { commandHelp } from "./command-help"
 export { print, write } from "./print"
 export { specialKeys } from "./special-keys"
 export { ask } from "./ask"
+export { choose } from "./choose"
 export { inputKey, inputKeys } from "./input"
 export * from "./styles"
 export * from "./cursor"
 export * from "./spinner"
 export * from "./progress"
+export * from "./utils"
 
 export type InitialProps = {
   /**

@@ -1,12 +1,9 @@
-import { Props, print, color, style, colors, styles, commandHelp } from "bluebun"
+import { Props, print, commandHelp, blue, bold, gray } from "bluebun"
 
 export default {
   name: "bluebun",
   description: "Default command",
   run: async (props: Props) => {
-    const [blue, gray] = colors("blue", "gray")
-    const [bold] = styles("bold")
-
     print(``)
     print(blue(bold(`Bluebun CLI`)))
     print(``)

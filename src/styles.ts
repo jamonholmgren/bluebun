@@ -1,20 +1,28 @@
 const ESC = "\u001B["
 
-const asciiStyles = {
-  bold: 1,
-  italic: 3,
-  underline: 4,
-  inverse: 7,
+export const styleStart = (style: number) => `${ESC}${style}m`
+export const styleEnd = (reset: number) => `${ESC}${reset}m`
+
+export const style = (style: number, reset: number) => (text: string) => {
+  return `${styleStart(style)}${text}${styleEnd(reset)}`
 }
 
-const asciiReset = {
-  bold: 22,
-  italic: 23,
-  underline: 24,
-  inverse: 27,
+export const bold = style(1, 22)
+export const italic = style(3, 23)
+export const underline = style(4, 24)
+export const inverse = style(7, 27)
+
+export const colorEnd = `${ESC}0m`
+
+export const colorStart = (color: number) => `${ESC}${color}m`
+
+export const color = (color: number) => (text: string) => {
+  // reset color will always actually reset to this color
+  const newText = text.replace(colorEnd, `${ESC}${color}m`)
+  return `${colorStart(color)}${newText}${colorEnd}`
 }
 
-const asciiColors = {
+export const ansiColors = {
   white: 37,
   black: 30,
   blue: 34,
@@ -35,36 +43,21 @@ const asciiColors = {
   brightWhite: 97,
 }
 
-const resetColor = `${ESC}0m`
-
-export const color = (color: keyof typeof asciiColors) => (text: string) => {
-  // reset color will always actually reset to this color
-  const newText = text.replace(resetColor, `${ESC}${asciiColors[color]}m`)
-  return `${ESC}${asciiColors[color]}m${newText}${resetColor}`
-}
-
-/**
- * // Returns multiple colors at once
- * // Usage:
- * const [red, blue, green] = colors("red", "blue", "green")
- */
-export const colors = (...colors: (keyof typeof asciiColors)[]) => colors.map((c) => color(c))
-
-export const style = (style: keyof typeof asciiStyles) => (text: string) => {
-  return `${ESC}${asciiStyles[style]}m${text}${ESC}${asciiReset[style]}m`
-}
-
-/**
- * // Returns multiple styles at once
- * // Usage:
- * const [bold, italic, underline] = styles("bold", "italic", "underline")
- */
-export const styles = (...styles: (keyof typeof asciiStyles)[]) => styles.map((s) => style(s))
-
-/**
- * Lets you strip the above ansi codes from a string.
- * Useful for testing.
- */
-export function stripANSI(str: string): string {
-  return str.replace(/\u001B\[\d+m/g, "")
-}
+export const white = color(ansiColors.white)
+export const black = color(ansiColors.black)
+export const blue = color(ansiColors.blue)
+export const cyan = color(ansiColors.cyan)
+export const green = color(ansiColors.green)
+export const magenta = color(ansiColors.magenta)
+export const red = color(ansiColors.red)
+export const yellow = color(ansiColors.yellow)
+export const grey = color(ansiColors.grey)
+export const gray = color(ansiColors.gray)
+export const brightBlack = color(ansiColors.brightBlack)
+export const brightRed = color(ansiColors.brightRed)
+export const brightGreen = color(ansiColors.brightGreen)
+export const brightYellow = color(ansiColors.brightYellow)
+export const brightBlue = color(ansiColors.brightBlue)
+export const brightMagenta = color(ansiColors.brightMagenta)
+export const brightCyan = color(ansiColors.brightCyan)
+export const brightWhite = color(ansiColors.brightWhite)

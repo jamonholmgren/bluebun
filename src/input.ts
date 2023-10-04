@@ -21,7 +21,13 @@ export const inputKey: InputKeyFunction = async () => {
 
   // if it's a special key, return the name
   const keySp = key as keyof typeof specialKeys
-  if (specialKeys[keySp]) return specialKeys[keySp]
+
+  const specialKey = specialKeys[keySp]
+
+  // if it's ctrl-c, process.exit
+  if (specialKey === "ctrl-c") process.exit(1)
+
+  if (specialKey) return specialKeys[keySp]
 
   // otherwise return the string
   return key

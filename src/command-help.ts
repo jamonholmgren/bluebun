@@ -1,23 +1,22 @@
-import { type InitialProps, commandTree, colors, styles, CommandTree } from "./bluebun"
+import {
+  type InitialProps,
+  type CommandTree,
+  commandTree,
+  calcWidestCommandName,
+  bold,
+  cyan,
+  gray,
+  white,
+} from "./bluebun"
 
 export async function commandHelp(initialProps: InitialProps) {
   const { name } = initialProps
-  const [bold] = styles("bold")
-  const [white, gray, cyan] = colors("white", "gray", "cyan")
 
   const tree = await commandTree(initialProps)
 
-  const calcWidest = (cmdTree: CommandTree, start: number = 10): number => {
-    return Object.keys(cmdTree).reduce((acc, key) => {
-      const { name, subcommands } = cmdTree[key]
-      const subcommandsWidest = subcommands ? calcWidest(subcommands, acc + 1 + name.length) : 0
-      return Math.max(acc, name.length, subcommandsWidest)
-    }, start)
-  }
+  const widest = calcWidestCommandName(tree)
 
-  const widest = calcWidest(tree) + 12 // add 12 for ansi color codes
-
-  const generateHelp = (cmdTree: CommandTree, prefix: string): string[] => {
+  function generateHelp(cmdTree: CommandTree, prefix: string): string[] {
     return Object.keys(cmdTree)
       .sort()
       .flatMap((key) => {

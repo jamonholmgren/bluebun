@@ -1,14 +1,12 @@
 # Styles and Colors
 
 This lets you output text in different colors and styles in the terminal using ANSI escape codes.
+Just import them directly from bluebun.
 
 ## Usage
 
 ```typescript
-import { print, color, style } from "bluebun"
-
-const red = color("red")
-const bold = style("bold")
+import { print, red, bold } from "bluebun"
 
 print(red(`This is ${bold("red")} text`))
 ```
@@ -25,6 +23,20 @@ Just output the ANSI escape code directly:
 import { print } from "bluebun"
 
 print("\x1b[38;2;255;0;0mThis is red text\x1b[0m")
+```
+
+Or use the `color` or `style` functions:
+
+```typescript
+import { print, color, style } from "bluebun"
+
+const red = color(31) // 31 is red
+
+print(red("This is red text"))
+
+const bold = style(1, 22) // 1 is bold, 22 is reset back to normal
+
+print(bold("This is bold text"))
 ```
 
 ## Testing
