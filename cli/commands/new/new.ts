@@ -45,19 +45,24 @@ export default {
     }
 
     displayOptions()
+
     projectInfo.name = await getName(props.first)
-    // displayOptions()
-    // projectInfo.authorName = await getAuthorName(props.options.author as string | undefined)
-    // displayOptions()
-    // projectInfo.authorEmail = await getAuthorEmail(props.options.email as string | undefined)
-    // displayOptions()
-    // projectInfo.description = await getDescription(props.options.description as string | undefined)
-    // displayOptions()
-    // projectInfo.website = await getWebsite(props.options.website as string | undefined)
-    // displayOptions()
-    // projectInfo.primary = (await getColor(props.options.primary as string | undefined, "primary")) || "white"
-    // displayOptions()
-    // projectInfo.secondary = (await getColor(props.options.secondary as string | undefined, "secondary")) || "white"
-    // displayOptions()
+    displayOptions()
+    projectInfo.authorName = await getAuthorName(props.options.author as string | undefined)
+    displayOptions()
+    projectInfo.authorEmail = await getAuthorEmail(props.options.email as string | undefined)
+    displayOptions()
+    projectInfo.description = await getDescription(props.options.description as string | undefined)
+    displayOptions()
+    projectInfo.website = await getWebsite(props.options.website as string | undefined)
+
+    displayOptions()
+    projectInfo.website = await getWebsite(props.options.website as string | undefined)
+
+    displayOptions()
+    projectInfo.primary = (await getColor(props.options.primary as string | undefined, "primary")) || "white"
+    displayOptions()
+    projectInfo.secondary = (await getColor(props.options.secondary as string | undefined, "secondary")) || "white"
+    displayOptions()
   },
 }

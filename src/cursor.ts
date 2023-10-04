@@ -1,5 +1,6 @@
 import { type ReadStream } from "tty"
 import { write } from "./print"
+import { type } from "os"
 
 // ty https://github.com/sindresorhus/ansi-escapes/blob/main/index.js
 const ESC = "\u001b["
@@ -77,8 +78,7 @@ export const cursor = {
   // advanced save & restore positions -- these can't be chained
   queryPosition,
   bookmark: async (name: string) => {
-    const pos = await cursor.queryPosition()
-    console.log("pos", pos)
+    const pos = await getCursorPos()
     if (pos) positions[name] = pos
   },
 
@@ -86,8 +86,6 @@ export const cursor = {
   jump: (name: string) => {
     const col = positions[name].col || 1
     const row = positions[name].row || 1
-    console.clear()
-    console.log(89)
     cursor.goToPosition(col, row)
     return cursor
   },
@@ -97,7 +95,8 @@ export const cursor = {
 // it returns the cursor position, which we can then parse
 // and use to position the cursor.
 let stream: ReadStream | undefined
-export function queryPosition(): Promise<{ row: number; col: number }> {
+type CursorPos = { row: number; col: number }
+export function queryPosition(): Promise<CursorPos> {
   return new Promise((resolve, reject) => {
     const listener = (data: string) => {
       const str = data.toString()
@@ -126,3 +125,25 @@ export function queryPosition(): Promise<{ row: number; col: number }> {
     process.stdout.write("\u001B[6n")
   })
 }
+
+const getCursorPos = async (): Promise<CursorPos> =>
+  new Promise((resolve) => {
+    const cursorGetPosition = "\u001b[6n"
+
+    process.stdin.setEncoding("utf8")
+    process.stdin.setRawMode(true)
+
+    function readfx(str: string) {
+      stream.removeListener("data", readfx)
+
+      const regex = /\[(.*)/g
+      const xy = regex.exec(str.trim())![0].replace(/\[|R"/g, "").split(";")
+      const pos: CursorPos = { row: parseInt(xy[0], 10), col: parseInt(xy[1], 10) }
+      process.stdin.setRawMode(false)
+      resolve(pos)
+    }
+
+    const stream = process.stdin.on("data", readfx)
+
+    process.stdout.write(cursorGetPosition)
+  })

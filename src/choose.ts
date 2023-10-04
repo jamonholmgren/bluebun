@@ -1,4 +1,5 @@
-import { bold, cursor, inputKey } from "./bluebun"
+import { bold, cursor, delay, inputKey } from "./bluebun"
+import * as readline from "node:readline/promises"
 
 type ChooseOptions = {
   style: "horizontal" | "vertical"
@@ -11,10 +12,10 @@ export async function choose(
 ) {
   let currentSelection = selections[0]
 
-  await cursor.bookmark("choose-start")
+  // await cursor.bookmark("cstart")
 
   const clearChoices = () => {
-    // cursor.jump("choose-start")
+    cursor.jump("ask-start")
 
     // clear the selections
     selections.forEach((selection) => {
@@ -29,7 +30,7 @@ export async function choose(
 
   const printChoices = () => {
     // go to the top
-    // cursor.jump("choose-start")
+    cursor.jump("ask-start")
 
     // Print the selections
     selections.forEach((selection) => {
@@ -72,7 +73,7 @@ export async function choose(
         } else if (options.after === "clear") {
           clearChoices()
         }
-        // cursor.jump("choose-start").show()
+        cursor.jump("ask-start").show()
         cursor.show()
         return currentSelection
       case "escape":
