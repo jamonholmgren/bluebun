@@ -4,7 +4,7 @@ import { expect, test } from "bun:test"
 test("commandTree", async () => {
   const tree = await commandTree({ name: "bluebun", cliPath: __dirname + "/../cli" })
 
-  expect(Object.keys(tree)).toMatchObject(["default", "help", "testing", "new", "version"])
+  expect(Object.keys(tree).sort()).toMatchObject(["default", "help", "testing", "new", "version"].sort())
   expect(Object.keys(tree["testing"].subcommands || {})).toMatchObject(["cli", "other"])
 
   expect(tree["testing"].subcommands?.cli.description).toContain("Just a test -- cli")
