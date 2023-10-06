@@ -1,7 +1,7 @@
 {
   "name": "blowgun",
   "description": "A CLI framework for Bun, inspired by Gluegun",
-  "version": "0.0.12",
+  "version": "0.2.0",
   "author": {
     "name": "Jamon Holmgren",
     "email": "code@jamon.dev"
