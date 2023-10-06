@@ -1,4 +1,4 @@
-import { ask, bold, yellow } from "bluebun"
+import { ask, bold, yellow } from "blowgun"
 
 export async function getDescription(description: string | undefined) {
   if (description) return description

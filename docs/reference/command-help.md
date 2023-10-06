@@ -1,10 +1,10 @@
 # Command Help
 
-While you often want to build your own help screens, Bluebun ships with an easy way to get all the commands and
+While you often want to build your own help screens, Blowgun ships with an easy way to get all the commands and
 their descriptions and formats it nicely.
 
 ```ts
-import { print, commandHelp } from "bluebun"
+import { print, commandHelp } from "blowgun"
 
 export default {
   name: "help",
@@ -20,13 +20,13 @@ This is an example of the output:
 ```sh
 Commands:
 
-  bluebun               Default command
-  bluebun help          Prints this help message
-  bluebun new           Spins up a new Bluebun project
-  bluebun testing       Just a test
-  bluebun testing cli   Testing the CLI
-  bluebun testing other Testing something else
-  bluebun version       Prints the CLI version
+  blowgun               Default command
+  blowgun help          Prints this help message
+  blowgun new           Spins up a new Blowgun project
+  blowgun testing       Just a test
+  blowgun testing cli   Testing the CLI
+  blowgun testing other Testing something else
+  blowgun version       Prints the CLI version
 ```
 
 ## Testing
@@ -35,15 +35,15 @@ commandHelp just returns a string, so it's relatively easy to test:
 
 ```ts
 import { expect, test } from "bun:test"
-import { commandHelp } from "bluebun"
+import { commandHelp } from "blowgun"
 
 test("commandHelp", async () => {
-  const help = await commandHelp({ name: "bluebun", cliPath: __dirname + "/../cli" })
+  const help = await commandHelp({ name: "blowgun", cliPath: __dirname + "/../cli" })
 
   const strippedText = stripANSI(help)
 
-  expect(help).toContain("bluebun")
-  expect(help).toContain("Spins up a new Bluebun project")
+  expect(help).toContain("blowgun")
+  expect(help).toContain("Spins up a new Blowgun project")
   expect(help).toContain("Prints the CLI version")
 })
 ```
@@ -55,7 +55,7 @@ Just keep in mind we add some default colors to the output, so you might need to
 If you want to build your own help from the command tree, you can use the `commandTree` function to get an object with all the commands and their subcommands as an optional `.subcommands` property::
 
 ```ts
-import { print, commandTree } from "bluebun"
+import { print, commandTree } from "blowgun"
 
 export default {
   name: "help",
@@ -66,7 +66,7 @@ export default {
     // commands looks like this:
     // {
     //   default: {
-    //     name: "bluebun",
+    //     name: "blowgun",
     //     description: "Default command",
     //     run: [Function: run],
     //   },

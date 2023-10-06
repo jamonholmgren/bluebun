@@ -7,7 +7,7 @@ To learn more about the `cli` command, see the [run](./run.md) page -- the main 
 ```ts
 #!/usr/bin/env bun
 
-const { command, props } = require("bluebun").cli({ name: "pizza", cliPath: __dirname + "/cli" })
+const { command, props } = require("blowgun").cli({ name: "pizza", cliPath: __dirname + "/cli" })
 
 // the `run` comand does this immediately
 command(props)
@@ -22,7 +22,7 @@ But most of the time, you won't need to do this. Just use the `run` command.
 To test your CLI end-to-end, you can just import the `cli` function and call it directly:
 
 ```ts
-import { cli, type InitialProps } from "bluebun"
+import { cli, type InitialProps } from "blowgun"
 import { expect, test } from "bun:test"
 
 test("pizza version", async () => {

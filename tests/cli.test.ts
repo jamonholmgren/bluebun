@@ -1,16 +1,16 @@
-import { cli, type InitialProps } from "bluebun"
+import { cli, type InitialProps } from "blowgun"
 import { expect, test } from "bun:test"
 
-const name = "bluebun"
+const name = "blowgun"
 const cliPath = __dirname + "/../cli"
 
-test("bluebun default", async () => {
-  const argv = ["/bin/bun", "/bin/bluebun"]
+test("blowgun default", async () => {
+  const argv = ["/bin/bun", "/bin/blowgun"]
 
   const { command, props } = await cli({ argv, name, cliPath })
 
   // make sure the command is the right one
-  expect(command.name).toEqual("bluebun")
+  expect(command.name).toEqual("blowgun")
 
   // check the props
   expect(props).toMatchObject({
@@ -26,13 +26,13 @@ test("bluebun default", async () => {
   })
 })
 
-test("bluebun nonexistant command", async () => {
-  const argv = ["/bin/bun", "/bin/bluebun", "pizza"]
+test("blowgun nonexistant command", async () => {
+  const argv = ["/bin/bun", "/bin/blowgun", "pizza"]
 
   const { command, props } = await cli({ argv, name, cliPath })
 
   // make sure the command is the right one
-  expect(command.name).toEqual("bluebun")
+  expect(command.name).toEqual("blowgun")
 
   // check the props
   expect(props).toMatchObject({
@@ -48,13 +48,13 @@ test("bluebun nonexistant command", async () => {
   })
 })
 
-test("bluebun nonexistant command after flag", async () => {
-  const argv = ["/bin/bun", "/bin/bluebun", "--verbose=true", "pizza"]
+test("blowgun nonexistant command after flag", async () => {
+  const argv = ["/bin/bun", "/bin/blowgun", "--verbose=true", "pizza"]
 
   const { command, props } = await cli({ argv, name, cliPath })
 
   // make sure the command is the right one
-  expect(command.name).toEqual("bluebun")
+  expect(command.name).toEqual("blowgun")
 
   // check the props
   expect(props).toMatchObject({
@@ -70,8 +70,8 @@ test("bluebun nonexistant command after flag", async () => {
   })
 })
 
-test("bluebun version", async () => {
-  const argv = ["/bin/bun", "/bin/bluebun", "version"]
+test("blowgun version", async () => {
+  const argv = ["/bin/bun", "/bin/blowgun", "version"]
 
   const { command, props } = await cli({ argv, name, cliPath })
 
@@ -89,8 +89,8 @@ test("bluebun version", async () => {
   })
 })
 
-test("bluebun help", async () => {
-  const argv = ["/bin/bun", "/bin/bluebun", "help"]
+test("blowgun help", async () => {
+  const argv = ["/bin/bun", "/bin/blowgun", "help"]
 
   const { command, props } = await cli({ argv, name, cliPath })
 
@@ -114,7 +114,7 @@ test("bluebun help", async () => {
 test("passing in flags to the help command", async () => {
   const argv = [
     "/bin/bun",
-    "/bin/bluebun",
+    "/bin/blowgun",
     "help",
     "--verbose",
     "true",
@@ -151,7 +151,7 @@ test("passing in flags to the help command", async () => {
 })
 
 test("nested new command", async () => {
-  const argv = ["/bin/bun", "/bin/bluebun", "new", "pizza", "cheese"]
+  const argv = ["/bin/bun", "/bin/blowgun", "new", "pizza", "cheese"]
 
   const { command, props } = await cli({ argv, name, cliPath })
 
@@ -173,7 +173,7 @@ test("nested new command", async () => {
 })
 
 test("checking aliases within nested commands, etc", async () => {
-  const argv = ["/bin/bun", "/bin/bluebun", "t", "cli", "pizza", "cheese"]
+  const argv = ["/bin/bun", "/bin/blowgun", "t", "cli", "pizza", "cheese"]
 
   const { command, props } = await cli({ argv, name, cliPath })
 
@@ -197,7 +197,7 @@ test("checking aliases within nested commands, etc", async () => {
 test("extremely complicated command, arguments, options", async () => {
   const argv = [
     "/bin/bun",
-    "/bin/bluebun",
+    "/bin/blowgun",
     "new",
     "pizza",
     "cheese",

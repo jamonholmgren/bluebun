@@ -1,4 +1,4 @@
-import { ask, bold, yellow } from "bluebun"
+import { ask, bold, yellow } from "blowgun"
 
 export async function getName(name: string | undefined) {
   if (name) return name

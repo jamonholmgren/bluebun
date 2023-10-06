@@ -1,5 +1,5 @@
 import { expect, test, beforeEach, afterEach } from "bun:test"
-import { print } from "bluebun"
+import { print } from "blowgun"
 
 beforeEach(() => {
   print.setMocked(true)

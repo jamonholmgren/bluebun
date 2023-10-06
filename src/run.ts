@@ -1,4 +1,4 @@
-import { type InitialProps, cli } from "./bluebun"
+import { type InitialProps, cli } from "./blowgun"
 
 /**
  * This is the main entry point to your CLI and takes the initial run options,

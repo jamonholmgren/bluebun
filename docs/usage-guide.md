@@ -1,8 +1,8 @@
 # Usage Guide
 
-This is a fairly comprehensive guide on how I use Bluebun to build CLIs. It doesn't cover
-_everything_ that Bluebun does, but after reading through this you should have a pretty
-solid understanding of how to use Bluebun.
+This is a fairly comprehensive guide on how I use Blowgun to build CLIs. It doesn't cover
+_everything_ that Blowgun does, but after reading through this you should have a pretty
+solid understanding of how to use Blowgun.
 
 Make sure you've done the [Getting Started](./getting-started.md) guide first, as that covers
 installation and spinning up the CLI we are about to build.
@@ -16,8 +16,8 @@ There's a file in the root of your new project, called `pizza`. It should look l
 ```js
 #!/usr/bin/env bun
 
-// Start bluebun to run the correct CLI command
-require("bluebun").run({
+// Start blowgun to run the correct CLI command
+require("blowgun").run({
   name: require("./package.json").name,
   cliPath: __dirname + "/cli",
 })
@@ -31,7 +31,7 @@ So, the file should look like this:
 ```js
 #!/usr/bin/env bun
 
-require("bluebun").run({ name: "pizza", cliPath: __dirname + "/cli" })
+require("blowgun").run({ name: "pizza", cliPath: __dirname + "/cli" })
 ```
 
 Ready to roll!
@@ -49,7 +49,7 @@ If I want, I'll sometimes look at the `first` parameter to see if they passed in
 So, let's do that.
 
 ```ts
-import { type Props, print, color } from "bluebun"
+import { type Props, print, color } from "blowgun"
 
 export default {
   name: "pizza",

@@ -18,7 +18,7 @@ import {
   red,
   white,
   yellow,
-} from "bluebun"
+} from "blowgun"
 
 export async function getColor(name: string | undefined, colorName: "primary" | "secondary") {
   if (name) return name

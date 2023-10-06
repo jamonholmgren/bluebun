@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 
-require("bluebun").run({
+require("blowgun").run({
   name: require("./package.json").name,
   cliPath: __dirname + "/cli",
 })

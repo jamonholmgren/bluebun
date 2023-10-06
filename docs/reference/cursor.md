@@ -1,15 +1,15 @@
 # Cursor
 
-Bluebun comes with a simple cursor API that lets you move the cursor around the terminal. You can "chain"
+Blowgun comes with a simple cursor API that lets you move the cursor around the terminal. You can "chain"
 commands, which makes for a really nice API.
 
-This is not usually used directly in your CLI, but is used by other Bluebun APIs, like [spinners](./spinner.md).
+This is not usually used directly in your CLI, but is used by other Blowgun APIs, like [spinners](./spinner.md).
 However, if you want to use it directly, you can!
 
 ## Usage
 
 ```typescript
-import { cursor } from "bluebun"
+import { cursor } from "blowgun"
 
 cursor.hide()
 cursor.up(2).left(5).write("Hello!").down(2).right(5).show()

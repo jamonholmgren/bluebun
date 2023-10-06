@@ -1,4 +1,4 @@
-import { Props, print, bold, THEME_PRIMARY, THEME_SECONDARY, commandHelp } from "bluebun"
+import { Props, print, bold, THEME_PRIMARY, THEME_SECONDARY, commandHelp } from "blowgun"
 
 export default {
   name: "BRAND",

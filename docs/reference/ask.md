@@ -7,7 +7,7 @@ It's a single line and will return when the user hits enter.
 ## Usage
 
 ```typescript
-import { ask } from "bluebun"
+import { ask } from "blowgun"
 
 const answer = await ask("What is your name?")
 ```
@@ -17,7 +17,7 @@ If you need validation for the answer, there are two ways to approach it.
 You can use the `validate` option (recommended):
 
 ```typescript
-import { ask, color } from "bluebun"
+import { ask, color } from "blowgun"
 
 const warning = color("yellow")("At least 3 characters please")
 
@@ -29,7 +29,7 @@ const answer = await ask("What is your name?", {
 Alternatively, you can just add a loop yourself:
 
 ```typescript
-import { ask, print, color } from "bluebun"
+import { ask, print, color } from "blowgun"
 
 const warning = color("yellow")("At least 3 characters please")
 
@@ -46,7 +46,7 @@ You can set a mock property on the `ask` function to return a value for a given 
 
 ```typescript
 import { expect, test, beforeAll, afterAll } from "bun:test"
-import { ask } from "bluebun"
+import { ask } from "blowgun"
 
 beforeAll(() => {
   ask.mock = (input) => {

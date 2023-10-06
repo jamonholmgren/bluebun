@@ -22,7 +22,7 @@
     "README.md"
   ],
   "dependencies": {
-    "bluebun": "latest"
+    "blowgun": "latest"
   },
   "devDependencies": {
     "@semantic-release/git": "^10.0.1",

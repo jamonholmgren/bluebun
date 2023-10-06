@@ -24,7 +24,7 @@ cli/
 Commands are exported as defaults from each command file. They look like this:
 
 ```typescript
-import { type Props } from "bluebun"
+import { type Props } from "blowgun"
 
 export default {
   name: "bake",
@@ -64,7 +64,7 @@ Here are the properties available on the `props` object, assuming we have a CLI 
 Given these props, we might have a command that looks like this:
 
 ```typescript
-import { type Props, spinStart, spinStop } from "bluebun"
+import { type Props, spinStart, spinStop } from "blowgun"
 import { createPizza, slice } from "./_pizza"
 import { convectionBake, toasterBake, regularBake } from "./_bakePizza"
 
@@ -96,6 +96,6 @@ export default {
 }
 ```
 
-For a full list of all the features available to you from Bluebun, see the [Reference](./reference.md) page.
+For a full list of all the features available to you from Blowgun, see the [Reference](./reference.md) page.
 
-For a much more in-depth guide on how to use Bluebun, see the [Usage Guide](./usage-guide.md) page.
+For a much more in-depth guide on how to use Blowgun, see the [Usage Guide](./usage-guide.md) page.

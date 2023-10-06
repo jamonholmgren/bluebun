@@ -1,4 +1,4 @@
-import { Props, print } from "bluebun"
+import { Props, print } from "blowgun"
 
 export default {
   name: "other",

@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test"
-import { inputKey, inputKeys } from "bluebun"
+import { inputKey, inputKeys } from "blowgun"
 
 test("inputKey", async () => {
   inputKey.mock = async () => "a"

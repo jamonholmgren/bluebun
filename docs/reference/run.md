@@ -1,12 +1,12 @@
 # run
 
-Bluebun's main function is just called `run`. It's usually run from the CLI binary and from tests.
+Blowgun's main function is just called `run`. It's usually run from the CLI binary and from tests.
 
 ```ts
 #!/usr/bin/env bun
 
-// Start bluebun to run the correct CLI command
-require("bluebun").run({ name: "pizza", cliPath: __dirname + "/cli" })
+// Start blowgun to run the correct CLI command
+require("blowgun").run({ name: "pizza", cliPath: __dirname + "/cli" })
 ```
 
 ## Options
@@ -22,7 +22,7 @@ The `run` function takes an options object with the following keys:
 To test your CLI end-to-end, you can just import the `run` function and call it directly:
 
 ```ts
-import { run } from "bluebun"
+import { run } from "blowgun"
 
 run({ cliPath: __dirname + "/../cli", argv: ["/bin/bun", "/bin/pizza", "version"] })
 ```
@@ -30,7 +30,7 @@ run({ cliPath: __dirname + "/../cli", argv: ["/bin/bun", "/bin/pizza", "version"
 We recommend mocking the print output and any input functions (see the [print docs](./print.md) and [inputKey docs](./inputKey.md) and [inputKeys docs](./inputKeys.md)).
 
 ```ts
-import { run, print, inputKey, type InitialProps } from "bluebun"
+import { run, print, inputKey, type InitialProps } from "blowgun"
 import { expect, test } from "bun:test"
 
 test("pizza version", async () => {

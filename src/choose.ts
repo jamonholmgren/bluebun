@@ -1,4 +1,4 @@
-import { bold, cursor, delay, inputKey } from "./bluebun"
+import { bold, cursor, delay, inputKey } from "./blowgun"
 import * as readline from "node:readline/promises"
 
 type ChooseOptions = {

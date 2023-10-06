@@ -9,7 +9,7 @@ _If you need to wait for a single keypress, use the [`inputKey`](./inputKey.md) 
 ## Usage
 
 ```typescript
-import { inputKeys } from "bluebun"
+import { inputKeys } from "blowgun"
 
 const keysPressed = []
 const keys = await inputKeys(async (key) => {

@@ -1,16 +1,16 @@
-import { Props, print, commandHelp, blue, bold, gray } from "bluebun"
+import { Props, print, commandHelp, blue, bold, gray } from "blowgun"
 
 export default {
-  name: "bluebun",
+  name: "blowgun",
   description: "Default command",
   run: async (props: Props) => {
     print(``)
-    print(blue(bold(`Bluebun CLI`)))
+    print(blue(bold(`Blowgun CLI`)))
     print(``)
     print(
       gray(
         ` ${`version ` + require(props.cliPath + "/../package.json").version} • by ${"Jamon Holmgren"} • ${blue(
-          `bluebun.jamon.dev`
+          `blowgun.jamon.dev`
         )}`
       )
     )
