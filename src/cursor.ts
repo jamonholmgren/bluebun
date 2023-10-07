@@ -1,6 +1,6 @@
 import { type ReadStream } from "tty"
 import { write } from "./print"
-import { type } from "os"
+import { CursorPos } from "readline"
 
 // ty https://github.com/sindresorhus/ansi-escapes/blob/main/index.js
 const ESC = "\u001b["
@@ -27,7 +27,8 @@ export const cursorCodes = {
   scrollDown: "T",
   savePosition: isTerminalApp ? "\u001B7" : ESC + "s",
   restorePosition: isTerminalApp ? "\u001B8" : ESC + "u",
-  goToPosition: (x: number, y: number) => `${ESC}${y};${x}H`,
+  goToPosition: (x: number, y: number) => `\u001b[${y};${x}H`,
+  // goToPosition: (cols: number, rows: number) => `goto: ${cols}, ${rows}\n`,
   hide: "?25l",
   show: "?25h",
 }
@@ -35,7 +36,7 @@ export const cursorCodes = {
 /**
  * For storing bookmarks
  */
-const positions: { [key: string]: { row: number; col: number } } = {}
+const positions: { [key: string]: CursorPos } = {}
 
 /**
  * For chaining cursor methods.
@@ -77,16 +78,18 @@ export const cursor = {
 
   // advanced save & restore positions -- these can't be chained
   queryPosition,
-  bookmark: async (name: string) => {
-    const pos = await getCursorPos()
-    if (pos) positions[name] = pos
+  bookmark: async (name: string, pos?: CursorPos) => {
+    const cpos = pos || (await queryPosition())
+    positions[name] = cpos
+    return cpos
   },
+  getBookmark: (name: string) => positions[name],
 
   // can be chained, since we don't have to wait for the queryPosition
   jump: (name: string) => {
-    const col = positions[name].col || 1
-    const row = positions[name].row || 1
-    cursor.goToPosition(col, row)
+    const cols = positions[name].cols || 1
+    const rows = positions[name].rows || 1
+    cursor.goToPosition(cols, rows)
     return cursor
   },
 }
@@ -95,7 +98,6 @@ export const cursor = {
 // it returns the cursor position, which we can then parse
 // and use to position the cursor.
 let stream: ReadStream | undefined
-type CursorPos = { row: number; col: number }
 export function queryPosition(): Promise<CursorPos> {
   return new Promise((resolve, reject) => {
     const listener = (data: string) => {
@@ -108,9 +110,9 @@ export function queryPosition(): Promise<CursorPos> {
       if (!match || match.length !== 2) {
         reject(new Error("Could not get cursor position"))
       } else {
-        const [row, col] = match.map((n) => parseInt(n, 10))
+        const [rows, cols] = match.map((n) => parseInt(n, 10))
         // Seems to resolve this issue: https://github.com/oven-sh/bun/issues/6279
-        setTimeout(() => resolve({ row, col }), 0)
+        setTimeout(() => resolve({ rows, cols }), 0)
       }
     }
 
@@ -125,25 +127,3 @@ export function queryPosition(): Promise<CursorPos> {
     process.stdout.write("\u001B[6n")
   })
 }
-
-const getCursorPos = async (): Promise<CursorPos> =>
-  new Promise((resolve) => {
-    const cursorGetPosition = "\u001b[6n"
-
-    process.stdin.setEncoding("utf8")
-    process.stdin.setRawMode(true)
-
-    function readfx(str: string) {
-      stream.removeListener("data", readfx)
-
-      const regex = /\[(.*)/g
-      const xy = regex.exec(str.trim())![0].replace(/\[|R"/g, "").split(";")
-      const pos: CursorPos = { row: parseInt(xy[0], 10), col: parseInt(xy[1], 10) }
-      process.stdin.setRawMode(false)
-      resolve(pos)
-    }
-
-    const stream = process.stdin.on("data", readfx)
-
-    process.stdout.write(cursorGetPosition)
-  })

@@ -22,7 +22,7 @@ export const ask: AskFunction = async (prompt = "", askOptions = {}): Promise<st
     output: process.stdout,
   })
 
-  await cursor.bookmark("ask-start")
+  // await cursor.bookmark("ask-start")
 
   let answer = ""
   while (true) {
@@ -37,7 +37,7 @@ export const ask: AskFunction = async (prompt = "", askOptions = {}): Promise<st
       // delay 1 second then clear the line
       await delay(1000)
       if (askOptions.after === "clear") {
-        cursor.eraseLine().jump("ask-start").eraseLine()
+        // cursor.eraseLine().jump("ask-start").eraseLine()
       } else {
         cursor.write("\n")
       }
@@ -48,7 +48,7 @@ export const ask: AskFunction = async (prompt = "", askOptions = {}): Promise<st
   }
 
   if (askOptions.after === "clear") {
-    cursor.jump("ask-start").eraseLine()
+    // cursor.jump("ask-start").eraseLine()
   } else {
     cursor.write("\n")
   }

@@ -19,6 +19,8 @@
     },
     "types": [
       "bun-types" // add Bun global
-    ]
+    ],
+    // all files and folders
+    "include": ["./src/**/*", "./cli/**/*", "./package.json", "blowgun"]
   }
 }
