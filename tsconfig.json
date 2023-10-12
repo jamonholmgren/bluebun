@@ -6,7 +6,7 @@
     "moduleResolution": "bundler",
     "moduleDetection": "force",
     "allowImportingTsExtensions": true,
-    "noEmit": true,
+    "noEmit": false,
     "composite": true,
     "strict": true,
     "downlevelIteration": true,
@@ -14,13 +14,14 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./types",
     "paths": {
       "bluebun": ["./src/bluebun.ts"]
     },
     "types": [
       "bun-types" // add Bun global
-    ],
-    // all files and folders
-    "include": ["./src/**/*", "./cli/**/*", "./package.json", "bluebun"]
+    ]
   }
 }

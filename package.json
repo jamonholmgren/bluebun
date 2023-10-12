@@ -9,6 +9,7 @@
   "homepage": "https://github.com/jamonholmgren/bluebun",
   "type": "module",
   "module": "./src/bluebun.ts",
+  "types": "./src/_types.d.ts",
   "scripts": {
     "ci:publish": "bun run semantic-release"
   },
@@ -26,7 +27,8 @@
     "@semantic-release/git": "^10.0.1",
     "@types/node": "latest",
     "bun-types": "latest",
-    "semantic-release": "^22.0.1"
+    "semantic-release": "^22.0.1",
+    "typescript": "^5.2.2"
   },
   "prettier": {
     "printWidth": 120,

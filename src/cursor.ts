@@ -1,6 +1,6 @@
 import { type ReadStream } from "tty"
+import { type CursorPos } from "bluebun"
 import { write } from "./print"
-import { CursorPos } from "readline"
 
 // ty https://github.com/sindresorhus/ansi-escapes/blob/main/index.js
 const ESC = "\u001b["

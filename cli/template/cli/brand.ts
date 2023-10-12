@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Props, print, bold, THEME_PRIMARY, THEME_SECONDARY, commandHelp } from "bluebun"
 
 export default {

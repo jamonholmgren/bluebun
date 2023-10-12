@@ -1,4 +1,4 @@
-import { type CursorPos } from "readline"
+import { type CursorPos } from "bluebun"
 import { cursor } from "./cursor"
 import { stripANSI } from "./utils"
 

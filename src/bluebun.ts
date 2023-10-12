@@ -17,6 +17,11 @@ export * from "./progress"
 export * from "./utils"
 export * from "./billboard"
 
+export interface CursorPos {
+  rows: number
+  cols: number
+}
+
 export type InitialProps = {
   /**
    * This is the name of the CLI. It's used to find the default command.
