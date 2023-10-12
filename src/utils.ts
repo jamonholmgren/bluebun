@@ -3,7 +3,7 @@
  * CLI developer.
  */
 
-import { type CommandTree } from "blowgun"
+import { type CommandTree } from "bluebun"
 
 /**
  * Returns largest string in an array. Useful for aligning text.

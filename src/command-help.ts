@@ -7,7 +7,7 @@ import {
   cyan,
   gray,
   white,
-} from "./blowgun"
+} from "./bluebun"
 
 export async function commandHelp(initialProps: InitialProps) {
   const { name } = initialProps

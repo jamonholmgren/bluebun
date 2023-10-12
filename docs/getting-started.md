@@ -1,24 +1,24 @@
 # Getting Started
 
-This lays out how to use Blowgun in your CLI at a high level.
+This lays out how to use Bluebun in your CLI at a high level.
 
 ## Quick Start
 
-Blowgun has a CLI (of course) to help you get started building your own CLI.
+Bluebun has a CLI (of course) to help you get started building your own CLI.
 
 ```
 # install/update bun
 curl -fsSL https://bun.sh/install | bash
 
-# use blowgun's CLI to create your new CLI
-bunx blowgun new pizza # doesn't work yet!
+# use bluebun's CLI to create your new CLI
+bunx bluebun new pizza # doesn't work yet!
 
 # cd in and link it so you can run it
 cd pizza
 bun link
 ```
 
-Blowgun will then spin up a new CLI project for you, and you can start building your CLI right away.
+Bluebun will then spin up a new CLI project for you, and you can start building your CLI right away.
 
 ## Your CLI's binary
 
@@ -26,13 +26,13 @@ For the rest of this document, we'll assume your CLI is called `pizza`. Just rep
 
 So, when you run `bunx pizza`, the file that is run is `pizza` in the root of your project. (This is specified in the package.json file, under the `bin` key.)
 
-This is very simple -- it just calls the `run()` function that is exported from `blowgun`, and passes in a few standard arguments:
+This is very simple -- it just calls the `run()` function that is exported from `bluebun`, and passes in a few standard arguments:
 
 ```js
 #!/usr/bin/env bun
 
-// Start blowgun to run the correct CLI command
-require("blowgun").run({
+// Start bluebun to run the correct CLI command
+require("bluebun").run({
   name: require("./package.json").name,
   cliPath: __dirname + "/cli",
 })
@@ -44,7 +44,7 @@ _(Note: if you replace the `require("./package.json").name` with a simple string
 
 ## The CLI directory
 
-By convention, Blowgun expects your CLI source to be in a directory called `cli` in the root of your project (but you can configure it above).
+By convention, Bluebun expects your CLI source to be in a directory called `cli` in the root of your project (but you can configure it above).
 
 ### Commands
 

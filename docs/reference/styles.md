@@ -1,26 +1,26 @@
 # Styles and Colors
 
 This lets you output text in different colors and styles in the terminal using ANSI escape codes.
-Just import them directly from blowgun.
+Just import them directly from bluebun.
 
 ## Usage
 
 ```typescript
-import { print, red, bold } from "blowgun"
+import { print, red, bold } from "bluebun"
 
 print(red(`This is ${bold("red")} text`))
 ```
 
 ## Available Styles and Colors
 
-Easiest way to see all the styles and colors is to just look at the [source file](https://github.com/jamonholmgren/blowgun/blob/main/src/styles.ts). The TypeScript definitions are also helpful here.
+Easiest way to see all the styles and colors is to just look at the [source file](https://github.com/jamonholmgren/bluebun/blob/main/src/styles.ts). The TypeScript definitions are also helpful here.
 
 ## Custom Styles
 
 Just output the ANSI escape code directly:
 
 ```typescript
-import { print } from "blowgun"
+import { print } from "bluebun"
 
 print("\x1b[38;2;255;0;0mThis is red text\x1b[0m")
 ```
@@ -28,7 +28,7 @@ print("\x1b[38;2;255;0;0mThis is red text\x1b[0m")
 Or use the `color` or `style` functions:
 
 ```typescript
-import { print, color, style } from "blowgun"
+import { print, color, style } from "bluebun"
 
 const red = color(31) // 31 is red
 

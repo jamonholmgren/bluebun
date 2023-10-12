@@ -1,4 +1,4 @@
-import { ask, yellow, bold } from "blowgun"
+import { ask, yellow, bold } from "bluebun"
 
 export async function getAuthorEmail(name: string | undefined) {
   if (name) return name

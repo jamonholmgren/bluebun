@@ -15,12 +15,12 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "paths": {
-      "blowgun": ["./src/blowgun.ts"]
+      "bluebun": ["./src/bluebun.ts"]
     },
     "types": [
       "bun-types" // add Bun global
     ],
     // all files and folders
-    "include": ["./src/**/*", "./cli/**/*", "./package.json", "blowgun"]
+    "include": ["./src/**/*", "./cli/**/*", "./package.json", "bluebun"]
   }
 }

@@ -9,7 +9,7 @@ _If you need to handle multiple keypresses, use the [`inputKeys`](./inputKeys.md
 ## Usage
 
 ```typescript
-import { inputKey } from "blowgun"
+import { inputKey } from "bluebun"
 
 const key = await inputKey()
 ```
@@ -20,7 +20,7 @@ You can set a mock function on the `inputKey` function to provide a character to
 
 ```typescript
 import { expect, test } from "bun:test"
-import { inputKey } from "blowgun"
+import { inputKey } from "bluebun"
 
 test("inputKey", async () => {
   inputKey.mock = async () => "a"

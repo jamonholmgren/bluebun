@@ -1,4 +1,4 @@
-import { type Props, print, blue, cursor, inputKeys, billboard, gray, white, bold, ask } from "blowgun"
+import { type Props, print, blue, cursor, inputKeys, billboard, gray, white, bold, ask } from "bluebun"
 import { getName } from "./_getName"
 import { getAuthorName } from "./_getAuthorName"
 import { getAuthorEmail } from "./_getAuthorEmail"
@@ -8,11 +8,11 @@ import { getColor } from "./_getColor"
 
 export default {
   name: "new",
-  description: "Spins up a new Blowgun project",
+  description: "Spins up a new Bluebun project",
   alias: "n",
   run: async (props: Props) => {
     print(``)
-    print(blue(`Let's create a new Blowgun-powered CLI!`))
+    print(blue(`Let's create a new Bluebun-powered CLI!`))
     print(``)
 
     // Save the cursor position so we can return to it later
@@ -47,7 +47,7 @@ export default {
       startPos
     )
 
-    updater("t", bold(white("Blowgun")))
+    updater("t", bold(white("Bluebun")))
     const version = await import(`${props.cliPath}/../package.json`).then((pkg) => pkg.version)
     updater("v", version)
 

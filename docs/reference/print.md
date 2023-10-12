@@ -5,9 +5,9 @@ This will print the message in the terminal, along with a newline.
 ## Usage
 
 ```typescript
-import { print } from "blowgun"
+import { print } from "bluebun"
 
-print("Hello, Blowgun!")
+print("Hello, Bluebun!")
 ```
 
 ## Testing
@@ -16,7 +16,7 @@ You can set a mock flag on the `print` function to store output in `testOutput` 
 
 ```typescript
 import { expect, test, beforeEach, afterEach } from "bun:test"
-import { print } from "blowgun"
+import { print } from "bluebun"
 
 beforeEach(() => {
   print.setMocked(true)

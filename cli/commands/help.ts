@@ -1,4 +1,4 @@
-import { Props, commandHelp, print } from "blowgun"
+import { Props, commandHelp, print } from "bluebun"
 
 export default {
   name: "help",
@@ -8,7 +8,7 @@ export default {
     const helpText = await commandHelp(props)
     print(helpText)
     print("")
-    print("For more information, visit blowgun.jamon.dev")
+    print("For more information, visit bluebun.jamon.dev")
     print("")
   },
 }

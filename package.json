@@ -1,22 +1,22 @@
 {
-  "name": "blowgun",
+  "name": "bluebun",
   "description": "A CLI framework for Bun, inspired by Gluegun",
   "version": "0.0.15",
   "author": {
     "name": "Jamon Holmgren",
     "email": "code@jamon.dev"
   },
-  "homepage": "https://github.com/jamonholmgren/blowgun",
+  "homepage": "https://github.com/jamonholmgren/bluebun",
   "type": "module",
-  "module": "./src/blowgun.ts",
+  "module": "./src/bluebun.ts",
   "scripts": {
     "ci:publish": "bun run semantic-release"
   },
   "bin": {
-    "blowgun": "./blowgun"
+    "bluebun": "./bluebun"
   },
   "files": [
-    "blowgun",
+    "bluebun",
     "src",
     "cli",
     "README.md",

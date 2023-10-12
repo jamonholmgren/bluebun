@@ -1,13 +1,13 @@
 # Progress bar
 
-Blowgun comes with a simple progress bar feature.
+Bluebun comes with a simple progress bar feature.
 
 ## `progressStart`
 
 Starts a progress bar.
 
 ```ts
-import { progressStart } from "blowgun"
+import { progressStart } from "bluebun"
 
 progressStart()
 ```
@@ -29,7 +29,7 @@ progressStart({
 Updates the progress bar. Values are between 0 and 1.0 (so often you're going to want to divide the current value by the maximum value).
 
 ```ts
-import { progressStart, progressUpdate } from "blowgun"
+import { progressStart, progressUpdate } from "bluebun"
 
 progressStart()
 // ...
@@ -41,7 +41,7 @@ progressUpdate(0.5)
 Stops the progress bar. You can pass in "fulfill" (default) to immediately draw the line at the final progress amount, "preserve" to keep the progress bar as-is, or "clear" to clear it away.
 
 ```ts
-import { progressStart, progressUpdate, progressStop } from "blowgun"
+import { progressStart, progressUpdate, progressStop } from "bluebun"
 
 progressStart()
 // ...

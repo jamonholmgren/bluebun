@@ -1,4 +1,4 @@
-import { ask, bold, yellow } from "blowgun"
+import { ask, bold, yellow } from "bluebun"
 
 export async function getWebsite(website: string | undefined) {
   if (website) return website

@@ -1,4 +1,4 @@
-import { type Command, type InitialProps } from "./blowgun"
+import { type Command, type InitialProps } from "./bluebun"
 import { promises } from "fs"
 
 export type CommandTree = { [key: string]: Command & { subcommands?: CommandTree } }

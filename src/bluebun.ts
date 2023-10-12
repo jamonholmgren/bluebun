@@ -1,5 +1,5 @@
 /**
- * Main entry point for blowgun.
+ * Main entry point for bluebun.
  */
 export * from "./cli"
 export * from "./run"
