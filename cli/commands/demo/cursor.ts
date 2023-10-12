@@ -25,7 +25,7 @@ export default {
         // if it's already a bookmark, go to it
         const pos = cursor.getBookmark(`bookmark-${k}`)
         if (pos) {
-          cursor.goToPosition(pos.cols, pos.rows)
+          cursor.goto(pos)
         } else {
           // save the position as a bookmark
           await cursor.bookmark(`bookmark-${k}`)

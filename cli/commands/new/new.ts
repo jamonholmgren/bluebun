@@ -51,7 +51,7 @@ export default {
     const version = await import(`${props.cliPath}/../package.json`).then((pkg) => pkg.version)
     updater("v", version)
 
-    cursor.goToPosition(startPos.cols + 20, startPos.rows + 4)
+    cursor.goto({ cols: startPos.cols + 20, rows: startPos.rows + 4 })
 
     // get input
     const input = await ask("", {

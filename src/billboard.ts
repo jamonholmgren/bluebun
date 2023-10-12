@@ -44,7 +44,7 @@ export function billboard(text: string, pos: CursorPos): Updater {
 
     // print out the row at the right spot, removing the reactive elements
     // console.log(line.replace(/\{[a-z]\}/g, "   "))
-    cursor.goToPosition(pos.cols, pos.rows + rowIndex).write(line.replace(/\{[a-z]\}/g, "   ") + "\n")
+    cursor.goto({ cols: pos.cols, rows: pos.rows + rowIndex }).write(line.replace(/\{[a-z]\}/g, "   ") + "\n")
     // console.log(pos.cols, pos.rows + rowIndex)
   })
 
@@ -57,11 +57,7 @@ export function billboard(text: string, pos: CursorPos): Updater {
     // find previous value length
     const previousValueLength = stripANSI(reactiveElement.value).length
     reactiveElement.value = newValue
-    cursor
-      .savePosition()
-      .goToPosition(reactiveElement.pos.cols, reactiveElement.pos.rows)
-      .write(newValue.padEnd(previousValueLength, " "))
-      .restorePosition()
+    cursor.savePosition().goto(reactiveElement.pos).write(newValue.padEnd(previousValueLength, " ")).restorePosition()
   }
 
   return updateFn

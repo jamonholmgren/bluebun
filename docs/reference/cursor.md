@@ -17,6 +17,8 @@ cursor.up(2).left(5).write("Hello!").down(2).right(5).show()
 
 ## Methods
 
+These methods are chainable.
+
 - `write(text)` - write a string to the terminal
 - `up(n)` - move the cursor up
 - `down(n)` - move the cursor down
@@ -34,10 +36,16 @@ cursor.up(2).left(5).write("Hello!").down(2).right(5).show()
 - `scrollDown(n)` - scroll down
 - `savePosition()` - save the cursor position
 - `restorePosition()` - restore the cursor position
-- `queryPosition()` - query the cursor position
 - `hide()` - hide the cursor
 - `show()` - show the cursor
 - `backspace()` - move the cursor back and erase the character
+- `goto({ rows: number, columns: number })` - move the cursor to a specific position
+- `jump("name")` - jump to a previously bookmarked position
+
+These methods are async and are not chainable.
+
+- `queryPosition()` - query the cursor position -- async -- return the position
+- `bookmark("name")` - bookmark a position and name it -- async -- return the position
 
 ## Testing
 

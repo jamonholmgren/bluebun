@@ -173,7 +173,7 @@ export declare const cursorCodes: {
 	scrollDown: string;
 	savePosition: string;
 	restorePosition: string;
-	goToPosition: (x: number, y: number) => string;
+	goToPosition: (cols: number, rows: number) => string;
 	hide: string;
 	show: string;
 };
@@ -196,7 +196,7 @@ export declare const cursor: {
 	clearScreen: () => any;
 	scrollUp: (count?: number) => any;
 	scrollDown: (count?: number) => any;
-	goToPosition: (x: number, y: number) => any;
+	goto: (pos: CursorPos) => any;
 	savePosition: () => any;
 	restorePosition: () => any;
 	hide: () => any;

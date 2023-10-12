@@ -27,8 +27,7 @@ export const cursorCodes = {
   scrollDown: "T",
   savePosition: isTerminalApp ? "\u001B7" : ESC + "s",
   restorePosition: isTerminalApp ? "\u001B8" : ESC + "u",
-  goToPosition: (x: number, y: number) => `\u001b[${y};${x}H`,
-  // goToPosition: (cols: number, rows: number) => `goto: ${cols}, ${rows}\n`,
+  goToPosition: (cols: number, rows: number) => `\u001b[${cols};${rows}H`,
   hide: "?25l",
   show: "?25h",
 }
@@ -65,7 +64,7 @@ export const cursor = {
   clearScreen: () => c(`${cursorCodes.clearScreen}`),
   scrollUp: (count = 1) => c(`${count}${cursorCodes.scrollUp}`),
   scrollDown: (count = 1) => c(`${count}${cursorCodes.scrollDown}`),
-  goToPosition: (x: number, y: number) => c(cursorCodes.goToPosition(x, y), ""),
+  goto: (pos: CursorPos) => c(cursorCodes.goToPosition(pos.cols, pos.rows), ""),
 
   // basic save & restore position
   savePosition: () => c(`${cursorCodes.savePosition}`, ""),
@@ -87,9 +86,9 @@ export const cursor = {
 
   // can be chained, since we don't have to wait for the queryPosition
   jump: (name: string) => {
-    const cols = positions[name].cols || 1
-    const rows = positions[name].rows || 1
-    cursor.goToPosition(cols, rows)
+    const pos = positions[name]
+    if (!pos) throw new Error(`No cursor bookmark found with name ${name}`)
+    cursor.goto(pos)
     return cursor
   },
 }
