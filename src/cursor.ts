@@ -29,7 +29,7 @@ export const cursorCodes = {
   exitAlternativeScreen: "?1049l",
   savePosition: isTerminalApp ? "\u001B7" : ESC + "s",
   restorePosition: isTerminalApp ? "\u001B8" : ESC + "u",
-  goToPosition: (cols: number, rows: number) => `\u001b[${cols};${rows}H`,
+  goToPosition: (cols: number, rows: number) => `\u001b[${rows};${cols}H`,
   hide: "?25l",
   show: "?25h",
 }
