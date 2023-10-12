@@ -33,6 +33,6 @@ export default {
         }
       }
     }
-    cursor.alternate(false).show()
+    cursor.alternate(false)
   },
 }

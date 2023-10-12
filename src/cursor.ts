@@ -32,7 +32,7 @@ export const cursorCodes = {
   goToPosition: (cols: number, rows: number) => `\u001b[${rows};${cols}H`,
   hide: "?25l",
   show: "?25h",
-}
+} as const
 
 /**
  * For storing bookmarks

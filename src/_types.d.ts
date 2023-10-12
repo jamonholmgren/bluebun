@@ -156,28 +156,28 @@ export declare const inputKeys: InputKeysFunction;
  * ANSI escape sequences.
  */
 export declare const cursorCodes: {
-	up: string;
-	down: string;
-	forward: string;
-	back: string;
-	nextLine: string;
-	previousLine: string;
-	horizontalAbsolute: string;
-	eraseData: string;
-	eraseAfter: string;
-	eraseBefore: string;
-	eraseLine: string;
-	eraseCharacter: string;
-	clearScreen: string;
-	scrollUp: string;
-	scrollDown: string;
-	enterAlternativeScreen: string;
-	exitAlternativeScreen: string;
-	savePosition: string;
-	restorePosition: string;
-	goToPosition: (cols: number, rows: number) => string;
-	hide: string;
-	show: string;
+	readonly up: "A";
+	readonly down: "B";
+	readonly forward: "C";
+	readonly back: "D";
+	readonly nextLine: "E";
+	readonly previousLine: "F";
+	readonly horizontalAbsolute: "G";
+	readonly eraseData: "J";
+	readonly eraseAfter: "0K";
+	readonly eraseBefore: "1K";
+	readonly eraseLine: "2K";
+	readonly eraseCharacter: "X";
+	readonly clearScreen: "2J";
+	readonly scrollUp: "S";
+	readonly scrollDown: "T";
+	readonly enterAlternativeScreen: "?1049h";
+	readonly exitAlternativeScreen: "?1049l";
+	readonly savePosition: string;
+	readonly restorePosition: string;
+	readonly goToPosition: (cols: number, rows: number) => string;
+	readonly hide: "?25l";
+	readonly show: "?25h";
 };
 /**
  * Moving the cursor around the terminal. Needs testing on Windows.
