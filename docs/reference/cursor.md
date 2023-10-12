@@ -38,6 +38,7 @@ These methods are chainable.
 - `restorePosition()` - restore the cursor position
 - `hide()` - hide the cursor
 - `show()` - show the cursor
+- `alternate(true|false)` - enable/disable alternate blank screen
 - `backspace()` - move the cursor back and erase the character
 - `goto({ rows: number, columns: number })` - move the cursor to a specific position
 - `jump("name")` - jump to a previously bookmarked position

@@ -4,6 +4,7 @@ export default {
   name: "cursor",
   description: "Tests cursor movement and bookmarking.",
   run: async (props: Props) => {
+    cursor.alternate(true)
     cursor.write(`\n\n\n     Testing cursor movement and bookmarking.`).write("\n\n\n")
 
     while (true) {
@@ -32,5 +33,6 @@ export default {
         }
       }
     }
+    cursor.alternate(false).show()
   },
 }

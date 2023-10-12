@@ -171,6 +171,8 @@ export declare const cursorCodes: {
 	clearScreen: string;
 	scrollUp: string;
 	scrollDown: string;
+	enterAlternativeScreen: string;
+	exitAlternativeScreen: string;
 	savePosition: string;
 	restorePosition: string;
 	goToPosition: (cols: number, rows: number) => string;
@@ -202,6 +204,7 @@ export declare const cursor: {
 	hide: () => any;
 	show: () => any;
 	backspace: (count?: number) => any;
+	alternate: (enabled: boolean) => any;
 	queryPosition: typeof queryPosition;
 	bookmark: (name: string, pos?: CursorPos) => Promise<CursorPos>;
 	getBookmark: (name: string) => CursorPos;

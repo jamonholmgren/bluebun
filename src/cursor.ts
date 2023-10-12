@@ -25,6 +25,8 @@ export const cursorCodes = {
   clearScreen: "2J",
   scrollUp: "S",
   scrollDown: "T",
+  enterAlternativeScreen: "?1049h",
+  exitAlternativeScreen: "?1049l",
   savePosition: isTerminalApp ? "\u001B7" : ESC + "s",
   restorePosition: isTerminalApp ? "\u001B8" : ESC + "u",
   goToPosition: (cols: number, rows: number) => `\u001b[${cols};${rows}H`,
@@ -74,6 +76,9 @@ export const cursor = {
   show: () => c(`${cursorCodes.show}`),
 
   backspace: (count = 1) => cursor.back(count).erase(count),
+
+  alternate: (enabled: boolean) =>
+    c(`${enabled ? cursorCodes.enterAlternativeScreen : cursorCodes.exitAlternativeScreen}`),
 
   // advanced save & restore positions -- these can't be chained
   queryPosition,
