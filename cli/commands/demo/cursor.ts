@@ -4,9 +4,7 @@ export default {
   name: "cursor",
   description: "Tests cursor movement and bookmarking.",
   run: async (props: Props) => {
-    print(``)
-    print(`Testing cursor movement and bookmarking.`)
-    print(``)
+    cursor.write(`\n\n\n     Testing cursor movement and bookmarking.`).write("\n\n\n")
 
     while (true) {
       const k = await inputKey()
