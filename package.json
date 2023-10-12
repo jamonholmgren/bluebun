@@ -11,7 +11,7 @@
   "module": "./src/bluebun.ts",
   "types": "./_types.d.ts",
   "scripts": {
-    "ci:publish": "bunx --bun dts-bundle-generator --out-file=./_types.d.ts --project=tsconfig.json ./src/bluebun.ts && bun run semantic-release"
+    "ci:publish": "bun x --bun dts-bundle-generator --out-file=./_types.d.ts --project=tsconfig.json ./src/bluebun.ts && bun run semantic-release"
   },
   "bin": {
     "bluebun": "./bluebun"
