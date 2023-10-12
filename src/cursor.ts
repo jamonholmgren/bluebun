@@ -101,11 +101,11 @@ export const cursor = {
 export function queryPosition(): Promise<CursorPos> {
   const code = "\u001B[6n"
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     process.stdin.resume()
     process.stdin.setRawMode(true)
 
-    process.stdin.on("data", (data) => {
+    const listener = (data: Buffer) => {
       var match = /\[(\d+)\;(\d+)R$/.exec(data.toString())
       if (match) {
         var position = match.slice(1, 3).reverse().map(Number)
@@ -114,14 +114,17 @@ export function queryPosition(): Promise<CursorPos> {
         process.stdin.setRawMode(false)
         process.stdin.pause()
 
-        resolve({
-          rows: position[1],
-          cols: position[0],
-        })
+        // remove when we change to .once
+        process.stdin.removeListener("data", listener)
+
+        setTimeout(() => resolve({ rows: position[1], cols: position[0] }), 0)
       }
-    })
+    }
+
+    // TODO: change to .once when this issue is fixed:
+    // https://github.com/oven-sh/bun/issues/6279
+    process.stdin.on("data", listener)
 
     process.stdout.write(code)
-    process.stdout.emit("data", code)
   })
 }
