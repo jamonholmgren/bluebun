@@ -1,7 +1,7 @@
 const ESC = "\u001B["
 
-export const styleStart = (style: number) => `${ESC}${style}m`
-export const styleEnd = (reset: number) => `${ESC}${reset}m`
+export const styleStart = (style: number) => `${ESC}${style}`
+export const styleEnd = (reset: number) => `${ESC}${reset}`
 
 export const style = (style: number, reset: number) => (text: string) => {
   return `${styleStart(style)}${text}${styleEnd(reset)}`

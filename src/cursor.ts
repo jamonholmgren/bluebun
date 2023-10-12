@@ -1,9 +1,9 @@
-import { type ReadStream } from "tty"
 import { type CursorPos } from "bluebun"
 import { write } from "./print"
 
 // ty https://github.com/sindresorhus/ansi-escapes/blob/main/index.js
-const ESC = "\u001b["
+// const ESC = "\x1b["
+const ESC = "\u001B["
 const isTerminalApp = process.env.TERM_PROGRAM === "Apple_Terminal"
 
 /**
@@ -50,7 +50,7 @@ const c = (s: string, esc: string = ESC) => {
  * Moving the cursor around the terminal. Needs testing on Windows.
  */
 export const cursor = {
-  write: (s: string) => c(s),
+  write: (s: string) => c(s, ""),
   up: (count: number = 1) => c(`${count}${cursorCodes.up}`),
   down: (count: number = 1) => c(`${count}${cursorCodes.down}`),
   forward: (count: number = 1) => c(`${count}${cursorCodes.forward}`),
@@ -97,33 +97,31 @@ export const cursor = {
 // this is how we use the ansi queryPosition escape code.
 // it returns the cursor position, which we can then parse
 // and use to position the cursor.
-let stream: ReadStream | undefined
+// ty https://github.com/bubkoo/get-cursor-position/blob/master/index.js
 export function queryPosition(): Promise<CursorPos> {
+  const code = "\u001B[6n"
+
   return new Promise((resolve, reject) => {
-    const listener = (data: string) => {
-      const str = data.toString()
-      const match = str.match(/\d+/g)
-
-      process.stdin.setRawMode(false)
-      stream!.pause()
-
-      if (!match || match.length !== 2) {
-        reject(new Error("Could not get cursor position"))
-      } else {
-        const [rows, cols] = match.map((n) => parseInt(n, 10))
-        // Seems to resolve this issue: https://github.com/oven-sh/bun/issues/6279
-        setTimeout(() => resolve({ rows, cols }), 0)
-      }
-    }
-
+    process.stdin.resume()
     process.stdin.setRawMode(true)
-    if (stream) {
-      // stream.resume()
-      stream.removeAllListeners("data")
-      stream.on("data", listener)
-    } else {
-      stream = process.stdin.on("data", listener)
-    }
-    process.stdout.write("\u001B[6n")
+
+    process.stdin.on("data", (data) => {
+      var match = /\[(\d+)\;(\d+)R$/.exec(data.toString())
+      if (match) {
+        var position = match.slice(1, 3).reverse().map(Number)
+
+        // cleanup and close stdin
+        process.stdin.setRawMode(false)
+        process.stdin.pause()
+
+        resolve({
+          rows: position[1],
+          cols: position[0],
+        })
+      }
+    })
+
+    process.stdout.write(code)
+    process.stdout.emit("data", code)
   })
 }

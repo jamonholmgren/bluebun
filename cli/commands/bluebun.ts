@@ -16,5 +16,7 @@ export default {
     )
     print(``)
     print(await commandHelp(props))
+
+    console.log(props.arguments)
   },
 }
