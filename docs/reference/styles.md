@@ -6,9 +6,9 @@ Just import them directly from bluebun.
 ## Usage
 
 ```typescript
-import { print, red, bold } from "bluebun"
+import { print, red, bold, bgGray } from "bluebun"
 
-print(red(`This is ${bold("red")} text`))
+print(bgGray(red(`This is ${bold("red")} text on a gray background`)))
 ```
 
 ## Available Styles and Colors

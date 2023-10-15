@@ -127,6 +127,24 @@ export declare const brightBlue: (text: string) => string;
 export declare const brightMagenta: (text: string) => string;
 export declare const brightCyan: (text: string) => string;
 export declare const brightWhite: (text: string) => string;
+export declare const bgWhite: (text: string) => string;
+export declare const bgBlack: (text: string) => string;
+export declare const bgBlue: (text: string) => string;
+export declare const bgCyan: (text: string) => string;
+export declare const bgGreen: (text: string) => string;
+export declare const bgMagenta: (text: string) => string;
+export declare const bgRed: (text: string) => string;
+export declare const bgYellow: (text: string) => string;
+export declare const bgGrey: (text: string) => string;
+export declare const bgGray: (text: string) => string;
+export declare const bgBrightBlack: (text: string) => string;
+export declare const bgBrightRed: (text: string) => string;
+export declare const bgBrightGreen: (text: string) => string;
+export declare const bgBrightYellow: (text: string) => string;
+export declare const bgBrightBlue: (text: string) => string;
+export declare const bgBrightMagenta: (text: string) => string;
+export declare const bgBrightCyan: (text: string) => string;
+export declare const bgBrightWhite: (text: string) => string;
 export type AskOptions = {
 	validation?: (answer: string) => true | string;
 	after?: "preserve" | "clear";
@@ -161,6 +179,7 @@ export declare const cursorCodes: {
 	readonly nextLine: "E";
 	readonly previousLine: "F";
 	readonly horizontalAbsolute: "G";
+	readonly home: "H";
 	readonly eraseData: "J";
 	readonly eraseAfter: "0K";
 	readonly eraseBefore: "1K";
@@ -193,6 +212,7 @@ export declare class Cursor {
 	moveDown(count?: number): this;
 	moveUp(count?: number): this;
 	backToStart(): this;
+	backToHome(): this;
 	horizontalAbsolute(count?: number): this;
 	eraseBefore(count?: number): this;
 	eraseLine(): this;
@@ -207,9 +227,9 @@ export declare class Cursor {
 	show(): this;
 	backspace(count?: number): this;
 	alternate(enabled: boolean): this;
+	jump(name: string): this;
 	queryPosition(): Promise<CursorPos>;
 	bookmark(name: string, pos?: CursorPos): Promise<CursorPos>;
-	jump(name: string): this;
 }
 export declare const cursor: Cursor;
 export declare function queryPosition(): Promise<CursorPos>;
