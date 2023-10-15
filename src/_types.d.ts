@@ -182,34 +182,38 @@ export declare const cursorCodes: {
 /**
  * Moving the cursor around the terminal. Needs testing on Windows.
  */
-export declare const cursor: {
-	write: (s: string) => any;
-	up: (count?: number) => any;
-	down: (count?: number) => any;
-	forward: (count?: number) => any;
-	back: (count?: number) => any;
-	moveDown: (count?: number) => any;
-	moveUp: (count?: number) => any;
-	backToStart: () => any;
-	horizontalAbsolute: (count?: number) => any;
-	eraseBefore: (count?: number) => any;
-	eraseLine: () => any;
-	erase: (count?: number) => any;
-	clearScreen: () => any;
-	scrollUp: (count?: number) => any;
-	scrollDown: (count?: number) => any;
-	goto: (pos: CursorPos) => any;
-	savePosition: () => any;
-	restorePosition: () => any;
-	hide: () => any;
-	show: () => any;
-	backspace: (count?: number) => any;
-	alternate: (enabled: boolean) => any;
-	queryPosition: typeof queryPosition;
-	bookmark: (name: string, pos?: CursorPos) => Promise<CursorPos>;
-	getBookmark: (name: string) => CursorPos;
-	jump: (name: string) => any;
-};
+export declare class Cursor {
+	bookmarks: {
+		[key: string]: CursorPos;
+	};
+	c(s: string, esc?: string): this;
+	write(s: string): this;
+	up(count?: number): this;
+	down(count?: number): this;
+	forward(count?: number): this;
+	back(count?: number): this;
+	moveDown(count?: number): this;
+	moveUp(count?: number): this;
+	backToStart(): this;
+	horizontalAbsolute(count?: number): this;
+	eraseBefore(count?: number): this;
+	eraseLine(): this;
+	erase(count?: number): this;
+	clearScreen(): this;
+	scrollUp(count?: number): this;
+	scrollDown(count?: number): this;
+	goto(pos: CursorPos): this;
+	savePosition(): this;
+	restorePosition(): this;
+	hide(): this;
+	show(): this;
+	backspace(count?: number): this;
+	alternate(enabled: boolean): this;
+	queryPosition(): Promise<CursorPos>;
+	bookmark(name: string, pos?: CursorPos): Promise<CursorPos>;
+	jump(name: string): this;
+}
+export declare const cursor: Cursor;
 export declare function queryPosition(): Promise<CursorPos>;
 /**
  * Start a spinner. Returns a Timer object that can be used to stop the spinner.

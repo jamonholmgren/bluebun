@@ -35,68 +35,108 @@ export const cursorCodes = {
 } as const
 
 /**
- * For storing bookmarks
- */
-const positions: { [key: string]: CursorPos } = {}
-
-/**
- * For chaining cursor methods.
- */
-const c = (s: string, esc: string = ESC) => {
-  write(esc + s)
-  return cursor
-}
-
-/**
  * Moving the cursor around the terminal. Needs testing on Windows.
  */
-export const cursor = {
-  write: (s: string) => c(s, ""),
-  up: (count: number = 1) => c(`${count}${cursorCodes.up}`),
-  down: (count: number = 1) => c(`${count}${cursorCodes.down}`),
-  forward: (count: number = 1) => c(`${count}${cursorCodes.forward}`),
-  back: (count: number = 1) => c(`${count}${cursorCodes.back}`),
-  moveDown: (count: number = 1) => c(`${count}${cursorCodes.nextLine}`),
-  moveUp: (count: number = 1) => c(`${count}${cursorCodes.previousLine}`),
-  backToStart: () => c(`${cursorCodes.horizontalAbsolute}`),
-  horizontalAbsolute: (count = 1) => c(`${count}${cursorCodes.horizontalAbsolute}`),
-  eraseBefore: (count = 1) => c(`${count}${cursorCodes.eraseData}`),
-  eraseLine: () => c(`${cursorCodes.eraseLine}`),
-  erase: (count = 1) => c(`${count}${cursorCodes.eraseCharacter}`),
-  clearScreen: () => c(`${cursorCodes.clearScreen}`),
-  scrollUp: (count = 1) => c(`${count}${cursorCodes.scrollUp}`),
-  scrollDown: (count = 1) => c(`${count}${cursorCodes.scrollDown}`),
-  goto: (pos: CursorPos) => c(cursorCodes.goToPosition(pos.cols, pos.rows), ""),
+export class Cursor {
+  bookmarks: { [key: string]: CursorPos } = {}
+
+  // for chaining easily
+  c(s: string, esc: string = ESC) {
+    write(esc + s)
+    return this
+  }
+
+  write(s: string) {
+    return this.c(s, "")
+  }
+  up(count: number = 1) {
+    return this.c(`${count}${cursorCodes.up}`)
+  }
+  down(count: number = 1) {
+    return this.c(`${count}${cursorCodes.down}`)
+  }
+  forward(count: number = 1) {
+    return this.c(`${count}${cursorCodes.forward}`)
+  }
+  back(count: number = 1) {
+    return this.c(`${count}${cursorCodes.back}`)
+  }
+  moveDown(count: number = 1) {
+    return this.c(`${count}${cursorCodes.nextLine}`)
+  }
+  moveUp(count: number = 1) {
+    return this.c(`${count}${cursorCodes.previousLine}`)
+  }
+  backToStart() {
+    return this.c(`${cursorCodes.horizontalAbsolute}`)
+  }
+  horizontalAbsolute(count = 1) {
+    return this.c(`${count}${cursorCodes.horizontalAbsolute}`)
+  }
+  eraseBefore(count = 1) {
+    return this.c(`${count}${cursorCodes.eraseData}`)
+  }
+  eraseLine() {
+    return this.c(`${cursorCodes.eraseLine}`)
+  }
+  erase(count = 1) {
+    return this.c(`${count}${cursorCodes.eraseCharacter}`)
+  }
+  clearScreen() {
+    return this.c(`${cursorCodes.clearScreen}`)
+  }
+  scrollUp(count = 1) {
+    return this.c(`${count}${cursorCodes.scrollUp}`)
+  }
+  scrollDown(count = 1) {
+    return this.c(`${count}${cursorCodes.scrollDown}`)
+  }
+  goto(pos: CursorPos) {
+    return this.c(cursorCodes.goToPosition(pos.cols, pos.rows), "")
+  }
 
   // basic save & restore position
-  savePosition: () => c(`${cursorCodes.savePosition}`, ""),
-  restorePosition: () => c(`${cursorCodes.restorePosition}`, ""),
+  savePosition() {
+    return this.c(`${cursorCodes.savePosition}`, "")
+  }
+  restorePosition() {
+    return this.c(`${cursorCodes.restorePosition}`, "")
+  }
 
-  hide: () => c(`${cursorCodes.hide}`),
-  show: () => c(`${cursorCodes.show}`),
+  hide() {
+    return this.c(`${cursorCodes.hide}`)
+  }
+  show() {
+    return this.c(`${cursorCodes.show}`)
+  }
 
-  backspace: (count = 1) => cursor.back(count).erase(count),
+  backspace(count = 1) {
+    return this.back(count).erase(count)
+  }
 
-  alternate: (enabled: boolean) =>
-    c(`${enabled ? cursorCodes.enterAlternativeScreen : cursorCodes.exitAlternativeScreen}`),
+  alternate(enabled: boolean) {
+    return this.c(`${enabled ? cursorCodes.enterAlternativeScreen : cursorCodes.exitAlternativeScreen}`)
+  }
 
-  // advanced save & restore positions -- these can't be chained
-  queryPosition,
-  bookmark: async (name: string, pos?: CursorPos) => {
+  // advanced save & restore bookmarks -- these can't be chained
+  queryPosition() {
+    return queryPosition()
+  }
+  async bookmark(name: string, pos?: CursorPos) {
     const cpos = pos || (await queryPosition())
-    positions[name] = cpos
+    this.bookmarks[name] = cpos
     return cpos
-  },
-  getBookmark: (name: string) => positions[name],
+  }
 
   // can be chained, since we don't have to wait for the queryPosition
-  jump: (name: string) => {
-    const pos = positions[name]
+  jump(name: string) {
+    const pos = this.bookmarks[name]
     if (!pos) throw new Error(`No cursor bookmark found with name ${name}`)
-    cursor.goto(pos)
-    return cursor
-  },
+    return this.goto(pos)
+  }
 }
+
+export const cursor = new Cursor()
 
 // this is how we use the ansi queryPosition escape code.
 // it returns the cursor position, which we can then parse
