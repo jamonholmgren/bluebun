@@ -1,4 +1,4 @@
-const ESC = "\u001B["
+export const ESC = "\u001B["
 
 export const styleStart = (style: number) => `${ESC}${style}`
 export const styleEnd = (reset: number) => `${ESC}${reset}`
@@ -12,15 +12,50 @@ export const italic = style(3, 23)
 export const underline = style(4, 24)
 export const inverse = style(7, 27)
 
-export const colorEnd = `${ESC}0m`
-
 export const colorStart = (color: number) => `${ESC}${color}m`
+export const bgColorStart = (color: number) => `${ESC}${color + 10}m`
+export const colorEnd = `${ESC}39m`
+export const bgColorEnd = `${ESC}49m`
 
-export const color = (color: number) => (text: string) => {
-  // reset color will always actually reset to this color
-  const newText = text.replace(colorEnd, `${ESC}${color}m`)
-  return `${colorStart(color)}${newText}${colorEnd}`
+export const color = (col: number, bg = false) => {
+  const startCode = bg ? bgColorStart(col) : colorStart(col)
+  const endCode = bg ? bgColorEnd : colorEnd
+
+  return (text: string) => {
+    const newText = text.replace(colorEnd, startCode)
+    return `${startCode}${newText}${endCode}`
+  }
 }
+
+export const bgColor = (col: number) => color(col, true)
+
+export const hexToRgb = (hex: string) => {
+  const bigint = parseInt(hex, 16)
+  const r = (bigint >> 16) & 255
+  const g = (bigint >> 8) & 255
+  const b = bigint & 255
+
+  return [r, g, b] as const
+}
+
+export const colorHex = (hex: string, bg = false) => {
+  // convert hex to rbg to ansi (strip any # prefix)
+  return colorRGB(...hexToRgb(hex.replace("#", "")), bg)
+}
+
+// returns escape codes wrapped around text for a given rgb color
+export const colorRGB = (r: number, g: number, b: number, bg = false) => {
+  const startCode = `${ESC}${bg ? 48 : 38};2;${r};${g};${b}m`
+  const endCode = bg ? bgColorEnd : colorEnd
+  return (text: string) => {
+    // first replace any existing reset color with this color
+    const newText = text.replace(colorEnd, startCode)
+    return `${startCode}${newText}${endCode}`
+  }
+}
+
+export const bgColorHex = (hex: string) => colorHex(hex, true)
+export const bgColorRGB = (rgb: readonly [number, number, number]) => colorRGB(...rgb, true)
 
 export const ansiColors = {
   white: 37,

@@ -15,14 +15,27 @@ print(bgGray(red(`This is ${bold("red")} text on a gray background`)))
 
 Easiest way to see all the styles and colors is to just look at the [source file](https://github.com/jamonholmgren/bluebun/blob/main/src/styles.ts). The TypeScript definitions are also helpful here.
 
+## Hex Colors / RGB Colors
+
+Most modern terminals support fully custom colors, so we provide colorHex and colorRGB functions (and their background versions) to make it easy to output text in any color you want.
+
+```typescript
+import { print, colorHex, colorRGB, bgColorHex, bgColorRGB } from "bluebun"
+
+print(colorHex("#ff0000")("This is red text"))
+print(colorRGB(255, 0, 0)("This is red text"))
+print(bgColorHex("#ff0000")("This is text on a red background"))
+print(bgColorRGB(255, 0, 0)("This is text on a red background"))
+```
+
 ## Custom Styles
 
 Just output the ANSI escape code directly:
 
 ```typescript
-import { print } from "bluebun"
+import { print, ESC } from "bluebun"
 
-print("\x1b[38;2;255;0;0mThis is red text\x1b[0m")
+print("${ESC}38;2;255;0;0mThis is red text\x1b[0m")
 ```
 
 Or use the `color` or `style` functions:
