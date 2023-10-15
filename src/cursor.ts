@@ -17,6 +17,7 @@ export const cursorCodes = {
   nextLine: "E",
   previousLine: "F",
   horizontalAbsolute: "G",
+  home: "H",
   eraseData: "J",
   eraseAfter: "0K",
   eraseBefore: "1K",
@@ -76,6 +77,10 @@ export class Cursor {
 
   backToStart() {
     return this.c(`${cursorCodes.horizontalAbsolute}`)
+  }
+
+  backToHome() {
+    return this.c(`${cursorCodes.home}`)
   }
 
   horizontalAbsolute(count = 1) {

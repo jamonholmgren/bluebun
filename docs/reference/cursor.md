@@ -27,6 +27,7 @@ These methods are chainable.
 - `moveDown(n)` - move the cursor down
 - `moveUp(n)` - move the cursor up
 - `backToStart()` - move the cursor back to the start of the line
+- `backToHome()` - move the cursor back to the top left of the screen
 - `horizontalAbsolute(n)` - move the cursor to a specific column
 - `eraseBefore(n)` - erase text before the cursor
 - `eraseLine(n)` - erase the current line
