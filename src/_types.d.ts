@@ -79,6 +79,7 @@ export declare const specialKeys: {
 	readonly "\u001B[1;4C": "alt-shift-right";
 	readonly "\u001B[1;4D": "alt-shift-left";
 };
+export declare const ESC = "\u001B[";
 export declare const styleStart: (style: number) => string;
 export declare const styleEnd: (reset: number) => string;
 export declare const style: (style: number, reset: number) => (text: string) => string;
@@ -86,9 +87,25 @@ export declare const bold: (text: string) => string;
 export declare const italic: (text: string) => string;
 export declare const underline: (text: string) => string;
 export declare const inverse: (text: string) => string;
-export declare const colorEnd = "\u001B[0m";
 export declare const colorStart: (color: number) => string;
-export declare const color: (color: number) => (text: string) => string;
+export declare const bgColorStart: (color: number) => string;
+export declare const colorEnd = "\u001B[39m";
+export declare const bgColorEnd = "\u001B[49m";
+export declare const color: (col: number, bg?: boolean) => (text: string) => string;
+export declare const bgColor: (col: number) => (text: string) => string;
+export declare const hexToRgb: (hex: string) => readonly [
+	number,
+	number,
+	number
+];
+export declare const colorHex: (hex: string, bg?: boolean) => (text: string) => string;
+export declare const colorRGB: (r: number, g: number, b: number, bg?: boolean) => (text: string) => string;
+export declare const bgColorHex: (hex: string) => (text: string) => string;
+export declare const bgColorRGB: (rgb: readonly [
+	number,
+	number,
+	number
+]) => (text: string) => string;
 export declare const ansiColors: {
 	white: number;
 	black: number;
