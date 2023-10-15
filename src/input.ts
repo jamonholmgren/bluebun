@@ -33,18 +33,12 @@ export const inputKey: InputKeyFunction = async () => {
   return key
 }
 
-type InputKeysFunction = {
-  (onKey: (key: string) => Promise<void | false> | void | false): Promise<void>
-  mock?: (onKey: (key: string) => Promise<void | false> | void | false) => Promise<void>
-}
-
+type PromiseOrValue<T> = T | Promise<T>
+type InputKeysFunction = <T>(callback: (k: string) => PromiseOrValue<T | undefined>) => Promise<T>
 export const inputKeys: InputKeysFunction = async (onKey) => {
-  if (inputKeys.mock) return inputKeys.mock(onKey)
-
   while (true) {
     const key = await inputKey()
-    if (key === "ctrl-c") break
     const result = await onKey(key)
-    if (result === false) break
+    if (result !== undefined) return result
   }
 }

@@ -147,10 +147,8 @@ export type InputKeyFunction = {
 	mock?: () => Promise<string> | string;
 };
 export declare const inputKey: InputKeyFunction;
-export type InputKeysFunction = {
-	(onKey: (key: string) => Promise<void | false> | void | false): Promise<void>;
-	mock?: (onKey: (key: string) => Promise<void | false> | void | false) => Promise<void>;
-};
+export type PromiseOrValue<T> = T | Promise<T>;
+export type InputKeysFunction = <T>(callback: (k: string) => PromiseOrValue<T | undefined>) => Promise<T>;
 export declare const inputKeys: InputKeysFunction;
 /**
  * ANSI escape sequences.

@@ -11,20 +11,21 @@ test("inputKey", async () => {
 })
 
 test("inputKeys", async () => {
-  inputKeys.mock = async (onKey) => {
-    await onKey("a")
-    await onKey("b")
-    await onKey(" ")
-    await onKey("c")
-    return
+  const keys = ["a", "b", "c"]
+  inputKey.mock = async () => {
+    const key = keys.shift()
+    if (!key) throw new Error("too many keys")
+    return key
   }
 
-  let result = ""
-  await inputKeys(async (key) => {
-    result += key
+  const keysPressed: string[] = []
+  const d = await inputKeys(async (key) => {
+    keysPressed.push(key)
+    if (key === "c") return "done"
   })
 
-  expect(result).toBe("ab c")
+  expect(keysPressed).toEqual(["a", "b", "c"])
+  expect(d).toBe("done")
 
-  inputKeys.mock = undefined
+  inputKey.mock = undefined
 })
