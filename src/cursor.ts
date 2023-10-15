@@ -49,48 +49,63 @@ export class Cursor {
   write(s: string) {
     return this.c(s, "")
   }
+
   up(count: number = 1) {
     return this.c(`${count}${cursorCodes.up}`)
   }
+
   down(count: number = 1) {
     return this.c(`${count}${cursorCodes.down}`)
   }
+
   forward(count: number = 1) {
     return this.c(`${count}${cursorCodes.forward}`)
   }
+
   back(count: number = 1) {
     return this.c(`${count}${cursorCodes.back}`)
   }
+
   moveDown(count: number = 1) {
     return this.c(`${count}${cursorCodes.nextLine}`)
   }
+
   moveUp(count: number = 1) {
     return this.c(`${count}${cursorCodes.previousLine}`)
   }
+
   backToStart() {
     return this.c(`${cursorCodes.horizontalAbsolute}`)
   }
+
   horizontalAbsolute(count = 1) {
     return this.c(`${count}${cursorCodes.horizontalAbsolute}`)
   }
+
   eraseBefore(count = 1) {
     return this.c(`${count}${cursorCodes.eraseData}`)
   }
+
   eraseLine() {
     return this.c(`${cursorCodes.eraseLine}`)
   }
+
   erase(count = 1) {
     return this.c(`${count}${cursorCodes.eraseCharacter}`)
   }
+
   clearScreen() {
     return this.c(`${cursorCodes.clearScreen}`)
   }
+
   scrollUp(count = 1) {
     return this.c(`${count}${cursorCodes.scrollUp}`)
   }
+
   scrollDown(count = 1) {
     return this.c(`${count}${cursorCodes.scrollDown}`)
   }
+
   goto(pos: CursorPos) {
     return this.c(cursorCodes.goToPosition(pos.cols, pos.rows), "")
   }
@@ -99,6 +114,7 @@ export class Cursor {
   savePosition() {
     return this.c(`${cursorCodes.savePosition}`, "")
   }
+
   restorePosition() {
     return this.c(`${cursorCodes.restorePosition}`, "")
   }
@@ -106,6 +122,7 @@ export class Cursor {
   hide() {
     return this.c(`${cursorCodes.hide}`)
   }
+
   show() {
     return this.c(`${cursorCodes.show}`)
   }
@@ -118,6 +135,13 @@ export class Cursor {
     return this.c(`${enabled ? cursorCodes.enterAlternativeScreen : cursorCodes.exitAlternativeScreen}`)
   }
 
+  // can be chained, since we don't have to wait for the queryPosition
+  jump(name: string) {
+    const pos = this.bookmarks[name]
+    if (!pos) throw new Error(`No cursor bookmark found with name ${name}`)
+    return this.goto(pos)
+  }
+
   // advanced save & restore bookmarks -- these can't be chained
   queryPosition() {
     return queryPosition()
@@ -126,13 +150,6 @@ export class Cursor {
     const cpos = pos || (await queryPosition())
     this.bookmarks[name] = cpos
     return cpos
-  }
-
-  // can be chained, since we don't have to wait for the queryPosition
-  jump(name: string) {
-    const pos = this.bookmarks[name]
-    if (!pos) throw new Error(`No cursor bookmark found with name ${name}`)
-    return this.goto(pos)
   }
 }
 
