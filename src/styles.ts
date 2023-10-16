@@ -22,7 +22,7 @@ export const color = (col: number, bg = false) => {
   const endCode = bg ? bgColorEnd : colorEnd
 
   return (text: string) => {
-    const newText = text.replace(colorEnd, startCode)
+    const newText = text.replace(endCode, startCode)
     return `${startCode}${newText}${endCode}`
   }
 }
