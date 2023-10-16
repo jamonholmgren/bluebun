@@ -3,29 +3,29 @@ import { color, colorRGB, colorHex, bgColor } from "bluebun"
 
 test("color", () => {
   // normal colors
-  expect(color(42)("Hello")).toBe("\u001B[42mHello\u001B[39m")
-  expect(color(43)("Hello")).toBe("\u001B[43mHello\u001B[39m")
+  expect(color(32)("Hello")).toBe("\u001B[32mHello\u001B[39m")
+  expect(color(33)("Hello")).toBe("\u001B[33mHello\u001B[39m")
 
   // background
-  expect(color(42, true)("Hello")).toBe("\u001B[52mHello\u001B[49m")
+  expect(color(32, true)("Hello")).toBe("\u001B[42mHello\u001B[49m")
 })
 
 test("nested colors", () => {
-  const red = color(41)
-  const green = color(42)
-  expect(red("Hello, " + green("World") + "!")).toBe("\u001B[41mHello, \u001B[42mWorld\u001B[41m!\u001B[39m")
+  const red = color(31)
+  const green = color(32)
+  expect(red("Hello, " + green("World") + "!")).toBe("\u001B[31mHello, \u001B[32mWorld\u001B[31m!\u001B[39m")
 })
 
 test("nested colors with backgrounds", () => {
-  const red = color(41)
-  const bgGreen = bgColor(42)
-  expect(red("Hello, " + bgGreen("World") + "!")).toBe("\u001B[41mHello, \u001B[52mWorld\u001B[49m!\u001B[39m")
+  const red = color(31)
+  const bgGreen = bgColor(32)
+  expect(red("Hello, " + bgGreen("World") + "!")).toBe("\u001B[31mHello, \u001B[42mWorld\u001B[49m!\u001B[39m")
 })
 
 test("nested background colors", () => {
-  const bgRed = bgColor(41)
-  const bgGreen = bgColor(42)
-  expect(bgRed("Hello, " + bgGreen("World") + "!")).toBe("\u001B[51mHello, \u001B[52mWorld\u001B[51m!\u001B[49m")
+  const bgRed = bgColor(31)
+  const bgGreen = bgColor(32)
+  expect(bgRed("Hello, " + bgGreen("World") + "!")).toBe("\u001B[41mHello, \u001B[42mWorld\u001B[41m!\u001B[49m")
 })
 
 test("colorRGB", () => {

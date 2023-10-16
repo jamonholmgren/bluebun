@@ -26,5 +26,7 @@ export default {
     print(gptGreen("Hello!"))
     print(white(bgGreen("there!")))
     print(yellow(`Hey ${red("you")}! I ${bgGreen("like")} ${gptGreen("you")}!`))
+
+    print(`And ... \u001B[41mHello, \u001B[42mWorld\u001B[41m!\u001B[49m ... yet again!`)
   },
 }
