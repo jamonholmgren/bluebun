@@ -16,8 +16,6 @@ export const inverse = style(7, 27)
 
 export const colorStart = <Col extends number>(color: Col) => `${ESC}${color}m` as const
 
-export const bgify = <Col extends number>(color: Col) => color + (10 as const)
-
 export const colorEnd = `${ESC}39m` as const
 export const bgColorEnd = `${ESC}49m` as const
 
@@ -55,19 +53,27 @@ export const colorHex = <Hex extends string>(hex: Hex) => {
   return colorRGB(...hexToRgb(hex.replace("#", "")))
 }
 
-export const bgColorHex = <Hex extends string>(hex: Hex) => {
-  const rgb = hexToRgb(replace(hex, "#", ""))
-  const r = rgb[0]
-  const g = rgb[1]
-  const b = rgb[2]
+export const colorHexStart = <Hex extends string>(hex: Hex) => {
+  const [r, g, b] = hexToRgb(replace(hex, "#", ""))
+  return colorRGBStart(r, g, b)
+}
 
-  // convert hex to rbg to ansi (strip any # prefix)
+export const bgColorHex = <Hex extends string>(hex: Hex) => {
+  const [r, g, b] = hexToRgb(replace(hex, "#", ""))
   return bgColorRGB(r, g, b)
 }
 
+export const bgColorHexStart = <Hex extends string>(hex: Hex) => {
+  const [r, g, b] = hexToRgb(replace(hex, "#", ""))
+  return bgColorRGBStart(r, g, b)
+}
+
+export const colorRGBStart = <R extends number, G extends number, B extends number>(r: R, g: G, b: B) =>
+  `${ESC}38;2;${r};${g};${b}m` as const
+
 // returns escape codes wrapped around text for a given rgb color
 export const colorRGB = <R extends number, G extends number, B extends number>(r: R, g: G, b: B) => {
-  const startCode = `${ESC}38;2;${r};${g};${b}m` as const
+  const startCode = colorRGBStart(r, g, b)
   return <Txt extends string>(text: Txt) => {
     // first replace any existing reset color with this color
     const newText = replace(text, colorEnd, startCode)
@@ -75,8 +81,11 @@ export const colorRGB = <R extends number, G extends number, B extends number>(r
   }
 }
 
+export const bgColorRGBStart = <R extends number, G extends number, B extends number>(r: R, g: G, b: B) =>
+  `${ESC}48;2;${r};${g};${b}m` as const
+
 export const bgColorRGB = <R extends number, G extends number, B extends number>(r: R, g: G, b: B) => {
-  const startCode = `${ESC}48;2;${r};${g};${b}m` as const
+  const startCode = bgColorRGBStart(r, g, b)
   return <Txt extends string>(text: Txt) => {
     // first replace any existing reset color with this color
     const newText = replace(text, bgColorEnd, startCode)

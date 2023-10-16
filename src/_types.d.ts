@@ -88,7 +88,6 @@ export declare const italic: (text: string) => `\u001B[${number}${string}\u001B[
 export declare const underline: (text: string) => `\u001B[${number}${string}\u001B[${number}`;
 export declare const inverse: (text: string) => `\u001B[${number}${string}\u001B[${number}`;
 export declare const colorStart: <Col extends number>(color: Col) => `\u001B[${Col}m`;
-export declare const bgify: <Col extends number>(color: Col) => number;
 export declare const colorEnd: "\u001B[39m";
 export declare const bgColorEnd: "\u001B[49m";
 export declare const color: <Col extends number>(col: Col) => <Txt extends string>(text: Txt) => `\u001B[${Col}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${Col}m${Rest}` : Txt}\u001B[39m`;
@@ -99,8 +98,12 @@ export declare const hexToRgb: <Hex extends string>(hex: Hex) => readonly [
 	number
 ];
 export declare const colorHex: <Hex extends string>(hex: Hex) => <Txt extends string>(text: Txt) => `\u001B[38;2;${number};${number};${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[38;2;${number};${number};${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const colorHexStart: <Hex extends string>(hex: Hex) => `\u001B[38;2;${number};${number};${number}m`;
 export declare const bgColorHex: <Hex extends string>(hex: Hex) => <Txt extends string>(text: Txt) => `\u001B[48;2;${number};${number};${number}m${Txt extends `${infer First}\u001B[49m${infer Rest}` ? `${First}\u001B[48;2;${number};${number};${number}m${Rest}` : Txt}\u001B[49m`;
+export declare const bgColorHexStart: <Hex extends string>(hex: Hex) => `\u001B[48;2;${number};${number};${number}m`;
+export declare const colorRGBStart: <R extends number, G extends number, B extends number>(r: R, g: G, b: B) => `\u001B[38;2;${R};${G};${B}m`;
 export declare const colorRGB: <R extends number, G extends number, B extends number>(r: R, g: G, b: B) => <Txt extends string>(text: Txt) => `\u001B[38;2;${R};${G};${B}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[38;2;${R};${G};${B}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgColorRGBStart: <R extends number, G extends number, B extends number>(r: R, g: G, b: B) => `\u001B[48;2;${R};${G};${B}m`;
 export declare const bgColorRGB: <R extends number, G extends number, B extends number>(r: R, g: G, b: B) => <Txt extends string>(text: Txt) => `\u001B[48;2;${R};${G};${B}m${Txt extends `${infer First}\u001B[49m${infer Rest}` ? `${First}\u001B[48;2;${R};${G};${B}m${Rest}` : Txt}\u001B[49m`;
 export declare const ansiColors: {
 	white: number;
