@@ -2,17 +2,20 @@ import { replace } from "./utils"
 
 export const ESC = "\u001B[" as const
 
-export const styleStart = (style: number) => `${ESC}${style}` as const
-export const styleEnd = (reset: number) => `${ESC}${reset}` as const
+export const styleStart = <Sty extends number>(style: Sty) => `${ESC}${style}` as const
+export const styleEnd = <Res extends number>(reset: Res) => `${ESC}${reset}` as const
 
-export const style = (style: number, reset: number) => (text: string) => {
-  return `${styleStart(style)}${text}${styleEnd(reset)}` as const
-}
+export const style =
+  <Sty extends number, Res extends number>(style: Sty, reset: Res) =>
+  <Txt extends string>(text: Txt) => {
+    return `${styleStart(style)}${text}${styleEnd(reset)}` as const
+  }
 
 export const bold = style(1, 22)
 export const italic = style(3, 23)
 export const underline = style(4, 24)
 export const inverse = style(7, 27)
+export const strikethrough = style(9, 29)
 
 export const colorStart = <Col extends number>(color: Col) => `${ESC}${color}m` as const
 
@@ -112,7 +115,26 @@ export const ansiColors = {
   brightMagenta: 95,
   brightCyan: 96,
   brightWhite: 97,
-}
+
+  bgWhite: 47,
+  bgBlack: 40,
+  bgBlue: 44,
+  bgCyan: 46,
+  bgGreen: 42,
+  bgMagenta: 45,
+  bgRed: 41,
+  bgYellow: 43,
+  bgGrey: 100,
+  bgGray: 100,
+  bgBrightBlack: 100,
+  bgBrightRed: 101,
+  bgBrightGreen: 102,
+  bgBrightYellow: 103,
+  bgBrightBlue: 104,
+  bgBrightMagenta: 105,
+  bgBrightCyan: 106,
+  bgBrightWhite: 107,
+} as const
 
 export const white = color(ansiColors.white)
 export const black = color(ansiColors.black)
@@ -133,21 +155,21 @@ export const brightMagenta = color(ansiColors.brightMagenta)
 export const brightCyan = color(ansiColors.brightCyan)
 export const brightWhite = color(ansiColors.brightWhite)
 
-export const bgWhite = color(ansiColors.white + 10)
-export const bgBlack = color(ansiColors.black + 10)
-export const bgBlue = color(ansiColors.blue + 10)
-export const bgCyan = color(ansiColors.cyan + 10)
-export const bgGreen = color(ansiColors.green + 10)
-export const bgMagenta = color(ansiColors.magenta + 10)
-export const bgRed = color(ansiColors.red + 10)
-export const bgYellow = color(ansiColors.yellow + 10)
-export const bgGrey = color(ansiColors.grey + 10)
-export const bgGray = color(ansiColors.gray + 10)
-export const bgBrightBlack = color(ansiColors.brightBlack + 10)
-export const bgBrightRed = color(ansiColors.brightRed + 10)
-export const bgBrightGreen = color(ansiColors.brightGreen + 10)
-export const bgBrightYellow = color(ansiColors.brightYellow + 10)
-export const bgBrightBlue = color(ansiColors.brightBlue + 10)
-export const bgBrightMagenta = color(ansiColors.brightMagenta + 10)
-export const bgBrightCyan = color(ansiColors.brightCyan + 10)
-export const bgBrightWhite = color(ansiColors.brightWhite + 10)
+export const bgWhite = color(ansiColors.bgWhite)
+export const bgBlack = color(ansiColors.bgBlack)
+export const bgBlue = color(ansiColors.bgBlue)
+export const bgCyan = color(ansiColors.bgCyan)
+export const bgGreen = color(ansiColors.bgGreen)
+export const bgMagenta = color(ansiColors.bgMagenta)
+export const bgRed = color(ansiColors.bgRed)
+export const bgYellow = color(ansiColors.bgYellow)
+export const bgGrey = color(ansiColors.bgGrey)
+export const bgGray = color(ansiColors.bgGray)
+export const bgBrightBlack = color(ansiColors.bgBrightBlack)
+export const bgBrightRed = color(ansiColors.bgBrightRed)
+export const bgBrightGreen = color(ansiColors.bgBrightGreen)
+export const bgBrightYellow = color(ansiColors.bgBrightYellow)
+export const bgBrightBlue = color(ansiColors.bgBrightBlue)
+export const bgBrightMagenta = color(ansiColors.bgBrightMagenta)
+export const bgBrightCyan = color(ansiColors.bgBrightCyan)
+export const bgBrightWhite = color(ansiColors.bgBrightWhite)
