@@ -79,33 +79,29 @@ export declare const specialKeys: {
 	readonly "\u001B[1;4C": "alt-shift-right";
 	readonly "\u001B[1;4D": "alt-shift-left";
 };
-export declare const ESC = "\u001B[";
-export declare const styleStart: (style: number) => string;
-export declare const styleEnd: (reset: number) => string;
-export declare const style: (style: number, reset: number) => (text: string) => string;
-export declare const bold: (text: string) => string;
-export declare const italic: (text: string) => string;
-export declare const underline: (text: string) => string;
-export declare const inverse: (text: string) => string;
-export declare const colorStart: (color: number) => string;
-export declare const bgColorStart: (color: number) => string;
-export declare const colorEnd = "\u001B[39m";
-export declare const bgColorEnd = "\u001B[49m";
-export declare const color: (col: number, bg?: boolean) => (text: string) => string;
-export declare const bgColor: (col: number) => (text: string) => string;
-export declare const hexToRgb: (hex: string) => readonly [
+export declare const ESC: "\u001B[";
+export declare const styleStart: (style: number) => `\u001B[${number}`;
+export declare const styleEnd: (reset: number) => `\u001B[${number}`;
+export declare const style: (style: number, reset: number) => (text: string) => `\u001B[${number}${string}\u001B[${number}`;
+export declare const bold: (text: string) => `\u001B[${number}${string}\u001B[${number}`;
+export declare const italic: (text: string) => `\u001B[${number}${string}\u001B[${number}`;
+export declare const underline: (text: string) => `\u001B[${number}${string}\u001B[${number}`;
+export declare const inverse: (text: string) => `\u001B[${number}${string}\u001B[${number}`;
+export declare const colorStart: <Col extends number>(color: Col) => `\u001B[${Col}m`;
+export declare const bgify: <Col extends number>(color: Col) => number;
+export declare const colorEnd: "\u001B[39m";
+export declare const bgColorEnd: "\u001B[49m";
+export declare const color: <Col extends number>(col: Col) => <Txt extends string>(text: Txt) => `\u001B[${Col}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${Col}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgColor: <Col extends number>(col: Col) => <Txt extends string>(text: Txt) => `\u001B[${Col}m${Txt extends `${infer First}\u001B[49m${infer Rest}` ? `${First}\u001B[${Col}m${Rest}` : Txt}\u001B[49m`;
+export declare const hexToRgb: <Hex extends string>(hex: Hex) => readonly [
 	number,
 	number,
 	number
 ];
-export declare const colorHex: (hex: string, bg?: boolean) => (text: string) => string;
-export declare const colorRGB: (r: number, g: number, b: number, bg?: boolean) => (text: string) => string;
-export declare const bgColorHex: (hex: string) => (text: string) => string;
-export declare const bgColorRGB: (rgb: readonly [
-	number,
-	number,
-	number
-]) => (text: string) => string;
+export declare const colorHex: <Hex extends string>(hex: Hex) => <Txt extends string>(text: Txt) => `\u001B[38;2;${number};${number};${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[38;2;${number};${number};${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgColorHex: <Hex extends string>(hex: Hex) => <Txt extends string>(text: Txt) => `\u001B[48;2;${number};${number};${number}m${Txt extends `${infer First}\u001B[49m${infer Rest}` ? `${First}\u001B[48;2;${number};${number};${number}m${Rest}` : Txt}\u001B[49m`;
+export declare const colorRGB: <R extends number, G extends number, B extends number>(r: R, g: G, b: B) => <Txt extends string>(text: Txt) => `\u001B[38;2;${R};${G};${B}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[38;2;${R};${G};${B}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgColorRGB: <R extends number, G extends number, B extends number>(r: R, g: G, b: B) => <Txt extends string>(text: Txt) => `\u001B[48;2;${R};${G};${B}m${Txt extends `${infer First}\u001B[49m${infer Rest}` ? `${First}\u001B[48;2;${R};${G};${B}m${Rest}` : Txt}\u001B[49m`;
 export declare const ansiColors: {
 	white: number;
 	black: number;
@@ -126,42 +122,42 @@ export declare const ansiColors: {
 	brightCyan: number;
 	brightWhite: number;
 };
-export declare const white: (text: string) => string;
-export declare const black: (text: string) => string;
-export declare const blue: (text: string) => string;
-export declare const cyan: (text: string) => string;
-export declare const green: (text: string) => string;
-export declare const magenta: (text: string) => string;
-export declare const red: (text: string) => string;
-export declare const yellow: (text: string) => string;
-export declare const grey: (text: string) => string;
-export declare const gray: (text: string) => string;
-export declare const brightBlack: (text: string) => string;
-export declare const brightRed: (text: string) => string;
-export declare const brightGreen: (text: string) => string;
-export declare const brightYellow: (text: string) => string;
-export declare const brightBlue: (text: string) => string;
-export declare const brightMagenta: (text: string) => string;
-export declare const brightCyan: (text: string) => string;
-export declare const brightWhite: (text: string) => string;
-export declare const bgWhite: (text: string) => string;
-export declare const bgBlack: (text: string) => string;
-export declare const bgBlue: (text: string) => string;
-export declare const bgCyan: (text: string) => string;
-export declare const bgGreen: (text: string) => string;
-export declare const bgMagenta: (text: string) => string;
-export declare const bgRed: (text: string) => string;
-export declare const bgYellow: (text: string) => string;
-export declare const bgGrey: (text: string) => string;
-export declare const bgGray: (text: string) => string;
-export declare const bgBrightBlack: (text: string) => string;
-export declare const bgBrightRed: (text: string) => string;
-export declare const bgBrightGreen: (text: string) => string;
-export declare const bgBrightYellow: (text: string) => string;
-export declare const bgBrightBlue: (text: string) => string;
-export declare const bgBrightMagenta: (text: string) => string;
-export declare const bgBrightCyan: (text: string) => string;
-export declare const bgBrightWhite: (text: string) => string;
+export declare const white: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const black: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const blue: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const cyan: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const green: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const magenta: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const red: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const yellow: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const grey: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const gray: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const brightBlack: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const brightRed: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const brightGreen: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const brightYellow: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const brightBlue: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const brightMagenta: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const brightCyan: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const brightWhite: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgWhite: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgBlack: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgBlue: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgCyan: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgGreen: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgMagenta: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgRed: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgYellow: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgGrey: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgGray: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgBrightBlack: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgBrightRed: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgBrightGreen: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgBrightYellow: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgBrightBlue: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgBrightMagenta: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgBrightCyan: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
+export declare const bgBrightWhite: <Txt extends string>(text: Txt) => `\u001B[${number}m${Txt extends `${infer First}\u001B[39m${infer Rest}` ? `${First}\u001B[${number}m${Rest}` : Txt}\u001B[39m`;
 export type AskOptions = {
 	validation?: (answer: string) => true | string;
 	after?: "preserve" | "clear";
@@ -285,6 +281,11 @@ export declare function stripANSI(str: string): string;
  * Async delay x milliseconds.
  */
 export declare function delay(ms: number): Promise<unknown>;
+/**
+ * Super smart string replace
+ */
+export type Replace<T extends string, S extends string, R extends string> = T extends `${infer First}${S}${infer Rest}` ? `${First}${R}${Rest}` : T;
+export declare function replace<T extends string, S extends string, R extends string>(target: T, searchValue: S, replaceValue: R): Replace<T, S, R>;
 export type Updater = (k: string, newValue: string) => void;
 /**
  * This prints a billboard with continually updating information (text).

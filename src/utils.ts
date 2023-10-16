@@ -39,3 +39,18 @@ export function stripANSI(str: string): string {
 export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
+
+/**
+ * Super smart string replace
+ */
+type Replace<T extends string, S extends string, R extends string> = T extends `${infer First}${S}${infer Rest}`
+  ? `${First}${R}${Rest}`
+  : T
+
+export function replace<T extends string, S extends string, R extends string>(
+  target: T,
+  searchValue: S,
+  replaceValue: R
+): Replace<T, S, R> {
+  return target.replace(searchValue, replaceValue) as any
+}
