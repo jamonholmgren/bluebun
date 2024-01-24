@@ -8,7 +8,7 @@ Bun is an incredibly fast JS runtime. It's essentially a Node competitor.
 
 If you want to support Node, you can always use the delightful Gluegun instead! Gluegun comes with a ton of useful tools and patterns for making CLIs and is battle-tested.
 
-Bluebun, on the other hand, is designed to be extremely fast and no-dependencies and ONLY work with Bun. You'll run your CLI with `bunx` rather than `npx`, for example, and we rely on Bun APIs and have rewritten all the important parts of Gluegun from scratch for speed and lightweightness.
+Bluebun, on the other hand, is designed to be extremely fast and no-dependencies and ONLY work with Bun. You'll run your CLI with `bunx` rather than `npx`, for example, and we rely on Bun APIs and have rewritten (or will rewrite) all the important parts of Gluegun from scratch for speed and lightweightness.
 
 ## Comparison to other CLI frameworks
 
